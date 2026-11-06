@@ -1,0 +1,94 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import Figure from '../../components/Figure.astro';
+---
+
+<CaseStudy
+  name="MLB Stats"
+  tagline="puts all of the metrics fans care about at their fingertips."
+  shareImage="project-thumb_at-bat-stats"
+>
+  <p slot="meta">Lead Designer • iOS • Product Design, User Research • 2017-2019</p>
+
+  <p class="intro">
+    The goal of the redesign was to address the needs of casual fans - those who are familiar with basic stats like
+    Batting Averages and Runs Batted In and would want to look these up at a game, to settle a bar trivia dispute, or
+    while watching at home on a second screen.
+  </p>
+
+  <Figure images={[{ name: 'stats-redesign', alt: 'Redesigned MLB stats screens' }]} eager />
+
+  <div class="section-head">
+    <h2>Uncovering the problems</h2>
+    <h3>App &amp; Site Metrics</h3>
+    <p>
+      I worked with the Analytics team to gain a picture of how users were using the different Stats products across
+      MLB's website and within At Bat to determine if there were any specific usage patterns seen only in a mobile
+      context.
+    </p>
+    <p>On mobile devices (both on mobile web and native), users had only shallow interactions with stats and went deeper into stats on desktop.</p>
+    <h3>Direct Feedback</h3>
+    <p>
+      I conducted multiple rounds of interviews to understand user behavior around looking up stats as well as observed
+      how users currently use MLB's stats products as well as competitors' products.
+    </p>
+    <p>In addition, I ran multiple rounds of interviews with prototypes throughout the design process, incorporating feedback for subsequent rounds.</p>
+  </div>
+
+  <div class="section-head">
+    <h2>Redesigning an outdated view</h2>
+  </div>
+
+  <div class="two-up">
+    <Figure images={[{ name: 'stats-current-square', alt: 'Original stats design' }]} lead="Original design.">
+      The Stats UI had not been touched in some number of years and had multiple usability issues in additional to
+      looking a few versions of iOS out of date.
+    </Figure>
+    <Figure images={[{ name: 'stats-old-concept-square', alt: 'Early redesign concept' }]} lead="Early Redesign Concept.">
+      Exploring saved searches, favorite teams, and floating filters. The profile avatar row drew inspiration from the
+      release of Instagram Stories.
+    </Figure>
+  </div>
+
+  <Figure images={[{ name: 'stats-default-view-1', alt: 'Stats list view' }]} lead="Stats list view.">
+    Changed layout to show more top players per stat, make filters more discoverable, and simplify navigation between
+    batting, pitching, and fielding stats.
+  </Figure>
+
+  <Figure images={[{ name: 'stats-navigation-1', alt: 'Stats detail view with bottom sheet' }]} lead="Stats detail view.">
+    Introduced bottom sheet interaction to quickly tap between stats.
+  </Figure>
+
+  <Figure images={[{ name: 'Stats-modules-2', alt: 'Stats UI snippets for team pages and game previews' }]} lead="UI Snippets.">
+    I also sought to bring elements of baseball stats and data visualizations to other areas of the app such as team
+    pages, game previews, and more.
+  </Figure>
+
+  <div class="section-head">
+    <h2>Designing for various screen sizes.</h2>
+    <p>
+      Based on my findings of user behavior across device types, I determined that the iPad experience wasn't solving
+      users' needs given the available screen real estate. While iPhone users were more likely to look up a single stat
+      or look up a specific player, users on larger devices were more likely to compare stats across categories as well
+      as between players. With this in mind, I opted for a sortable table view on iPad instead of the old two-column
+      view.
+    </p>
+  </div>
+
+  <Figure images={[{ name: 'stats-ipad-1', alt: 'Sortable stats table on iPad' }]} tight />
+  <Figure images={[{ name: 'mlb-stats-desktop2', alt: 'MLB stats on desktop' }]} />
+</CaseStudy>
+
+<style>
+  .two-up {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 700px) {
+    .two-up {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

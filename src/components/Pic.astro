@@ -1,0 +1,31 @@
+---
+import { Picture } from 'astro:assets';
+import { media } from '../lib/media';
+
+interface Props {
+  /** File name in src/assets/media, without extension. */
+  name: string;
+  alt: string;
+  /** CSS sizes hint for the browser; defaults to the full content column. */
+  sizes?: string;
+  /** Load immediately (use for the first image above the fold). */
+  eager?: boolean;
+  class?: string;
+}
+
+const { name, alt, sizes = '(max-width: 1280px) 100vw, 1170px', eager = false, class: className } = Astro.props;
+const src = media(name);
+const widths = [480, 800, 1200, 1800, 2340].filter((w) => w < src.width).concat(src.width);
+---
+
+<Picture
+  src={src}
+  alt={alt}
+  widths={widths}
+  sizes={sizes}
+  formats={['avif', 'webp']}
+  fallbackFormat={src.format === 'png' ? 'png' : 'jpg'}
+  loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : undefined}
+  class={className}
+/>

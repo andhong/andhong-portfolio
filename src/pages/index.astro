@@ -1,0 +1,151 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+import { projects } from '../data/site';
+
+const hankTiles = [
+  { name: 'hank-app-screenshot', alt: 'Hank app screenshot' },
+  { name: 'hank-printed-card', alt: 'Hank printed card' },
+  { name: 'member-pins', alt: 'Hank member pins' },
+  { name: 'hank-screenshots-UI-snippets-1', alt: 'Hank UI snippets' },
+];
+const half = '(max-width: 700px) 100vw, 585px';
+---
+
+<Base>
+  <section class="hero wrap">
+    <h1>I'm Andrew Hong, a product designer based in Philadelphia making things that I can be proud of.</h1>
+    <p>
+      <strong>Current</strong> <span class="muted">Staff Product Designer,</span>
+      <a class="text-link" href="https://www.classdojo.com">ClassDojo</a>
+    </p>
+    <p>
+      <strong>Previous</strong>
+      <span class="muted">Hank (Co-founder; acquired), Lumi (Lead designer; acquired), MLB Advanced Media, 1stDibs</span>
+    </p>
+  </section>
+
+  <section class="recent">
+    <div class="wrap">
+      <p class="eyebrow">Recent work</p>
+      <h2>Hank is a social network focused on fighting social isolation amongst older adults.</h2>
+      <p class="tags">Brand Identity • Product Design</p>
+      <a class="tiles" href="/project/hank" aria-label="Hank case study">
+        {hankTiles.map((t, i) => <Pic name={t.name} alt={t.alt} sizes={half} eager={i < 2} />)}
+      </a>
+      <p class="cta"><a class="button" href="/project/hank">View case study</a></p>
+    </div>
+  </section>
+
+  <section class="selected wrap">
+    <h2>Selected works</h2>
+    <ul class="grid">
+      {
+        projects.map((p) => (
+          <li>
+            <a href={`/project/${p.slug}`}>
+              <Pic name={p.thumb} alt={p.title} sizes={half} />
+              <span class="name">{p.title}</span>
+              <span class="sr-only">: {p.blurb}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    text-align: center;
+    padding-top: clamp(30px, 6vw, 70px);
+    padding-bottom: clamp(70px, 10vw, 130px);
+    font-size: 15px;
+  }
+  .hero h1 {
+    max-width: 760px;
+    margin: 0 auto 22px;
+    letter-spacing: -1px;
+  }
+  .hero p {
+    margin: 0 0 6px;
+  }
+
+  .recent {
+    background: var(--panel);
+    padding: clamp(60px, 8vw, 110px) 0;
+    text-align: center;
+  }
+  .eyebrow,
+  .tags {
+    font-size: 14px;
+  }
+  .eyebrow {
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .recent h2 {
+    font-size: clamp(26px, 3vw, 34px);
+    max-width: 900px;
+    margin: 0 auto 18px;
+  }
+  .tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .tiles :global(img),
+  .grid :global(img) {
+    width: 100%;
+    border-radius: var(--radius);
+    transition: transform 0.4s ease;
+  }
+  .tiles:hover :global(img),
+  .grid a:hover :global(img) {
+    transform: scale(1.01);
+  }
+  .cta {
+    margin: 40px 0 0;
+  }
+
+  .selected {
+    padding-top: clamp(70px, 9vw, 120px);
+  }
+  .selected h2 {
+    text-align: center;
+    font-size: clamp(28px, 3vw, 36px);
+    margin-bottom: 50px;
+  }
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px 24px;
+  }
+  .grid a {
+    display: block;
+    text-decoration: none;
+  }
+  .name {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-family: var(--serif);
+    font-size: 22px;
+    letter-spacing: 0;
+  }
+
+  @media (max-width: 700px) {
+    .tiles,
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .grid {
+      gap: 48px;
+    }
+  }
+</style>

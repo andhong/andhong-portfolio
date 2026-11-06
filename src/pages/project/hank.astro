@@ -1,0 +1,128 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import Figure from '../../components/Figure.astro';
+---
+
+<CaseStudy
+  name="Hank"
+  tagline="is a social network focused on fighting social isolation amongst older adults."
+  shareImage="hank-app-screenshot"
+>
+  <Fragment slot="meta">
+    <p><strong>Years</strong> 2020-2024</p>
+    <p><strong>Role</strong> Co-founder, Head of Product &amp; Design</p>
+    <p><strong>Responsibilities</strong> Product Design, User Research, Many other hats</p>
+    <p><strong>Collaborators</strong> 1 product manager, 4 engineers</p>
+    <p><strong>Platforms</strong> iOS, Web</p>
+    <p class="callout">Hank was acquired by Wider Circle in 2024.</p>
+  </Fragment>
+
+  <div class="intro">
+    <p>
+      I co-founded Hank with Brian Park in 2020 in the midst of the Covid-19 pandemic. We built a social platform
+      designed for older adults to find and organize in-person activities, build friendships, and live healthy and
+      socially rich lives.
+    </p>
+    <p>
+      I was responsible for every single touchpoint for Hank including the product, brand (with assistance from an
+      agency), email, product copy, social media creative, customer service, and more.
+    </p>
+  </div>
+
+  <Figure images={[{ name: 'hank-screenshots', alt: 'Hank main product views' }]} lead="Main product views." eager>
+    Hank connects members to each other via in-person activities and helps them built relationships via chat features.
+  </Figure>
+
+  <Figure images={[{ name: 'hank-screenshots-UI-snippets-1', alt: 'Hank UI snippets' }]} tight />
+    <Figure
+      images={[
+        { name: 'hank-printed-card', alt: 'Hank printed card' },
+        { name: 'member-pins', alt: 'Hank member pins' },
+      ]}
+      lead="Assorted UI and brand snippets."
+    >
+      I was responsible for any piece of software and brand touched by a end and internal users.
+    </Figure>
+
+  <div class="section-head">
+    <h2>Fighting social isolation amongst older adults.</h2>
+    <p>
+      Our members were typically adults 55+ who had undergone some sort of precipitating event that highlighted their
+      loneliness - moving away from friends to be closer to grandchildren, losing a partner, or retiring and falling out
+      of touch with coworkers. We sought to build a playful social experience with an emphasis on in-person
+      relationships.
+    </p>
+  </div>
+
+  <Figure
+    images={[{ name: 'hank-screenshots-activities2', alt: 'Hank activities list, detail, and creation form' }]}
+    lead="Cool things to do and people to do them with."
+  >
+    Hank is focused around meeting up with other members in-person and building human connections in the real world.
+  </Figure>
+
+  <figure class="video">
+    <video src="/media/Activity-form-demo-16x9-1.mp4" autoplay muted loop playsinline preload="metadata"
+      aria-label="Demo of the Hank activity creation form"></video>
+    <figcaption>
+      <strong>Activity creation form.</strong>
+      <span class="muted">We went through multiple rounds of usability testing and iterations to make the form simple to use.</span>
+    </figcaption>
+  </figure>
+
+  <Figure
+    images={[{ name: 'hank-screenshots-profile', alt: 'Hank member profile screens' }]}
+    lead="Making an online community feel more human."
+  >
+    We have invested in content-rich user profiles and delightful interaction touches to make the product feel warmer
+    and more welcoming.
+  </Figure>
+
+  <Figure
+    images={[{ name: 'hank-screenshots-messages', alt: 'Hank group chat on desktop and iOS' }]}
+    lead="Keeping members connected."
+  >
+    Members that join an activity are automatically added to a full-featured group chat (powered by Stream) that allows
+    members to connect with one another.
+  </Figure>
+
+  <div class="section-head">
+    <h2>Using AI to help scale activity supply</h2>
+    <p>
+      As Hank grows, it is crucial that we maintain a sufficient volume of activities in each market. We have been
+      experimenting with using generative AI to find local activities and create brand new ones. Hank team members can
+      then manually screen activities before editing, deleting, or publishing.
+    </p>
+  </div>
+
+  <Figure
+    images={[{ name: 'hank-screenshots-babyface', alt: 'Dashboard listing AI-generated activity drafts' }]}
+    lead="Dashboard for AI-generated drafts."
+  >
+    Drafts can be generated, edited, and published from this dashboard. In the background, AI-powered scripting tools
+    generate activities drawn from different sources and processed to help ensure that data is not being hallucinated.
+  </Figure>
+
+  <Figure
+    images={[{ name: 'hank-screenshots-ai-draft', alt: 'Editing an AI-generated activity draft beside its source' }]}
+    lead="Editing AI-generated drafts."
+  >
+    Drafts always refers back to the source material to double-check content and decrease risk of hallucinations. The
+    UI also communicates wherever there were issues parsing data to be fed into Hank's activity schema.
+  </Figure>
+</CaseStudy>
+
+<style>
+  .video {
+    margin: 0 0 clamp(60px, 8vw, 100px);
+  }
+  .video video {
+    width: 100%;
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+  .video figcaption {
+    margin-top: 18px;
+    font-size: 15px;
+  }
+</style>

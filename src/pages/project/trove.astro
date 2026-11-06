@@ -1,0 +1,72 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import Figure from '../../components/Figure.astro';
+---
+
+<CaseStudy
+  name="Trove"
+  title="Trove 3D Printing"
+  tagline="was an early stage consumer 3D printing startup backed by Resolute Ventures. Trove sought to bring consumer 3D printing to a new audience via fine jewelry customized in-browser."
+  shareImage="project-thumb_trove"
+>
+  <Fragment slot="meta">
+    <p>Co-Founder, Product Designer, Creative Director • 2014-2016</p>
+    <p class="callout">
+      🔔 Trove was acquired by Classpass in 2016. It was a failure but also my first time designing anything so I'm still
+      proud of it.
+    </p>
+  </Fragment>
+
+  <Figure images={[{ name: 'customizer-mockup', alt: 'Trove customizer on desktop' }]} eager />
+
+  <div class="section-head">
+    <h2>
+      I co-founded a consumer 3D-printing startup that created jewelry customized in-browser. I designed every part of
+      the customer journey from site to packaging.
+    </h2>
+    <p>
+      Trove was a customizable jewelry platform where users were able to discover, customize, and purchase their own
+      unique jewelry pieces. The in-browser customization tools allowed anyone to create unique pieces without any
+      experience with design programs.
+    </p>
+    <p>
+      I co-founded Trove alongside Brian Park and Tim Growney in 2015. I designed everything that a user engaged with -
+      brand, website, jewlery, packaging, and more. Being the only designer for the platform helped me to maintain a
+      consistent user experience from initial awareness of Trove all the way to receiving and wearing our custom
+      jewelry.
+    </p>
+  </div>
+
+  <figure class="gif">
+    <img src="/media/customizer-mock-2-1.gif" alt="Animated demo of the Trove jewelry customizer" width="781" height="575" loading="lazy" />
+  </figure>
+
+  <Figure images={[{ name: 'mobile-customizer@2X', alt: 'Trove customizer on mobile' }]} />
+
+  <div class="section-head">
+    <h2>I LEARNED A LOT.<br />THE HARD WAY.</h2>
+    <p>
+      As the first major product launch for a new founding team, the Customizer proved to be an invaluable learning
+      experience. Internally, we learned how to effectively communicate with one another and discuss ideal products
+      versus feasibility given short timelines. We began the ongoing process of deeply understanding our users and
+      continue to refine this knowledge in order to continue to build better products.
+    </p>
+    <p>
+      While it is drilled into UX designers to test, iterate, and refine, going through this process at a rapidly moving
+      startup truly brought to light the urgency and importance of this process. Our success relies heavily on this
+      design process and continual desire to explore and learn how we can innovate in ways that benefit our audience.
+    </p>
+  </div>
+
+  <Figure images={[{ name: 'BOXES2', alt: 'Trove jewelry packaging' }]} />
+</CaseStudy>
+
+<style>
+  .gif {
+    margin: 0 0 clamp(60px, 8vw, 100px);
+  }
+  .gif img {
+    margin-inline: auto;
+    border-radius: var(--radius);
+  }
+</style>

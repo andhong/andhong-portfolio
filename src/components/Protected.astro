@@ -1,0 +1,137 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+
+// Encrypted payloads produced by `npm run encrypt` (see scripts/encrypt-protected.mjs).
+const payloads = import.meta.glob<{ default: unknown }>('/src/protected/*.json', { eager: true });
+const payload = payloads[`/src/protected/${slug}.json`]?.default;
+---
+
+<div class="protected" data-protected>
+  {
+    payload ? (
+      <>
+        <form class="gate">
+          <p>This content is protected. To view, please enter the password.</p>
+          <div class="row">
+            <label class="sr-only" for={`pw-${slug}`}>Password</label>
+            <input id={`pw-${slug}`} type="password" autocomplete="current-password" placeholder="Enter password" required />
+            <button class="button" type="submit">Submit</button>
+          </div>
+          <p class="error" role="alert" hidden>That password didn't work. Try again?</p>
+        </form>
+        <div class="content" hidden />
+        <script type="application/json" set:html={JSON.stringify(payload)} />
+      </>
+    ) : (
+      <p class="gate">
+        This case study is available on request.{' '}
+        <a class="text-link" href={`mailto:${site.email}`}>Email me</a> for access.
+      </p>
+    )
+  }
+</div>
+
+<script>
+  const STORE = 'ah-protected-pw';
+  const b64 = (s: string) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+
+  async function decrypt(p: { iterations: number; salt: string; iv: string; data: string }, password: string) {
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt: b64(p.salt), iterations: p.iterations, hash: 'SHA-256' },
+      base,
+      { name: 'AES-GCM', length: 256 },
+      false,
+      ['decrypt'],
+    );
+    const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(p.iv) }, key, b64(p.data));
+    return new TextDecoder().decode(plain);
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-protected]')) {
+    const json = root.querySelector('script[type="application/json"]');
+    const form = root.querySelector('form');
+    const content = root.querySelector<HTMLElement>('.content');
+    const error = root.querySelector<HTMLElement>('.error');
+    const input = root.querySelector('input');
+    if (!json || !form || !content || !error || !input) continue;
+    const payload = JSON.parse(json.textContent!);
+
+    const unlock = async (password: string) => {
+      content.innerHTML = await decrypt(payload, password);
+      content.hidden = false;
+      form.remove();
+      try {
+        sessionStorage.setItem(STORE, password);
+      } catch {}
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      error.hidden = true;
+      try {
+        await unlock(input.value);
+      } catch {
+        error.hidden = false;
+        input.select();
+      }
+    });
+
+    // Unlock automatically if the visitor already entered it this session.
+    let saved: string | null = null;
+    try {
+      saved = sessionStorage.getItem(STORE);
+    } catch {}
+    if (saved) unlock(saved).catch(() => {});
+  }
+</script>
+
+<style>
+  .gate {
+    max-width: 520px;
+    font-size: 16px;
+  }
+  .row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  input {
+    flex: 1;
+    min-width: 0;
+    font: inherit;
+    font-size: 16px;
+    padding: 10px 14px;
+    border: 1px solid #cfcfd2;
+    border-radius: 4px;
+  }
+  button {
+    border: 0;
+    cursor: pointer;
+  }
+  .error {
+    color: #b3261e;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  .content :global(img) {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .content :global(figure) {
+    margin: 0 0 clamp(60px, 8vw, 100px);
+  }
+  .content :global(figcaption) {
+    margin-top: 18px;
+    font-size: 15px;
+  }
+  .content :global(h2) {
+    margin-bottom: 18px;
+  }
+</style>

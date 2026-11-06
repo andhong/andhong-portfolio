@@ -1,0 +1,65 @@
+---
+import Pic from './Pic.astro';
+
+type Item = { name: string; alt: string };
+
+interface Props {
+  /** One or more images; several are laid out side by side. */
+  images: Item[];
+  /** Bold first sentence of the caption; the slot holds the rest. */
+  lead?: string;
+  eager?: boolean;
+  /** Small gap below, for images stacked as one group. */
+  tight?: boolean;
+}
+
+const { images, lead, eager = false, tight = false } = Astro.props;
+const cols = images.length;
+const sizes = cols > 1 ? `(max-width: 700px) 100vw, ${Math.round(1170 / cols)}px` : undefined;
+const hasCaption = lead || Astro.slots.has('default');
+---
+
+<figure class:list={['figure', { tight }]}>
+  <div class="grid" style={`--cols: ${cols}`}>
+    {images.map((img, i) => <Pic name={img.name} alt={img.alt} sizes={sizes} eager={eager && i === 0} />)}
+  </div>
+  {
+    hasCaption && (
+      <figcaption>
+        {lead && <strong>{lead}</strong>} <span class="muted"><slot /></span>
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .figure {
+    margin: 0 0 clamp(60px, 8vw, 100px);
+  }
+  .figure.tight {
+    margin-bottom: 24px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: 24px;
+  }
+  .grid :global(img) {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  figcaption {
+    margin-top: 18px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  @media (max-width: 700px) {
+    .figure.tight {
+      margin-bottom: 16px;
+    }
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+</style>

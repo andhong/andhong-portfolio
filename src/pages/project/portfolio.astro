@@ -1,0 +1,33 @@
+---
+// URL kept as /project/portfolio to match the old WordPress link.
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import Figure from '../../components/Figure.astro';
+---
+
+<CaseStudy
+  name="1stdibs Contemporary"
+  tagline="brought the best contemporary designers to buyers all over the world."
+  shareImage="contemporary-landing-3"
+>
+  <p slot="meta">Product Designer • Responsive Web • 2017</p>
+
+  <Figure images={[{ name: 'contemporary-landing-3', alt: '1stdibs Contemporary landing page' }]} eager />
+
+  <div class="section-head">
+    <h2>
+      I designed a site that connected buyers with makers of contemporary luxury goods such as furniture, art, and
+      jewelry.
+    </h2>
+    <p>
+      1stdibs is a luxury marketplace that seeks to bring the most beautiful objects to buyers all over the world. While
+      1stdibs has previously been focused on antiques, vintage objects, and fine art, the company recently has been
+      adjusting its strategy to include contemporary designers and makers. I was tasked with designing a landing page
+      that would act as a product showcase and homepage for 1stdibs.com. I designed the entire Contemporary Design
+      homepage experience from establishing requirements with stakeholders all the way through to overseeing
+      development.
+    </p>
+  </div>
+
+  <Figure images={[{ name: 'contemporary-modules', alt: 'Customizable CMS modules' }]} tight />
+  <Figure images={[{ name: 'contemporary-mobile', alt: '1stdibs Contemporary on mobile' }]} />
+</CaseStudy>

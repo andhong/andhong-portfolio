@@ -1,0 +1,69 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import Figure from '../../components/Figure.astro';
+import Split from '../../components/Split.astro';
+---
+
+<CaseStudy
+  name="MLB: The Official App"
+  tagline="is the #1 app for live baseball and used by tens of millions of baseball fans."
+  shareImage="project-thumb_at-bat"
+>
+  <p slot="meta">Lead Designer • iOS and Android • Product Design, User Research • 2017-2019</p>
+
+  <Figure images={[{ name: 'Artboard-Copy', alt: 'MLB app scoreboard, news, and game screens' }]} eager tight />
+  <Figure
+    images={[
+      { name: 'Stats-modules', alt: 'Matchup, team, and player stats modules' },
+      { name: 'Win-Prob-Modules', alt: 'Win probability modules' },
+    ]}
+  />
+
+  <div class="section-head">
+    <h2>
+      I was the lead designer on a world class sports app that connects users to America's favorite pastime - through
+      live games, highlights, stats, and more.
+    </h2>
+    <p>
+      MLB At Bat is the official app of Major League Baseball and is the way millions of fans watch games, keep up with
+      their favorite teams and players, and dive into the world of baseball.
+    </p>
+    <p>
+      I was the lead designer of MLB At Bat and covered everything from product strategy and user testing all the way
+      down to the minutae of asset management. It was my job to strike a balance between being an advocate for users
+      and understanding the needs of one of the biggest sports leagues in America.
+    </p>
+  </div>
+
+  <Split name="Stats-Redesign" alt="Redesigned stats screens" heading="Redesigning a mobile-optimized stats experience">
+    <p>
+      The stats experience on iOS (and later on mobile web) needed to adapt to accommodate the behavior of fans looking
+      up players while on the go.
+    </p>
+    <p>
+      By conducting user research alongside a dedicated researcher and combing through data, we realized that there was
+      a large difference in depth of page views, use of filters, and time spent looking at stats between a desktop and
+      mobile experience.
+    </p>
+    <p>
+      The redesigned stats experience is more lightweight (both in terms of visuals and load time) and answers the
+      questions that users typically have when looking at stats based on user testing.
+    </p>
+    <p><a href="/project/mlb-at-bat-stats">View Case Study</a></p>
+  </Split>
+
+  <Split name="Video-Redesign" alt="Original and redesigned video player" heading="Making portrait video a richer experience">
+    <p>
+      Our video player experience didn't fully utilize screen real estate in portrait mode, leaving large empty spaces
+      above and below the 16:9 video.
+    </p>
+    <p>
+      We initiall explored the possibility of cutting different aspect ratios of video to better fit vertical mobile
+      devices, but due to restrictions with how networks create their video feeds this proved infeasible.
+    </p>
+    <p>
+      Instead we decided to dock the video to the top of the view and added data panels in a scrolling view that provide
+      more context behind the game.
+    </p>
+  </Split>
+</CaseStudy>

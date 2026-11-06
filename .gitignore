@@ -1,2 +1,5 @@
-.idea/
-andrew-design.iml
+node_modules/
+dist/
+.astro/
+.DS_Store
+private/

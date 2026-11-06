@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+
+// Listed in reading order (used on phones). `col` places each image in the
+// same desktop column as the old site's masonry layout.
+const items = [
+  { name: 'freezer-cocktail-resized', alt: 'Freezer Cocktail bottle and label', col: 0 },
+  { name: 'AJH02564-scaled', alt: 'Green mountain ridge under a blue sky', col: 1 },
+  { name: 'Untitled-design-3', alt: 'Hand holding a small printed thank-you card', col: 2 },
+  { name: '48940013-scaled', alt: 'Glacier and snowy peaks at the water’s edge', col: 0 },
+  { name: 'AJH03002', alt: 'Inflatable pool floats on the grass beside a lake', col: 2 },
+  { name: 'wee-heavy-mockup-wide', alt: 'Illustrated beer bottle label on a blue background', col: 1 },
+  { name: 'AJH01003-scaled', alt: 'Snow-covered road through the mountains', col: 1 },
+  { name: '348624525_3092175547592878_6573827047360235283_n', alt: 'Red umbrella against concrete architecture', col: 2 },
+  { name: 'Artboard-12', alt: 'Series of illustrated bottle labels', col: 0 },
+  { name: '61730065-rotated', alt: 'Hands on a steering wheel, shot on film', col: 1 },
+  { name: 'globe-sm', alt: 'Abstract striped globe illustration', col: 0 },
+  { name: 'cp-chelsea', alt: 'Pixel-art Chelsea boot', col: 2 },
+  { name: 'once-in-a-blue-moon', alt: 'Two overlapping circles on a teal poster', col: 0 },
+].map((it, order) => ({ ...it, order }));
+
+const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
+---
+
+<Base title="Playground" description="Side projects and other creative pursuits.">
+  <section class="wrap">
+    <h1>Side projects and other creative pursuits</h1>
+    <div class="masonry">
+      {
+        columns.map((col) => (
+          <div class="col">
+            {col.map((it) => (
+              <div class="item" style={`order: ${it.order}`}>
+                <Pic name={it.name} alt={it.alt} sizes="(max-width: 700px) 100vw, 380px" eager={it.order < 3} />
+              </div>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  h1 {
+    text-align: center;
+    font-size: clamp(30px, 3.4vw, 40px);
+    padding: clamp(30px, 6vw, 70px) 0 clamp(50px, 6vw, 80px);
+  }
+  .masonry {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    align-items: start;
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .item :global(img) {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  @media (max-width: 700px) {
+    .masonry {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .col {
+      display: contents;
+    }
+  }
+</style>
