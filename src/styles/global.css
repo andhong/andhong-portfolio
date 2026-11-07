@@ -13,7 +13,8 @@
   --panel: #f2eee5;
   --page: #fbf9f4;
   --radius: 3px;
-  --max: 1170px;
+  --max: 1170px; /* header/nav width */
+  --content: 800px; /* everything inside <main> and the footer */
   --gutter: clamp(16px, 4vw, 55px);
   --serif: 'EB Garamond Variable', 'EB Garamond', Garamond, 'Times New Roman', serif;
   --sans: var(--serif);
@@ -97,6 +98,11 @@ h3 {
   padding-inline: var(--gutter);
 }
 
+/* Page content is a single 800px column; only the header nav runs wider. */
+main .wrap {
+  max-width: calc(var(--content) + 2 * var(--gutter));
+}
+
 .muted {
   color: var(--muted);
 }
@@ -149,7 +155,6 @@ h3 {
 }
 .case .headline {
   color: var(--muted);
-  max-width: 1000px;
   margin-bottom: 30px;
 }
 .case .headline strong {
@@ -173,7 +178,6 @@ h3 {
 }
 .case .intro {
   font-size: 21px;
-  max-width: 820px;
   margin-bottom: clamp(48px, 6vw, 80px);
 }
 .case .section-head {
@@ -184,7 +188,6 @@ h3 {
 }
 .case .section-head p {
   font-size: 21px;
-  max-width: 820px;
 }
 .case .section-head h3 {
   font-size: 13px;
@@ -214,7 +217,6 @@ h3 {
 .case figcaption {
   margin-top: 16px;
   font-size: 17px;
-  max-width: 820px;
   line-height: 1.5;
 }
 /* Columns that each carry their own caption (e.g. two diagrams side by side). */

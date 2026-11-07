@@ -13,7 +13,7 @@ interface Props {
   class?: string;
 }
 
-const { name, alt, sizes = '(max-width: 1280px) 100vw, 1170px', eager = false, class: className } = Astro.props;
+const { name, alt, sizes = '(max-width: 880px) 100vw, 800px', eager = false, class: className } = Astro.props;
 const src = media(name);
 const widths = [480, 800, 1200, 1800, 2340].filter((w) => w < src.width).concat(src.width);
 ---

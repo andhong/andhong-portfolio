@@ -17,7 +17,7 @@ interface Props {
 
 const { images, lead, eager = false, tight = false } = Astro.props;
 const cols = images.length;
-const sizes = cols > 1 ? `(max-width: 700px) 100vw, ${Math.round(1170 / cols)}px` : undefined;
+const sizes = cols > 1 ? `(max-width: 700px) 100vw, ${Math.round(800 / cols)}px` : undefined;
 const hasCaption = lead || Astro.slots.has('default');
 ---
 

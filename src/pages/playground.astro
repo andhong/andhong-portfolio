@@ -32,7 +32,7 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
           <div class="col">
             {col.map((it) => (
               <div class="item" style={`order: ${it.order}`}>
-                <Pic name={it.name} alt={it.alt} sizes="(max-width: 700px) 100vw, 380px" eager={it.order < 3} />
+                <Pic name={it.name} alt={it.alt} sizes="(max-width: 700px) 100vw, 260px" eager={it.order < 3} />
               </div>
             ))}
           </div>
