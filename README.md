@@ -4,7 +4,7 @@ Portfolio site for Andrew Hong, built with [Astro](https://astro.build) and host
 
 ## Working on the site
 
-Requires Node 22.23+.
+Requires Node 22.12 or newer (Node 22 LTS recommended).
 
 ```bash
 npm install
