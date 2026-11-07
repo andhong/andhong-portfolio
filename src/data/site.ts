@@ -5,7 +5,6 @@ export const site = {
     "I'm Andrew Hong, a product designer based in Philadelphia making things that I can be proud of.",
   email: 'andrewhong09@gmail.com',
   linkedin: 'https://www.linkedin.com/in/andrewjhong/',
-  cv: 'https://read.cv/andrewhong',
 };
 
 export const nav = [
