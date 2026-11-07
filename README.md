@@ -13,7 +13,13 @@ npm run build     # production build into dist/
 npm run preview   # serve the production build
 ```
 
-Pushing to `master` builds and deploys the site automatically (`.github/workflows/deploy.yml`).
+## Publishing
+
+Pushing to `master` does **not** change the live site. To publish whatever is on `master`:
+
+GitHub → **Actions** → **Deploy to GitHub Pages** → **Run workflow** (branch: `master`).
+
+It takes about 2 minutes. The workflow lives in `.github/workflows/deploy.yml`.
 
 ## Where things live
 

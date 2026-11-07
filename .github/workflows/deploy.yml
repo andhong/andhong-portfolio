@@ -1,8 +1,8 @@
 name: Deploy to GitHub Pages
 
+# Deploys only when run by hand: GitHub → Actions → "Deploy to GitHub Pages" → Run workflow.
+# Pushing to master does NOT update the live site.
 on:
-  push:
-    branches: [master]
   workflow_dispatch:
 
 permissions:
