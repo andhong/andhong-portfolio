@@ -12,15 +12,17 @@ interface Props {
   title?: string;
   /** Image used for link previews (file name in src/assets/media). */
   shareImage?: string;
+  /** Keep the page out of search results (e.g. drafts). */
+  noindex?: boolean;
 }
 
-const { name, tagline, title = name, shareImage } = Astro.props;
+const { name, tagline, title = name, shareImage, noindex = false } = Astro.props;
 const og = shareImage
   ? (await getImage({ src: media(shareImage), width: 1200, format: 'jpg' })).src
   : undefined;
 ---
 
-<Base title={title} description={`${name} ${tagline}`} image={og}>
+<Base title={title} description={`${name} ${tagline}`} image={og} noindex={noindex}>
   <article class="wrap case">
     <h1 class="headline"><strong>{name}</strong> {tagline}</h1>
     <div class="meta"><slot name="meta" /></div>

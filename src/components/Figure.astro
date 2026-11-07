@@ -1,7 +1,9 @@
 ---
 import Pic from './Pic.astro';
+import Placeholder from './Placeholder.astro';
 
-type Item = { name: string; alt: string };
+/** Omit `name` to show a placeholder box (with `ratio`, width / height) until the image exists. */
+type Item = { name?: string; alt: string; ratio?: number };
 
 interface Props {
   /** One or more images; several are laid out side by side. */
@@ -21,7 +23,15 @@ const hasCaption = lead || Astro.slots.has('default');
 
 <figure class:list={['figure', { tight }]}>
   <div class="grid" style={`--cols: ${cols}`}>
-    {images.map((img, i) => <Pic name={img.name} alt={img.alt} sizes={sizes} eager={eager && i === 0} />)}
+    {
+      images.map((img, i) =>
+        img.name ? (
+          <Pic name={img.name} alt={img.alt} sizes={sizes} eager={eager && i === 0} />
+        ) : (
+          <Placeholder label={img.alt} ratio={img.ratio} />
+        ),
+      )
+    }
   </div>
   {
     hasCaption && (

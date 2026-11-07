@@ -1,0 +1,34 @@
+---
+// Stand-in for an image that hasn't been added yet. Swap for <Pic> / <Figure> when ready.
+interface Props {
+  label?: string;
+  /** Width / height, e.g. 1800 / 1263 to match the Hank screenshots. */
+  ratio?: number;
+}
+const { label = 'Image coming soon', ratio = 1800 / 1263 } = Astro.props;
+---
+
+<div class="placeholder" style={`aspect-ratio: ${ratio}`} role="img" aria-label={label}>
+  <span>{label}</span>
+</div>
+
+<style>
+  .placeholder {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--rule);
+    background: repeating-linear-gradient(-45deg, var(--panel) 0 10px, transparent 10px 20px);
+  }
+  span {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--page);
+    padding: 6px 12px;
+    text-decoration: none;
+    display: inline-block;
+  }
+</style>

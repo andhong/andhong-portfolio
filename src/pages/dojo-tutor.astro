@@ -1,0 +1,66 @@
+---
+// SCAFFOLD — copied from the Hank case study (src/pages/project/hank.astro).
+// Replace every [bracketed] line with real copy, and give each placeholder image a `name`
+// once the file is in src/assets/media (see README → Images). Remove `noindex` when it's ready.
+import CaseStudy from '../layouts/CaseStudy.astro';
+import Figure from '../components/Figure.astro';
+---
+
+<CaseStudy
+  name="Dojo Tutor"
+  tagline="brings 1:1 online tutoring with expert teachers to families on ClassDojo."
+  noindex
+>
+  <Fragment slot="meta">
+    <p><strong>Years</strong> [20XX–present]</p>
+    <p><strong>Role</strong> Staff Product Designer</p>
+    <p><strong>Responsibilities</strong> [Product Design, User Research, …]</p>
+    <p><strong>Collaborators</strong> [Team makeup, e.g. 1 product manager, 4 engineers]</p>
+    <p><strong>Platforms</strong> [iOS, Android, Web]</p>
+    <p class="callout">[Optional callout — a launch milestone, metric, or award.]</p>
+  </Fragment>
+
+  <div class="intro">
+    <p>[Intro paragraph: what Dojo Tutor is, who it's for, and the problem it solves.]</p>
+    <p>[Your role and scope: what you owned and who you worked with.]</p>
+  </div>
+
+  <Figure images={[{ alt: 'Main product views' }]} lead="Main product views.">
+    [Caption describing the core screens.]
+  </Figure>
+
+  <Figure images={[{ alt: 'UI snippets' }]} tight />
+  <Figure images={[{ alt: 'Detail 1', ratio: 1 }, { alt: 'Detail 2', ratio: 1 }]} lead="Assorted UI snippets.">
+    [Caption.]
+  </Figure>
+
+  <div class="section-head">
+    <h2>[Section 1 headline — the core problem or audience.]</h2>
+    <p>[Context: who the users are, what they needed, what research revealed.]</p>
+  </div>
+
+  <Figure images={[{ alt: 'Key flow' }]} lead="[Bold lead sentence.]">
+    [Caption.]
+  </Figure>
+
+  <Figure images={[{ alt: 'Video or prototype', ratio: 16 / 9 }]} lead="[Prototype or demo.]">
+    [Caption. To use a video instead, copy the &lt;figure class="video"&gt; block from the Hank page.]
+  </Figure>
+
+  <Figure images={[{ alt: 'Supporting screens' }]} lead="[Bold lead sentence.]">
+    [Caption.]
+  </Figure>
+
+  <div class="section-head">
+    <h2>[Section 2 headline — a key decision, experiment, or result.]</h2>
+    <p>[What you tried, what you learned, and the impact.]</p>
+  </div>
+
+  <Figure images={[{ alt: 'Iteration or results' }]} lead="[Bold lead sentence.]">
+    [Caption.]
+  </Figure>
+
+  <Figure images={[{ alt: 'Final design' }]} lead="[Bold lead sentence.]">
+    [Caption.]
+  </Figure>
+</CaseStudy>
