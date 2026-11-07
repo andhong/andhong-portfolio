@@ -1,0 +1,99 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import Figure from '../../components/Figure.astro';
+---
+
+<CaseStudy
+  name="1stDibs Dealer Dashboard"
+  title="1stDibs Seller Tools"
+  tagline="helps sellers succeed on an online marketplace for extraordinary design objects."
+  shareImage="1stdibs-dashboard-final2"
+>
+  <Fragment slot="meta">
+    <p><strong>Year</strong> 2017</p>
+    <p><strong>Role</strong> Product Designer</p>
+    <p><strong>Responsibilities</strong> Product Design, User Research</p>
+    <p>
+      <strong>Collaborators</strong> Thalith N (Design), Kaley S (Research), Shir H (Product), John R (Eng), Alpere F
+      (Eng), Cormick B (Eng), Stav M (Eng), Chris B (QA), and many more.
+    </p>
+    <p><strong>Platforms</strong> Web</p>
+  </Fragment>
+
+  <div class="intro">
+    <p>
+      1stdibs is an online marketplace specializing in high value luxury items such as vintage furniture, fine art, and
+      design objects.
+    </p>
+    <p>
+      The Dealer Dashboard is the hub for all seller activity but had not been updated in several years despite rapidly
+      changing needs of dealers.
+    </p>
+    <p>
+      My team was tasked with discovering what needs (both dealer and internal) had to be addressed, then launching a new
+      dashboard based on our discoveries without breaking essential workflows.
+    </p>
+  </div>
+
+  <Figure images={[{ name: '1stdibs-dashboard-final2', alt: 'Redesigned 1stDibs dealer dashboard' }]} lead="Dealer Dashboard." eager>
+    Final designs after multiple rounds of value testing, design workshops, and QA.
+  </Figure>
+
+  <div class="section-head">
+    <h2>Defining user and business goals</h2>
+    <p>
+      We performed generative research via design workshops and interviews with account managers, stakeholders, and
+      dealers to uncover common themes in issues with the current dashboard.
+    </p>
+    <p>
+      Sellers were most interested in how to be successful on the platform and how they were performing relative to
+      other sellers. The dashboard had to answer questions such as "what immediate actions do I need to take" and "how
+      can I do better on 1stdibs?"
+    </p>
+    <p>
+      Internal users were most interested in enabling dealers to succeed on the platform with less manual intervention
+      from account managers.
+    </p>
+  </div>
+
+  <Figure images={[{ name: '1stdibs-dashboard-original2', alt: 'Original 1stDibs dealer dashboard' }]} lead="Original dashboard.">
+    The existing dashboard was essentially a sitemap with links out to other parts of the web app.
+  </Figure>
+
+  <Figure
+    images={[
+      { name: 'IMG_7139-scaled', alt: 'Design workshop sticky notes' },
+      { name: 'IMG_6988-1-scaled', alt: 'Design workshop participants' },
+      { name: 'IMG_7140-scaled', alt: 'Design workshop sketches' },
+    ]}
+    lead="Design workshops."
+  >
+    I helped facilitate design workshops with participation from stakeholders, users, product, and engineering to
+    generate insights and gather ideas from across the business before designing any flows or screens.
+  </Figure>
+
+  <div class="section-head">
+    <h2>Iteration and testing</h2>
+    <p>
+      Alongside our researcher and other designer, I ran sessions with users to go over design concepts with
+      progressively higher levels of fidelity as we crystallized what the final product would be.
+    </p>
+  </div>
+
+  <Figure images={[{ name: 'value-testing2', alt: 'Two dashboard prototypes used in value testing' }]} lead="Value testing.">
+    We had users interact with two different prototypes exploring differences in how the dashboard showed unresolved
+    tasks, metrics, and other modules.
+  </Figure>
+
+  <div class="section-head">
+    <h2>Final designs</h2>
+    <p>
+      The Dealer Dashboard redesign showed early signs of success at launch (based on site metrics plus feedback from
+      dealers and account managers). The redesign accomplished the Dealer and Internal goals that we were building
+      against, and additional iterations post-launch helped to further refine the design of this project.
+    </p>
+  </div>
+
+  <Figure images={[{ name: '1stdibs-dashboard-final2', alt: 'Final dealer dashboard design' }]} tight />
+  <Figure images={[{ name: 'card-documentation', alt: 'Dashboard card component documentation' }]} />
+</CaseStudy>

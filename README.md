@@ -48,11 +48,3 @@ To add images:
    The build fails with a clear error if a name doesn't match a file.
 
 Videos and GIFs go in `public/media/` and are referenced as `/media/file.mp4`.
-
-## Password-protected case studies (optional)
-
-Lumi and 1stDibs Seller Tools currently show "available on request." To publish their content behind a password:
-
-1. Create `private/lumi/index.html` (a fragment of the case study's HTML) and put its images next to it. `private/` is gitignored, so keep a backup of it elsewhere.
-2. Run `PROTECTED_PASSWORD=yourpassword npm run encrypt`. This writes `src/protected/lumi.json`, which is encrypted with AES-256-GCM and safe to commit.
-3. The page will then ask visitors for the password and decrypt the content in the browser.

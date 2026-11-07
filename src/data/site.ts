@@ -17,10 +17,10 @@ export const nav = [
 // "Selected works" grid on the home page, in order.
 // `thumb` is a file name in src/assets/media (no extension).
 export const projects = [
-  { slug: 'lumi', title: 'Lumi', blurb: 'Supply chain management tools', thumb: 'lumi-dashboard-3', protected: true },
+  { slug: 'lumi', title: 'Lumi', blurb: 'Supply chain management tools', thumb: 'lumi-dashboard-3' },
   { slug: 'mlb-at-bat-ios', title: 'MLB: The Official App', blurb: 'Product Design', thumb: 'project-thumb_at-bat' },
   { slug: 'mlb-at-bat-stats', title: 'MLB Stats', blurb: 'Case Study', thumb: 'project-thumb_at-bat-stats' },
-  { slug: '1stdibs-seller', title: '1stDibs Seller Tools', blurb: 'Marketplace seller tools', thumb: '1stdibs-dashboard-final2', protected: true },
+  { slug: '1stdibs-seller', title: '1stDibs Seller Tools', blurb: 'Marketplace seller tools', thumb: '1stdibs-dashboard-final2' },
   { slug: 'portfolio', title: '1stdibs Contemporary', blurb: 'Product Design', thumb: 'project-thumb_1d-contemporary' },
   { slug: 'trove', title: 'Trove 3D Printing', blurb: 'Product Design', thumb: 'project-thumb_trove' },
 ];

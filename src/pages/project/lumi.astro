@@ -1,0 +1,118 @@
+---
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import Figure from '../../components/Figure.astro';
+---
+
+<CaseStudy
+  name="Lumi"
+  tagline="is a software platform that helps businesses find and collaborate with packaging manufacturers."
+  shareImage="lumi-dashboard-3"
+>
+  <Fragment slot="meta">
+    <p><strong>Years</strong> 2019-2020</p>
+    <p><strong>Role</strong> Lead Designer</p>
+    <p><strong>Responsibilities</strong> Product Design, User Research</p>
+    <p><strong>Collaborators</strong> 2 product managers, 1 product designer, 8 engineers</p>
+    <p><strong>Platforms</strong> Web</p>
+    <p class="callout">🔔 Lumi was acquired by Narvar in 2021 and sunsetted in 2024.</p>
+  </Fragment>
+
+  <div class="intro">
+    <p>
+      Lumi is a B2B packaging and supply chain platform that connects top brands to factories around the world and
+      helps with every step from sourcing to manufacturing to inventory management.
+    </p>
+    <p>During my time at Lumi, I touched nearly every surface of the platform during a business model transition for the company.</p>
+  </div>
+
+  <Figure images={[{ name: 'lumi-unused-components', alt: 'Assorted Lumi UI components' }]} lead="Assorted UI snippets." eager>
+    Some used in production and some left behind in the exploration phase.
+  </Figure>
+
+  <div class="section-head">
+    <h2>Transitioning from Client Services to a Marketplace</h2>
+    <p>
+      Lumi had been building software to simplify the packaging order process between clients and vendors, but there
+      was still a lot of manual intervention from Lumi staff during the quote request process.
+    </p>
+    <p>
+      I helped bring a more structured understanding of how the workflows of clients, vendors, and internal Lumi staff
+      all intersected to better understand where processes were breaking and where to maximize impact as we sought to
+      retool the platform.
+    </p>
+  </div>
+
+  <div class="figure-row">
+    <Figure images={[{ name: 'FF-Member-workflow', alt: 'Managed services workflow diagram' }]} lead="Managed services workflow.">
+      Lumi's team (orange row) is heavily involved in every step of the quoting and ordering process.
+    </Figure>
+    <Figure images={[{ name: 'FF-Marketplace-workflow', alt: 'Marketplace workflow diagram' }]} lead="Marketplace workflow.">
+      New software tools would enable clients and vendors to work more closely together.
+    </Figure>
+  </div>
+
+  <div class="section-head">
+    <h2>Expanding Lumi's software to encompass packaging manufacturers</h2>
+    <p>
+      Lumi had existing software for clients and the internal quoting team, but needed to build a new portal for
+      vendors to view inbound packaging requests from brands, communicate with them throughout the quoting and ordering
+      process, and manage orders and shipments.
+    </p>
+    <p>Previous to the development of the new portal, vendors interacted with Lumi exclusively via email and PDFs.</p>
+  </div>
+
+  <Figure images={[{ name: 'lumi-dashboard', alt: 'Vendor opportunities dashboard' }]} lead="Vendor opportunities.">
+    A view for factories to manage inbound requests from brands and receive all of the key information they need to
+    make informed business decisions.
+  </Figure>
+
+  <div class="section-head">
+    <h2>Effectively matching clients and vendors</h2>
+    <p>
+      Using historic data from orders placed with Lumi's supplier network, we are able to provide clients with important
+      insights about what to expect when working with a given factory. On the other side of the client/vendor
+      relationship, we are also able to provide vendors with insights about clients to help facilitate a strong match on
+      the platform.
+    </p>
+  </div>
+
+  <Figure images={[{ name: 'lumi-opportunity-page', alt: 'Opportunity detail view' }]} tight />
+  <Figure images={[{ name: 'lumi-quote-submitted', alt: 'Opportunity detail view after a quote is submitted' }]} lead="Opportunity detail views.">
+    Vendors can see details and relevant documents about an opportunity, in addition to information about the client.
+  </Figure>
+
+  <Figure images={[{ name: 'Vendor-scorecard', alt: 'Vendor quote with vendor scorecard' }]} lead="Vendor quote.">
+    Clients could view pricing for a quote, plus key information about a vendor to help guide their purchase decisions.
+  </Figure>
+
+  <div class="section-head">
+    <h2>Simplifying a convoluted ordering process</h2>
+    <p>
+      The world of packaging supply chain management is filled with antiquated tools and legacy systems. Lumi brought
+      the digital tools used by brands and factories into the modern era of software by taking lessons from e-commerce
+      to simplify the ordering experience.
+    </p>
+  </div>
+
+  <Figure images={[{ name: 'lumi-order-page', alt: 'Client order page' }]} tight />
+  <Figure images={[{ name: 'lumi-vendor-order', alt: 'Vendor order page' }]} />
+
+  <div class="section-head">
+    <h2>Lumi ID helps brands help consumers dispose of packaging sustainably</h2>
+    <p>
+      Lumi ID was an internal project to help provide consumers with information about their packaging and learn how to
+      dispose of it properly. Lumi ID was an Honorable Mention in Fast Company's World Changing Ideas Awards in 2020.
+    </p>
+  </div>
+
+  <div class="figure-row">
+    <Figure images={[{ name: 'Lumi-ID-screenshots', alt: 'Lumi ID packaging information pages' }]} lead="Lumi ID page.">
+      Consumers could scan QR codes on their packaging to see in-depth information about manufacturing, disposal, and
+      more.
+    </Figure>
+    <Figure images={[{ name: 'Lumi-ID-QR-codes2', alt: 'Lumi ID QR code templates' }]} lead="QR code explorations.">
+      Lumi provided a series of templates for brands to include in their packaging artwork that would link to the
+      appropriate Lumi ID page for a piece of packaging.
+    </Figure>
+  </div>
+</CaseStudy>

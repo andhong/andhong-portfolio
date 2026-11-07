@@ -39,7 +39,7 @@ import Figure from '../../components/Figure.astro';
     <h2>Redesigning an outdated view</h2>
   </div>
 
-  <div class="two-up">
+  <div class="figure-row">
     <Figure images={[{ name: 'stats-current-square', alt: 'Original stats design' }]} lead="Original design.">
       The Stats UI had not been touched in some number of years and had multiple usability issues in addition to
       looking a few versions of iOS out of date.
@@ -78,17 +78,3 @@ import Figure from '../../components/Figure.astro';
   <Figure images={[{ name: 'stats-ipad-1', alt: 'Sortable stats table on iPad' }]} tight />
   <Figure images={[{ name: 'mlb-stats-desktop2', alt: 'MLB stats on desktop' }]} />
 </CaseStudy>
-
-<style>
-  .two-up {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-  @media (max-width: 700px) {
-    .two-up {
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
-  }
-</style>

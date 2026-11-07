@@ -31,35 +31,3 @@ const hasCaption = lead || Astro.slots.has('default');
     )
   }
 </figure>
-
-<style>
-  .figure {
-    margin: 0 0 clamp(60px, 8vw, 100px);
-  }
-  .figure.tight {
-    margin-bottom: 24px;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-    gap: 24px;
-  }
-  .grid :global(img) {
-    width: 100%;
-    border-radius: var(--radius);
-  }
-  figcaption {
-    margin-top: 18px;
-    font-size: 15px;
-    line-height: 1.5;
-  }
-  @media (max-width: 700px) {
-    .figure.tight {
-      margin-bottom: 16px;
-    }
-    .grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-  }
-</style>

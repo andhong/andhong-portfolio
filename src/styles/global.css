@@ -123,3 +123,94 @@ h3 {
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* ---------- Case studies ----------
+   Shared by every page in src/pages/project/ and the Figure component. */
+.case {
+  padding-top: clamp(24px, 5vw, 60px);
+}
+.case .headline {
+  color: var(--muted);
+  max-width: 1100px;
+  margin-bottom: 30px;
+}
+.case .headline strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+.case .meta {
+  font-size: 15px;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+.case .meta p {
+  margin: 0 0 6px;
+}
+.case .callout {
+  background: var(--panel);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 28px 0 0;
+  font-size: 15px;
+}
+.case .intro {
+  font-size: 16px;
+  max-width: 1170px;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+.case .section-head {
+  margin-bottom: clamp(36px, 5vw, 60px);
+}
+.case .section-head h2 {
+  margin-bottom: 18px;
+}
+.case .section-head p {
+  font-size: 16px;
+}
+.case .section-head h3 {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin: 28px 0 8px;
+}
+
+/* Figures: one or more images side by side, optional caption. */
+.case .figure {
+  margin: 0 0 clamp(60px, 8vw, 100px);
+}
+.case .figure.tight {
+  margin-bottom: 24px;
+}
+.case .grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr));
+  gap: 24px;
+}
+.case .grid img {
+  width: 100%;
+  border-radius: var(--radius);
+}
+.case figcaption {
+  margin-top: 18px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+/* Columns that each carry their own caption (e.g. two diagrams side by side). */
+.case .figure-row {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+  gap: 24px;
+}
+@media (max-width: 700px) {
+  .case .figure.tight {
+    margin-bottom: 16px;
+  }
+  .case .grid,
+  .case .figure-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .case .figure-row {
+    gap: 0;
+  }
+}
