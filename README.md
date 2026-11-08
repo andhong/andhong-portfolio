@@ -15,11 +15,17 @@ npm run preview   # serve the production build
 
 ## Publishing
 
-Pushing to `master` does **not** change the live site. To publish whatever is on `master`:
+Pushing to `master` does **not** change the live site. The live site is built from the `live` branch. To publish what's on `master`, either:
 
-GitHub → **Actions** → **Deploy to GitHub Pages** → **Run workflow** (branch: `master`).
+- push it to `live`:
+  ```bash
+  git push origin master:live
+  ```
+- or use GitHub → **Actions** → **Deploy to GitHub Pages** → **Run workflow**.
 
 It takes about 2 minutes. The workflow lives in `.github/workflows/deploy.yml`.
+
+Unfinished pages live in `src/drafts/`. They show up in `npm run dev` but are never built for the live site (see `src/pages/[draft].astro`).
 
 ## Where things live
 
