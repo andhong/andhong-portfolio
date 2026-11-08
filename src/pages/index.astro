@@ -6,22 +6,39 @@ import { projects, recent } from '../data/site';
 
 const shown = projects.filter((p) => !p.hidden);
 const half = '(max-width: 700px) 100vw, 400px';
+
+// Hero résumé lines: company, then role (shown in gray italic).
+const previous = [
+  { company: 'Hank', role: 'Co-founder' },
+  { company: 'Lumi', role: 'Lead Designer' },
+  { company: 'MLB Advanced Media', role: 'Lead Designer' },
+  { company: '1stDibs', role: 'Product Designer' },
+];
 ---
 
 <Base>
   <section class="hero wrap">
     <h1>A product designer based in Philadelphia making things that I can be proud of.</h1>
     <p class="cv">
-      <span class="label">Current</span> Staff Product Designer,{' '}<a
-        class="text-link"
-        href="https://www.classdojo.com"
-        target="_blank"
-        rel="noopener noreferrer">ClassDojo</a
+      <span class="label">Current</span>
+      <span class="entry"
+        ><a class="text-link" href="https://www.classdojo.com" target="_blank" rel="noopener noreferrer">ClassDojo</a
+        >{' '}<em>Staff Product Designer</em></span
       >
     </p>
     <p class="cv">
-      <span class="label">Previous</span> Hank (Co-founder; acquired), Lumi (Lead designer; acquired), MLB Advanced
-      Media, 1stDibs
+      <span class="label">Previous</span>
+      {
+        previous.map((p, i) => (
+          <>
+            {/* The dot rides with the entry before it so it never starts a line. */}
+            <span class="entry">
+              {p.company} <em>{p.role}</em>
+              {i < previous.length - 1 && <span class="sep" aria-hidden="true">·</span>}
+            </span>{' '}
+          </>
+        ))
+      }
     </p>
   </section>
 
@@ -81,9 +98,22 @@ const half = '(max-width: 700px) 100vw, 400px';
   .cv {
     font-size: calc(var(--text) * 0.92);
     margin: 0 0 8px;
+    /* Split entries evenly across lines instead of leaving one alone. */
+    text-wrap: balance;
   }
   .cv .label {
-    margin-right: 6px;
+    margin-right: 10px;
+  }
+  /* Keep "Company Role" together so lines only break between entries. */
+  .cv .entry {
+    white-space: nowrap;
+  }
+  .cv em {
+    color: var(--muted);
+  }
+  .cv .sep {
+    color: var(--muted);
+    margin: 0 0.15em 0 0.45em;
   }
 
   .recent {
