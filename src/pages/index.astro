@@ -77,7 +77,9 @@ const previous = [
             <a href={`/project/${p.slug}`}>
               <Pic name={p.thumb} alt={p.title} sizes={half} />
               <span class="name">{p.title}</span>
-              <span class="blurb">{p.blurb}</span>
+              <span class="blurb">
+                {p.blurb}{' '}<span class="sep" aria-hidden="true">·</span>{' '}<span class="years">{p.years}</span>
+              </span>
             </a>
           </li>
         ))
@@ -191,6 +193,13 @@ const previous = [
     margin-top: 18px;
     font-size: 26px;
     letter-spacing: -0.02em;
+  }
+  .blurb .sep {
+    margin: 0 0.15em;
+  }
+  .years {
+    font-style: normal;
+    font-variant-numeric: oldstyle-nums;
   }
   .blurb {
     display: block;
