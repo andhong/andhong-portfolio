@@ -34,7 +34,7 @@ const { name, alt, heading } = Astro.props;
     margin-bottom: 20px;
   }
   .text {
-    font-size: 18px;
+    font-size: calc(var(--text) * 0.95);
   }
   @media (max-width: 800px) {
     .split {

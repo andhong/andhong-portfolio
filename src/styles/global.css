@@ -2,16 +2,20 @@
 @import '@fontsource-variable/eb-garamond/wght-italic.css';
 
 /* Design: a quiet nod to 1980s print advertising — tightly set Garamond,
-   warm paper, hairline rules and generous whitespace. */
+   hairline rules and generous whitespace. */
 :root {
-  --ink: #1c1b19;
-  --muted: #6a655c;
-  --nav: #8c867b;
-  --link: #1c1b19;
-  --rule: #d9d3c7;
-  --band: #f2eee5;
-  --panel: #f2eee5;
-  --page: #fbf9f4;
+  --ink: #1a1a1a;
+  --muted: #666666;
+  --nav: #8a8a8a;
+  --link: #1a1a1a;
+  --rule: #dddddd;
+  --band: #f4f4f4;
+  --panel: #f4f4f4;
+  --page: #ffffff;
+  /* Type scale: body text grows from ~19px on phones to 22px on desktop. */
+  --text: clamp(19px, 0.55vw + 16px, 22px);
+  --text-lg: calc(var(--text) * 1.05);
+  --text-sm: calc(var(--text) * 0.88);
   --radius: 3px;
   --max: 1170px; /* header/nav width */
   --content: 800px; /* everything inside <main> and the footer */
@@ -35,7 +39,7 @@ body {
   background: var(--page);
   color: var(--ink);
   font-family: var(--serif);
-  font-size: 20px;
+  font-size: var(--text);
   line-height: 1.5;
   letter-spacing: -0.01em;
   font-kerning: normal;
@@ -109,7 +113,7 @@ main .wrap {
 
 /* Small letter-spaced capitals for labels, nav and eyebrows. */
 .label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -130,7 +134,7 @@ main .wrap {
 /* Understated call to action: "View case study ›" */
 .more {
   font-style: italic;
-  font-size: 20px;
+  font-size: var(--text);
   text-decoration: none;
   border-bottom: 1px solid var(--rule);
   padding-bottom: 2px;
@@ -157,12 +161,18 @@ main .wrap {
   color: var(--muted);
   margin-bottom: 30px;
 }
+/* Work-page titles fill the full column width (no balanced wrapping). */
+.case h1,
+.case h2,
+.case h3 {
+  text-wrap: wrap;
+}
 .case .headline strong {
   color: var(--ink);
   font-weight: 500;
 }
 .case .meta {
-  font-size: 18px;
+  font-size: var(--text-sm);
   margin-bottom: clamp(48px, 6vw, 80px);
 }
 .case .meta p {
@@ -174,10 +184,10 @@ main .wrap {
   padding: 12px 0;
   margin: 28px 0 0;
   font-style: italic;
-  font-size: 18px;
+  font-size: var(--text-sm);
 }
 .case .intro {
-  font-size: 21px;
+  font-size: var(--text-lg);
   margin-bottom: clamp(48px, 6vw, 80px);
 }
 .case .section-head {
@@ -187,10 +197,10 @@ main .wrap {
   margin-bottom: 18px;
 }
 .case .section-head p {
-  font-size: 21px;
+  font-size: var(--text-lg);
 }
 .case .section-head h3 {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -216,7 +226,7 @@ main .wrap {
 }
 .case figcaption {
   margin-top: 16px;
-  font-size: 17px;
+  font-size: var(--text-sm);
   line-height: 1.5;
 }
 /* Columns that each carry their own caption (e.g. two diagrams side by side). */

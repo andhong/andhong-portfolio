@@ -31,7 +31,7 @@ const half = '(max-width: 700px) 100vw, 400px';
         <div class="wrap">
           <p class="label">{idx === 0 ? 'Recent work' : 'Previously'} · {r.company}</p>
           <h2>
-            <em>{r.title}</em> {r.tagline}
+            <a class="title-link" href={r.href}><em>{r.title}</em> {r.tagline}</a>
           </h2>
           <p class="tags">{r.tags}</p>
           <a class="tiles" href={r.href} aria-label={`${r.title} case study`}>
@@ -79,7 +79,7 @@ const half = '(max-width: 700px) 100vw, 400px';
     margin: 0 auto 32px;
   }
   .cv {
-    font-size: 19px;
+    font-size: calc(var(--text) * 0.92);
     margin: 0 0 8px;
   }
   .cv .label {
@@ -97,10 +97,21 @@ const half = '(max-width: 700px) 100vw, 400px';
   .recent h2 em {
     font-style: italic;
   }
+  .title-link {
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease;
+  }
+  .title-link:hover {
+    background-size: 100% 1px;
+  }
   .tags {
     font-style: italic;
     color: var(--muted);
-    font-size: 18px;
+    font-size: var(--text-sm);
   }
   .tiles {
     text-decoration: none;
@@ -155,7 +166,7 @@ const half = '(max-width: 700px) 100vw, 400px';
     display: block;
     font-style: italic;
     color: var(--muted);
-    font-size: 17px;
+    font-size: var(--text-sm);
   }
 
   @media (max-width: 700px) {
