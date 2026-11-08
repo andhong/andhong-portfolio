@@ -76,10 +76,9 @@ const previous = [
           <li>
             <a href={`/project/${p.slug}`}>
               <Pic name={p.thumb} alt={p.title} sizes={half} />
+              <span class="label years">{p.years}</span>
               <span class="name">{p.title}</span>
-              <span class="blurb">
-                {p.blurb}{' '}<span class="sep" aria-hidden="true">·</span>{' '}<span class="years">{p.years}</span>
-              </span>
+              <span class="blurb">{p.blurb}</span>
             </a>
           </li>
         ))
@@ -190,16 +189,13 @@ const previous = [
   }
   .name {
     display: block;
-    margin-top: 18px;
+    margin-top: 4px;
     font-size: 26px;
     letter-spacing: -0.02em;
   }
-  .blurb .sep {
-    margin: 0 0.15em;
-  }
   .years {
-    font-style: normal;
-    font-variant-numeric: oldstyle-nums;
+    display: block;
+    margin-top: 20px;
   }
   .blurb {
     display: block;
