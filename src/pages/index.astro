@@ -5,6 +5,8 @@ import Placeholder from '../components/Placeholder.astro';
 import { projects, recent } from '../data/site';
 
 const shown = projects.filter((p) => !p.hidden);
+// Drafts appear in local preview only, never in the production build.
+const features = recent.filter((r) => !r.draft || import.meta.env.DEV);
 const half = '(max-width: 700px) 100vw, 400px';
 
 // Hero résumé lines: company, then role (shown in gray italic).
@@ -43,10 +45,13 @@ const previous = [
   </section>
 
   {
-    recent.map((r, idx) => (
+    features.map((r, idx) => (
       <section class="recent">
         <div class="wrap">
-          <p class="label">{idx === 0 ? 'Recent work' : 'Previously'} · {r.company}</p>
+          <p class="label">
+            {idx === 0 ? 'Recent work' : 'Previously'} · {r.company}
+            {r.draft && <span class="draft-tag">Draft · not on live site</span>}
+          </p>
           <h2>
             <a class="title-link" href={r.href}><em>{r.title}</em> {r.tagline}</a>
           </h2>
@@ -124,6 +129,12 @@ const previous = [
   }
   .recent h2 {
     margin: 18px auto 14px;
+  }
+  .draft-tag {
+    margin-left: 10px;
+    padding: 2px 8px;
+    border: 1px dashed currentColor;
+    color: #b3261e;
   }
   .recent h2 em {
     font-style: italic;

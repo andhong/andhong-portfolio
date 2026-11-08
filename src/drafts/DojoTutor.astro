@@ -1,7 +1,10 @@
 ---
-// Dojo Tutor case study. Image slots without a `name` render as placeholders:
-// once a file is in src/assets/media (see README → Images), add `name: 'file-name'`.
-// Remove `noindex` when the images are in.
+// Dojo Tutor case study — DRAFT. Served at /dojo-tutor in local preview only
+// (see src/pages/[draft].astro); it is not part of the live site.
+// To publish: move this file to src/pages/dojo-tutor.astro (imports work as-is), remove
+// it from src/pages/[draft].astro, remove `noindex`, and drop `draft: true` in src/data/site.ts.
+// Image slots without a `name` render as placeholders: once a file is in
+// src/assets/media (see README → Images), add `name: 'file-name'`.
 import CaseStudy from '../layouts/CaseStudy.astro';
 import Figure from '../components/Figure.astro';
 ---

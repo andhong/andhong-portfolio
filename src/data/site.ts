@@ -27,6 +27,7 @@ export const projects = [
 
 // "Recent work" features at the top of the home page, in order.
 // A tile without `name` renders as a placeholder until real images are added.
+// `draft: true` shows the section in local preview (npm run dev) but not on the live site.
 export type Tile = { name?: string; alt: string };
 export const recent: {
   company: string;
@@ -35,8 +36,10 @@ export const recent: {
   tags: string;
   href: string;
   tiles: Tile[];
+  draft?: boolean;
 }[] = [
   {
+    draft: true,
     company: 'ClassDojo',
     title: 'Dojo Tutor',
     tagline: 'is a marketplace connecting tutors and families across a wide range of subjects, in both 1-on-1 and group formats.',

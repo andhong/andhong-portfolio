@@ -1,0 +1,17 @@
+---
+// Unpublished pages: built by the local dev server (npm run dev) so they can be
+// previewed, but never by the production build, so they don't exist on the live site.
+import DojoTutor from '../drafts/DojoTutor.astro';
+
+const drafts = { 'dojo-tutor': DojoTutor };
+
+export function getStaticPaths() {
+  if (!import.meta.env.DEV) return [];
+  return [{ params: { draft: 'dojo-tutor' } }];
+}
+
+const { draft } = Astro.params;
+const Page = drafts[draft as keyof typeof drafts];
+---
+
+<Page />
