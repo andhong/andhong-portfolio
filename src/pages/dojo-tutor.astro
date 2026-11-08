@@ -1,14 +1,14 @@
 ---
-// SCAFFOLD — copied from the Hank case study (src/pages/project/hank.astro).
-// Replace every [bracketed] line with real copy, and give each placeholder image a `name`
-// once the file is in src/assets/media (see README → Images). Remove `noindex` when it's ready.
+// Dojo Tutor case study. Image slots without a `name` render as placeholders:
+// once a file is in src/assets/media (see README → Images), add `name: 'file-name'`.
+// Remove `noindex` when the images are in.
 import CaseStudy from '../layouts/CaseStudy.astro';
 import Figure from '../components/Figure.astro';
 ---
 
 <CaseStudy
   name="Dojo Tutor"
-  tagline="brings 1:1 online tutoring with expert teachers to families on ClassDojo."
+  tagline="is a marketplace connecting tutors and families across a wide range of subjects, in both 1-on-1 and group formats."
   noindex
 >
   <Fragment slot="meta">
@@ -17,50 +17,82 @@ import Figure from '../components/Figure.astro';
     <p><strong>Responsibilities</strong> Product design, User research</p>
     <p><strong>Collaborators</strong> 1 product manager, 1 product designer, 8 engineers</p>
     <p><strong>Platforms</strong> Web, iOS, Android</p>
-    <p class="callout">[Optional callout — a launch milestone, metric, or award.]</p>
+    <p class="callout">
+      Designed and shipped more than 75% of Dojo Tutor’s current product experience, often building features myself
+      with AI coding agents. Grew M3 retention 12% and LTV 20% YoY.
+    </p>
   </Fragment>
 
   <div class="intro">
-    <p>[Intro paragraph: what Dojo Tutor is, who it's for, and the problem it solves.]</p>
-    <p>[Your role and scope: what you owned and who you worked with.]</p>
+    <p>
+      I own the core product experience on both sides of the marketplace, from discovery and design through
+      implementation, partnering closely with engineers and often shipping features myself.
+    </p>
   </div>
 
-  <Figure images={[{ alt: 'Main product views' }]} lead="Main product views.">
-    [Caption describing the core screens.]
-  </Figure>
-
-  <Figure images={[{ alt: 'UI snippets' }]} tight />
-  <Figure images={[{ alt: 'Detail 1', ratio: 1 }, { alt: 'Detail 2', ratio: 1 }]} lead="Assorted UI snippets.">
-    [Caption.]
-  </Figure>
+  <Figure images={[{ alt: 'Hero image' }]} eager />
 
   <div class="section-head">
-    <h2>[Section 1 headline — the core problem or audience.]</h2>
-    <p>[Context: who the users are, what they needed, what research revealed.]</p>
+    <h2>Turning Dojo Tutor into a true marketplace and grew LTV by 20% YoY</h2>
+    <p>
+      Dojo Tutor launched in 2023 as a matching service: the platform paired students with tutors and charged a fixed
+      price for all classes. The product was an MVP, but the goal was a true marketplace where tutors could grow and run
+      their own businesses.
+    </p>
+    <p>
+      Since joining in 2024, I’ve redesigned every post-purchase surface for tutors and families. I’ve also added the
+      core features a marketplace needs: schedule management, tutor-set pricing, direct messaging, automated marketing
+      tools, and payment management. Of these I used AI coding agents to build 70% of the parent surface frontends and
+      80% of the tutor surface frontends, with backend contributions as well.
+    </p>
   </div>
 
-  <Figure images={[{ alt: 'Key flow' }]} lead="[Bold lead sentence.]">
-    [Caption.]
-  </Figure>
-
-  <Figure images={[{ alt: 'Video or prototype', ratio: 16 / 9 }]} lead="[Prototype or demo.]">
-    [Caption. To use a video instead, copy the &lt;figure class="video"&gt; block from the Hank page.]
-  </Figure>
-
-  <Figure images={[{ alt: 'Supporting screens' }]} lead="[Bold lead sentence.]">
-    [Caption.]
-  </Figure>
+  <Figure
+    images={[
+      {
+        alt: 'Dashboards, direct messaging, schedule management, insights, notification settings, payment history, and more',
+      },
+    ]}
+  />
 
   <div class="section-head">
-    <h2>[Section 2 headline — a key decision, experiment, or result.]</h2>
-    <p>[What you tried, what you learned, and the impact.]</p>
+    <h2>Expanding from 1-on-1 tutoring to group classes and growing revenue by 10%</h2>
+    <p>
+      Dojo Tutor launched with 1-on-1 online tutoring only. In early 2026, we introduced group classes, our largest
+      product expansion to date.
+    </p>
+    <p>
+      I designed the tutor experience for creating and managing group classes, along with the internal tools our team
+      uses to review class submissions.
+    </p>
+    <p>
+      Within the first 8 months of launch group classes account for 10% of Dojo Tutor’s revenue and is a strong
+      contributor to overall revenue growth.
+    </p>
   </div>
 
-  <Figure images={[{ alt: 'Iteration or results' }]} lead="[Bold lead sentence.]">
-    [Caption.]
-  </Figure>
+  <Figure images={[{ alt: 'Group class form' }, { alt: 'Group class dashboard' }]} />
 
-  <Figure images={[{ alt: 'Final design' }]} lead="[Bold lead sentence.]">
-    [Caption.]
-  </Figure>
+  <div class="section-head">
+    <h2>Letting tutors set their own prices</h2>
+    <p>
+      Prices used to be fixed by the platform. Dojo Tutor sought to allow tutors to set their own prices allowing them to
+      charge more for specialty topics as well as open up more affordable tutoring options for families. I designed and
+      built much of the frontend for tutor pricing, including the first-time experience, setting rates, adding
+      discounts, and surfacing market data so tutors can price competitively.
+    </p>
+    <p>Despite widespread apprehension from our tutor community, over 70% of tutors have opted into the new pricing model.</p>
+  </div>
+
+  <Figure images={[{ alt: 'Pricing onboarding' }, { alt: 'Setting prices screens' }]} />
+
+  <div class="section-head">
+    <h2>Launching iOS and Android apps for tutors</h2>
+    <p>
+      I designed native apps that let tutors message families, manage their classes, and claim open spots in classes
+      that need a substitute. The app is slated to launch December 2026.
+    </p>
+  </div>
+
+  <Figure images={[{ alt: 'Tutor app' }]} />
 </CaseStudy>

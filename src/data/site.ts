@@ -39,8 +39,7 @@ export const recent: {
   {
     company: 'ClassDojo',
     title: 'Dojo Tutor',
-    // TODO: confirm this description.
-    tagline: 'brings 1:1 online tutoring with expert teachers to families on ClassDojo.',
+    tagline: 'is a marketplace connecting tutors and families across a wide range of subjects, in both 1-on-1 and group formats.',
     tags: 'Product design',
     href: '/dojo-tutor',
     tiles: [
