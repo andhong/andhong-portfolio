@@ -9,18 +9,22 @@ const shown = projects.filter((p) => !p.hidden);
 const features = recent.filter((r) => !r.draft || import.meta.env.DEV);
 const half = '(max-width: 700px) 100vw, 400px';
 
-// Hero résumé lines: company, then role (shown in gray italic).
-const previous = [
+// Hero résumé lines: company, then an optional role (shown in gray italic).
+const previous: { company: string; role?: string }[] = [
   { company: 'Hank', role: 'Co-founder' },
-  { company: 'Lumi', role: 'Lead Designer' },
-  { company: 'MLB Advanced Media', role: 'Lead Designer' },
-  { company: '1stDibs', role: 'Product Designer' },
+  { company: 'Lumi' },
+  { company: 'MLB Advanced Media' },
+  { company: '1stDibs' },
 ];
 ---
 
 <Base>
   <section class="hero wrap">
-    <h1>A product designer based in Philadelphia making things that I can be proud of.</h1>
+    <h1>
+      <span class="ln">Andrew Hong is a <span class="nw">product designer</span></span>{' '}
+      <span class="ln">focused on turning ideas into</span>{' '}
+      <span class="ln"><span class="nw">real things</span> that make life&nbsp;better.</span>
+    </h1>
     <p class="cv">
       <span class="label">Current</span>
       <span class="entry"
@@ -35,7 +39,7 @@ const previous = [
           <>
             {/* The dot rides with the entry before it so it never starts a line. */}
             <span class="entry">
-              {p.company} <em>{p.role}</em>
+              {p.company}{p.role && <> <em>{p.role}</em></>}
               {i < previous.length - 1 && <span class="sep" aria-hidden="true">·</span>}
             </span>{' '}
           </>
@@ -98,7 +102,18 @@ const previous = [
     padding-top: clamp(40px, 7vw, 90px);
     padding-bottom: clamp(70px, 10vw, 130px);
   }
+  /* Headline: three set lines on wide screens; on narrower ones it wraps
+     freely but never splits the phrases marked .nw. */
+  .nw {
+    white-space: nowrap;
+  }
+  @media (min-width: 900px) {
+    .ln {
+      display: block;
+    }
+  }
   .hero h1 {
+    text-wrap: pretty;
     margin: 0 auto 32px;
   }
   .cv {
@@ -131,6 +146,8 @@ const previous = [
     margin: 18px auto 14px;
   }
   .draft-tag {
+    display: inline-block;
+    white-space: nowrap;
     margin-left: 10px;
     padding: 2px 8px;
     border: 1px dashed currentColor;

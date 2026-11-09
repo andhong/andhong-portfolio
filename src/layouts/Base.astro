@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site, nav } from '../data/site';
+import MobileMenu from '../components/MobileMenu.astro';
 
 interface Props {
   /** Page name, shown before the site name in the tab. Omit on the home page. */
@@ -45,7 +46,7 @@ const isActive = (href: string) =>
     <a class="sr-only" href="#main">Skip to content</a>
     <header class="site-header wrap">
       <a class="logo" href="/">Andrew Hong</a>
-      <nav aria-label="Main">
+      <nav class="desktop-nav" aria-label="Main">
         {
           nav.map((item) => (
             <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
@@ -54,6 +55,7 @@ const isActive = (href: string) =>
           ))
         }
       </nav>
+      <MobileMenu isActive={isActive} />
     </header>
 
     <main id="main">
@@ -86,11 +88,11 @@ const isActive = (href: string) =>
     color: var(--ink);
     white-space: nowrap;
   }
-  nav {
+  .desktop-nav {
     display: flex;
     gap: clamp(16px, 2.4vw, 28px);
   }
-  nav a {
+  .desktop-nav a {
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.14em;
@@ -100,10 +102,10 @@ const isActive = (href: string) =>
     padding-bottom: 3px;
     border-bottom: 1px solid transparent;
   }
-  nav a:hover {
+  .desktop-nav a:hover {
     color: var(--ink);
   }
-  nav a[aria-current='page'] {
+  .desktop-nav a[aria-current='page'] {
     color: var(--ink);
     border-bottom-color: var(--ink);
   }
@@ -142,22 +144,19 @@ const isActive = (href: string) =>
     font-style: normal;
   }
 
-  /* Phones: keep logo and nav on one row, scaling both down to fit. */
-  @media (max-width: 560px) {
+  /* Phones: the inline links give way to the expanding menu (MobileMenu). */
+  @media (max-width: 640px) {
     .site-header {
-      gap: 12px;
-      padding-top: 22px;
-      padding-bottom: 22px;
+      align-items: center;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      padding-right: 12px;
     }
     .logo {
-      font-size: clamp(18px, 5.4vw, 22px);
+      font-size: 22px;
     }
-    nav {
-      gap: clamp(10px, 3.4vw, 18px);
-    }
-    nav a {
-      font-size: clamp(11px, 3.1vw, 13px);
-      letter-spacing: 0.08em;
+    .desktop-nav {
+      display: none;
     }
   }
 </style>
