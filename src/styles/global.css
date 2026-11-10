@@ -1,5 +1,7 @@
 @import '@fontsource-variable/eb-garamond/wght.css';
 @import '@fontsource-variable/eb-garamond/wght-italic.css';
+/* Accent: one weight, Latin only. Used for labels, numbers and buttons, never for reading text. */
+@import '@fontsource/ibm-plex-mono/latin-500.css';
 
 /* Design: a quiet nod to 1980s print advertising — tightly set Garamond,
    hairline rules and generous whitespace. */
@@ -24,6 +26,7 @@
   --gutter: clamp(16px, 4vw, 55px);
   --serif: 'EB Garamond Variable', 'EB Garamond', Garamond, 'Times New Roman', serif;
   --sans: var(--serif);
+  --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 }
 
 *,
@@ -119,11 +122,12 @@ main .wrap.full {
   color: var(--muted);
 }
 
-/* Small letter-spaced capitals for labels, nav and eyebrows. */
+/* Small capitals for labels and eyebrows, set in the mono accent. */
 .label {
-  font-size: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -161,9 +165,10 @@ main .wrap.full {
   background: #fff;
   color: var(--ink);
   box-shadow: 3px 3px 0 var(--ink);
-  font-size: 14px;
+  font-family: var(--mono);
+  font-size: 12.5px;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   line-height: 1.2;
   text-transform: uppercase;
   text-decoration: none;
@@ -289,9 +294,10 @@ body::after {
   font-size: var(--text-lg);
 }
 .case .section-head h3 {
-  font-size: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
   margin: 32px 0 8px;
