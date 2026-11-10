@@ -53,7 +53,7 @@ const previous: { company: string; role?: string }[] = [
       <section class="recent">
         <div class="wrap">
           <p class="label">
-            {idx === 0 ? 'Recent work' : 'Previously'} · {r.company}
+            {r.company === features[0].company ? 'Recent work' : 'Previously'} · {r.company}
           </p>
           <h2>
             <a class="title-link" href={r.href}><em>{r.title}</em> {r.tagline}</a>

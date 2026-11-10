@@ -3,6 +3,11 @@
 import CaseStudy from '../layouts/CaseStudy.astro';
 import Figure from '../components/Figure.astro';
 import Stats from '../components/Stats.astro';
+import { recent } from '../data/site';
+
+// Link to the pricing deep dive once it's published (always in local preview).
+const pricing = recent.find((r) => r.href === '/tutor-pricing');
+const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
 ---
 
 <CaseStudy
@@ -143,6 +148,13 @@ import Stats from '../components/Stats.astro';
       Despite widespread apprehension from our tutor community, over 70% of tutors opted into the new pricing model within
       the first 3 months of release.
     </p>
+    {
+      showPricing && (
+        <p>
+          <a class="more" href="/tutor-pricing">Read the full pricing case study ›</a>
+        </p>
+      )
+    }
   </div>
 
   <Figure

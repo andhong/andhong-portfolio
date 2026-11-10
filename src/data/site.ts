@@ -49,6 +49,15 @@ export const recent: {
     hero: { name: 'dojo-tutor-hero', alt: 'A wall of Dojo Tutor screens across web and mobile: calendars, chats, pricing, group classes, insights, and the parent home' },
   },
   {
+    draft: true,
+    company: 'ClassDojo',
+    title: 'Tutor-set pricing',
+    tagline: 'let Dojo Tutor’s tutors set their own prices without a race to the bottom. 70% opted in within 3 months.',
+    tags: 'Product design • User research • Product building',
+    href: '/tutor-pricing',
+    hero: { name: 'dojo-class-prices', alt: 'Editing a class price with the recommended range and take-home pay' },
+  },
+  {
     company: 'Hank',
     title: 'Hank',
     tagline: 'is a social network focused on fighting social isolation amongst older adults.',
