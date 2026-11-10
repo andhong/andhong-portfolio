@@ -60,14 +60,8 @@ const previous: { company: string; role?: string }[] = [
             <a class="title-link" href={r.href}><em>{r.title}</em> {r.tagline}</a>
           </h2>
           <p class="tags">{r.tags}</p>
-          <a class="tiles" href={r.href} aria-label={`${r.title} case study`}>
-            {r.tiles.map((t, i) =>
-              t.name ? (
-                <Pic name={t.name} alt={t.alt} sizes={half} eager={idx === 0 && i < 2} />
-              ) : (
-                <Placeholder label={t.alt} />
-              ),
-            )}
+          <a class="hero-img" href={r.href} aria-label={`${r.title} case study`}>
+            {r.hero.name ? <Pic name={r.hero.name} alt={r.hero.alt} eager={idx === 0} /> : <Placeholder label={r.hero.alt} />}
           </a>
           <p class="cta">
             <a class="more" href={r.href}>View case study ›</a>
@@ -172,14 +166,12 @@ const previous: { company: string; role?: string }[] = [
     color: var(--muted);
     font-size: var(--text-sm);
   }
-  .tiles {
+  .hero-img {
+    display: block;
     text-decoration: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
     margin-top: 48px;
   }
-  .tiles :global(img),
+  .hero-img :global(img),
   .grid :global(img) {
     width: 100%;
     border-radius: var(--radius);
@@ -233,7 +225,6 @@ const previous: { company: string; role?: string }[] = [
   }
 
   @media (max-width: 700px) {
-    .tiles,
     .grid {
       grid-template-columns: 1fr;
       gap: 16px;

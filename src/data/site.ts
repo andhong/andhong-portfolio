@@ -26,16 +26,17 @@ export const projects = [
 ];
 
 // "Recent work" features at the top of the home page, in order.
-// A tile without `name` renders as a placeholder until real images are added.
+// Each feature shows one hero image (a file name in src/assets/media); a hero without
+// `name` renders as a placeholder until the image exists.
 // `draft: true` shows the section in local preview (npm run dev) but not on the live site.
-export type Tile = { name?: string; alt: string };
+export type Hero = { name?: string; alt: string };
 export const recent: {
   company: string;
   title: string;
   tagline: string;
   tags: string;
   href: string;
-  tiles: Tile[];
+  hero: Hero;
   draft?: boolean;
 }[] = [
   {
@@ -45,12 +46,7 @@ export const recent: {
     tagline: 'is ClassDojo’s marketplace connecting tutors and families across a wide range of subjects, in both 1-on-1 and group formats.',
     tags: 'Product design • Product building',
     href: '/dojo-tutor',
-    tiles: [
-      { alt: 'Dojo Tutor image 1' },
-      { alt: 'Dojo Tutor image 2' },
-      { alt: 'Dojo Tutor image 3' },
-      { alt: 'Dojo Tutor image 4' },
-    ],
+    hero: { name: 'dojo-tutor-hero', alt: 'Dojo Tutor tutor calendar showing the day’s classes' },
   },
   {
     company: 'Hank',
@@ -58,11 +54,6 @@ export const recent: {
     tagline: 'is a social network focused on fighting social isolation amongst older adults.',
     tags: 'Brand identity • Product design',
     href: '/project/hank',
-    tiles: [
-      { name: 'hank-app-screenshot', alt: 'Hank app screenshot' },
-      { name: 'hank-printed-card', alt: 'Hank printed card' },
-      { name: 'member-pins', alt: 'Hank member pins' },
-      { name: 'hank-screenshots-UI-snippets-1', alt: 'Hank UI snippets' },
-    ],
+    hero: { name: 'hank-screenshots', alt: 'Hank activity list, activity details, and group chat' },
   },
 ];
