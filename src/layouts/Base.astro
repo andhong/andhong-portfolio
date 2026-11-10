@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { site, nav } from '../data/site';
 import MobileMenu from '../components/MobileMenu.astro';
+import AlbersFooter from '../components/AlbersFooter.astro';
 
 interface Props {
   /** Page name, shown before the site name in the tab. Omit on the home page. */
@@ -63,13 +64,7 @@ const isActive = (href: string) =>
       <slot />
     </main>
 
-    <footer class="site-footer">
-      <p class="links">
-        <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true">·</span
-        ><a href={`mailto:${site.email}`}>Email</a>
-      </p>
-      <p class="sign">Made with <span class="heart" aria-label="love">❤</span> in Philadelphia</p>
-    </footer>
+    <AlbersFooter />
   </body>
 </html>
 
@@ -109,40 +104,6 @@ const isActive = (href: string) =>
   .desktop-nav a[aria-current='page'] {
     color: var(--ink);
     border-bottom-color: var(--ink);
-  }
-
-  .site-footer {
-    border-top: 1px solid var(--rule);
-    text-align: center;
-    padding: 72px var(--gutter) 90px;
-    margin-top: 140px;
-  }
-  .links {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    font-size: var(--text);
-    margin: 0 0 10px;
-  }
-  .links a {
-    text-decoration: none;
-  }
-  .links a:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .links span {
-    color: var(--muted);
-  }
-  .sign {
-    font-style: italic;
-    color: var(--muted);
-    font-size: var(--text-sm);
-    margin: 0;
-  }
-  .heart {
-    color: #c4302b;
-    font-style: normal;
   }
 
   /* Phones: the inline links give way to the "Menu" button (MobileMenu), whose

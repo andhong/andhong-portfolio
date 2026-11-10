@@ -1,0 +1,156 @@
+---
+// Site footer after Josef Albers' Homage to the Square: nested squares, each set
+// low inside the one before it (side 1 : top 1.5 : bottom 0.5). The inner squares
+// lean toward the cursor, deeper ones further, and a click changes the palette.
+// Each page load starts on a random palette.
+import { site } from '../data/site';
+
+// Outer field → innermost square.
+const palettes = [
+  ['#f3d6c4', '#e59a8a', '#c4566a', '#6d2643'], // rose to plum
+  ['#e9b44c', '#f08a24', '#d9531e', '#9b2915'], // late-summer yellow to oxblood
+  ['#cfd2c3', '#a3ab8c', '#6f7d5b', '#3f4a37'], // olive grays
+  ['#d7e3e9', '#86aec7', '#3e709a', '#1c3553'], // dusk blues
+  ['#f1e6b8', '#dcc56b', '#b28b2f', '#5e4a1d'], // ochres
+  ['#e6e1d8', '#bdb4a6', '#857b6d', '#3a342d'], // stone
+];
+const [c0, c1, c2, c3] = palettes[0];
+---
+
+<footer
+  class="albers"
+  data-palettes={JSON.stringify(palettes)}
+  style={`--c0:${c0};--c1:${c1};--c2:${c2};--c3:${c3}`}
+>
+  <div class="sq sq1">
+    <div class="sq sq2">
+      <div class="sq sq3">
+        <div class="inner">
+          <p class="sign">Made with <span class="heart" aria-label="love">❤</span> in Philadelphia</p>
+          <p class="links">
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a><span aria-hidden="true"
+              >·</span
+            ><a href={`mailto:${site.email}`}>Email</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const el = document.querySelector<HTMLElement>('footer.albers');
+  if (el) {
+    const palettes: string[][] = JSON.parse(el.dataset.palettes!);
+    let i = Math.floor(Math.random() * palettes.length);
+    const apply = () => palettes[i].forEach((c, k) => el.style.setProperty(`--c${k}`, c));
+    apply();
+
+    el.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) return;
+      i = (i + 1) % palettes.length;
+      apply();
+    });
+
+    if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', String((e.clientX - r.left) / r.width - 0.5));
+        el.style.setProperty('--my', String((e.clientY - r.top) / r.height - 0.5));
+      });
+      el.addEventListener('pointerleave', () => {
+        el.style.setProperty('--mx', '0');
+        el.style.setProperty('--my', '0');
+      });
+    }
+  }
+</script>
+
+<style>
+  .albers {
+    --mx: 0;
+    --my: 0;
+    margin-top: 140px;
+    padding: clamp(56px, 9vw, 110px) var(--gutter) 0;
+    background: var(--c0);
+    cursor: pointer;
+    transition: background 0.6s ease;
+    overflow: hidden;
+  }
+  .sq {
+    transition:
+      background 0.6s ease,
+      transform 0.35s ease-out;
+  }
+  /* The outer square: as wide as the content column allows, always square. */
+  .sq1 {
+    position: relative;
+    width: min(620px, 100%);
+    aspect-ratio: 1;
+    margin: 0 auto;
+    background: var(--c1);
+  }
+  /* Each square sits inside the last with Albers' spacing: sides 10%, top 15%,
+     bottom 5%. Insets are relative to a square parent, so every level stays square. */
+  .sq2,
+  .sq3 {
+    position: absolute;
+    inset: 15% 10% 5%;
+  }
+  .sq2 {
+    background: var(--c2);
+    transform: translate(calc(var(--mx) * 22px), calc(var(--my) * 22px));
+  }
+  .sq3 {
+    background: var(--c3);
+    transform: translate(calc(var(--mx) * 16px), calc(var(--my) * 16px));
+  }
+  .inner {
+    height: 100%;
+    display: grid;
+    place-content: center;
+    gap: clamp(14px, 2.4vw, 24px);
+    padding: 0 8%;
+    text-align: center;
+    color: var(--c0);
+    transform: translate(calc(var(--mx) * 10px), calc(var(--my) * 10px));
+    transition: transform 0.35s ease-out;
+  }
+  .sign {
+    margin: 0;
+    font-size: clamp(28px, 5.4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .heart {
+    color: var(--c1);
+    transition: color 0.6s ease;
+  }
+  .links {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 0;
+    font-size: clamp(16px, 1.9vw, 20px);
+    color: var(--c1);
+    transition: color 0.6s ease;
+  }
+  .links a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .links a:hover {
+    color: var(--c0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .albers,
+    .sq,
+    .inner,
+    .heart,
+    .links {
+      transition: none;
+    }
+  }
+</style>
