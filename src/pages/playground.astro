@@ -65,7 +65,6 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
     <button class="lb-close" type="button">Close</button>
     <figure>
       <img alt="" decoding="async" />
-      <figcaption></figcaption>
     </figure>
   </dialog>
 </Base>
@@ -74,7 +73,6 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
   const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
   if (dialog) {
     const img = dialog.querySelector('img')!;
-    const caption = dialog.querySelector('figcaption')!;
 
     const close = () => dialog.close();
 
@@ -82,7 +80,6 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
       trigger.addEventListener('click', () => {
         img.src = trigger.dataset.full!;
         img.alt = trigger.dataset.alt!;
-        caption.textContent = trigger.dataset.alt!;
         document.documentElement.classList.add('lb-lock');
         dialog.showModal(); // focus returns to the trigger automatically on close
       });
@@ -180,24 +177,17 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 14px;
     height: 100%;
     margin: 0;
-    padding: 64px var(--gutter) 40px;
+    padding: 64px var(--gutter);
   }
   .lightbox img {
     max-width: 100%;
-    max-height: calc(100dvh - 150px);
+    max-height: calc(100dvh - 128px);
     width: auto;
     height: auto;
     border-radius: var(--radius);
     cursor: default;
-  }
-  .lightbox figcaption {
-    font-style: italic;
-    color: var(--muted);
-    font-size: var(--text-sm);
-    text-align: center;
   }
   .lb-close {
     position: absolute;
