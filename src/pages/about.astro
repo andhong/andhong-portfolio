@@ -1,11 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
 import { site } from '../data/site';
 ---
 
 <Base title="About" description="Product designer, builder, and repeat founder.">
   <section class="about wrap">
     <h1>I'm Andrew.</h1>
+    <figure class="film">
+      <div class="edge" aria-hidden="true"><span>◂ 23</span><span>400</span><span>23A ▸</span></div>
+      <Pic name="about-glacier" alt="Andrew on a glacier, flashing a peace sign, with snowy mountains behind" eager />
+      <div class="edge" aria-hidden="true"><span>24</span><span>◂ ▸</span><span>24A</span></div>
+    </figure>
     <p>
       I'm a product designer, builder, and repeat founder. I have a deep interest in finding where craft can drive impact
       and taking nebulous ideas and transforming them into concrete experiences. Recently I’ve been figuring out how to
@@ -38,5 +44,68 @@ import { site } from '../data/site';
   }
   h1 {
     margin-bottom: 32px;
+  }
+
+  /* A frame cut from a strip of 35mm negative: dark film base, sprocket
+     holes along both edges, orange edge printing, set down slightly askew. */
+  .film {
+    --base: #1b1714;
+    --hole: #f5f5f5; /* the page as it reads through the paper texture */
+    position: relative;
+    margin: 0 0 clamp(40px, 6vw, 64px);
+    padding: 34px 0;
+    background: var(--base);
+    transform: rotate(-1.2deg);
+    box-shadow: 0 14px 30px -18px rgba(40, 28, 16, 0.55);
+  }
+  /* Sprocket holes: rounded slots repeated along the top and bottom edges. */
+  .film::before,
+  .film::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 12px;
+    background: linear-gradient(90deg, transparent 6px, var(--hole) 6px 16px, transparent 16px) 0 0 / 22px 12px repeat-x;
+    border-radius: 2px;
+  }
+  .film::before {
+    top: 7px;
+  }
+  .film::after {
+    bottom: 7px;
+  }
+  .film :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .edge {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    color: #e2843a;
+    opacity: 0.85;
+  }
+  .edge:first-child {
+    top: 21px;
+  }
+  .edge:last-child {
+    bottom: 21px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .film {
+      transition: transform 0.4s ease;
+    }
+    .film:hover {
+      transform: rotate(0deg);
+    }
   }
 </style>
