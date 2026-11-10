@@ -130,8 +130,21 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
     </p>
   </div>
 
-  <!-- Placeholder until the design system image is ready: add `name: 'file-name'`. -->
-  <Figure images={[{ alt: 'Design system image coming soon', ratio: 16 / 9 }]} />
+  <figure class="figure video">
+    <video
+      class="wide"
+      src="/media/dojo-design-system-reel.mp4"
+      poster="/media/dojo-design-system-reel-poster.jpg"
+      width="1920"
+      height="1080"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-label="Dojo Tutor design system components: navigation, notifications, calendars, earnings, subscriptions, schedules, and class cards"
+    ></video>
+  </figure>
 
   <div class="section-head">
     <h2>Group classes: +10% revenue, with safety review built in</h2>
@@ -228,3 +241,11 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
     Classes, chat, claiming a last-minute substitution, and the account menu.
   </Figure>
 </CaseStudy>
+
+<style>
+  .video video {
+    max-width: none;
+    border-radius: var(--radius);
+    background: #fdf6ee;
+  }
+</style>
