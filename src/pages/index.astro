@@ -70,6 +70,20 @@ const previous: { company: string; role?: string }[] = [
             {(r.tiles ?? (r.hero ? [r.hero] : [])).map((img, i) =>
               img.wall ? (
                 <HeroWall alt={img.alt} eager={idx === 0} />
+              ) : img.video ? (
+                <video
+                  class="hero-video"
+                  src={img.video}
+                  poster={img.poster}
+                  width="1920"
+                  height="1080"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  aria-label={img.alt}
+                />
               ) : img.name ? (
                 <Pic name={img.name} alt={img.alt} sizes={r.tiles ? half : undefined} eager={idx === 0 && i < 2} />
               ) : (
@@ -188,6 +202,7 @@ const previous: { company: string; role?: string }[] = [
     gap: 24px;
   }
   .hero-img :global(img),
+  .hero-video,
   .grid :global(img) {
     width: 100%;
     border-radius: var(--radius);

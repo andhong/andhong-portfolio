@@ -31,7 +31,21 @@ import Figure from '../components/Figure.astro';
     </p>
   </div>
 
-  <Figure images={[{ name: 'dojo-pricing-hero', alt: 'Setting a group class price: recommended range, take-home pay after the platform fee, and Earnings Boost' }]} eager />
+  <figure class="figure video">
+    <video
+      class="wide"
+      src="/media/dojo-pricing-hero.mp4"
+      poster="/media/dojo-pricing-hero-poster.jpg"
+      width="1920"
+      height="1080"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      aria-label="Setting a group class price: recommended range, take-home pay after the platform fee, and Earnings Boost"
+    ></video>
+  </figure>
 
   <div class="section-head">
     <h2>The stakes</h2>
@@ -147,6 +161,11 @@ import Figure from '../components/Figure.astro';
 </CaseStudy>
 
 <style>
+  .video video {
+    max-width: none;
+    border-radius: var(--radius);
+    background: #fdf6ee;
+  }
   .back {
     margin-top: clamp(48px, 6vw, 80px);
   }

@@ -29,8 +29,9 @@ export const projects = [
 // Each feature shows either one `hero` image or a 2×2 grid of four `tiles`
 // (file names in src/assets/media); an image without `name` renders as a placeholder.
 // `draft: true` shows the section in local preview (npm run dev) but not on the live site.
-/** `wall: true` renders the animated wall of screens (HeroWall) instead of the image. */
-export type Hero = { name?: string; alt: string; wall?: boolean };
+/** `wall: true` renders the animated wall of screens (HeroWall) instead of the image;
+ *  `video` (a path under public/, with an optional `poster`) plays a looping video instead. */
+export type Hero = { name?: string; alt: string; wall?: boolean; video?: string; poster?: string };
 export const recent: {
   company: string;
   title: string;
@@ -59,7 +60,7 @@ export const recent: {
     heading: ['Enabling Dojo Tutor’s tutors to ', 'set their own prices', ' and take control of their businesses.'],
     tags: 'Product design • User research • Product building',
     href: '/tutor-pricing',
-    hero: { name: 'dojo-pricing-hero', alt: 'Setting a group class price: recommended range, take-home pay after the platform fee, and Earnings Boost' },
+    hero: { video: '/media/dojo-pricing-hero.mp4', poster: '/media/dojo-pricing-hero-poster.jpg', alt: 'Setting a group class price: recommended range, take-home pay after the platform fee, and Earnings Boost' },
   },
   {
     company: 'Hank',
