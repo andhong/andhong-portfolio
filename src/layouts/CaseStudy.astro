@@ -6,6 +6,8 @@ import { getImage } from 'astro:assets';
 interface Props {
   /** Project name, shown in bold at the start of the headline and in the tab title. */
   name: string;
+  /** Bold text that opens the headline, if different from `name` (e.g. 'Dojo Tutor:'). */
+  lead?: string;
   /** Rest of the headline after the project name. */
   tagline: string;
   /** Tab/page title, if different from `name`. */
@@ -19,7 +21,7 @@ interface Props {
   details?: { label: string; items: string[] }[];
 }
 
-const { name, tagline, title = name, shareImage, noindex = false, details = [] } = Astro.props;
+const { name, lead = name, tagline, title = name, shareImage, noindex = false, details = [] } = Astro.props;
 const og = shareImage
   ? (await getImage({ src: media(shareImage), width: 1200, format: 'jpg' })).src
   : undefined;
@@ -27,7 +29,7 @@ const og = shareImage
 
 <Base title={title} description={`${name} ${tagline}`} image={og} noindex={noindex}>
   <article class="wrap case">
-    <h1 class="headline"><strong>{name}</strong> {tagline}</h1>
+    <h1 class="headline"><strong>{lead}</strong> {tagline}</h1>
     <div class="meta">
       {
         details.length > 0 && (
