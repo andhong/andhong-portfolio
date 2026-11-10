@@ -109,27 +109,6 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
     </p>
   </div>
 
-  <Figure
-    images={[
-      { name: 'dojo-calendar-day', alt: 'Updated tutor day calendar' },
-      { name: 'dojo-insights', alt: 'Tutor performance insights and reviews' },
-    ]}
-    tight
-  />
-  <Figure images={[{ name: 'dojo-parent-home', alt: 'New parent homepage' }]} lead="Built with AI coding agents.">
-    Updated calendar and performance metrics tools for tutors, and a new homepage for parents to manage their classes
-    and discover tutors and group classes.
-  </Figure>
-
-  <div class="section-head">
-    <h2>Patterns that keep the product coherent</h2>
-    <p>
-      The design system covers everything from new page layouts to individual components as well as display of user
-      lockups, date and time ranges, and copy standards. This keeps the tutor and parent experiences consistent as the
-      product grows.
-    </p>
-  </div>
-
   <figure class="figure video">
     <video
       class="wide"
@@ -145,6 +124,26 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
       aria-label="Dojo Tutor design system components: navigation, notifications, calendars, earnings, subscriptions, schedules, and class cards"
     ></video>
   </figure>
+
+  <div class="section-head">
+    <h2>Patterns that keep the product coherent</h2>
+    <p>
+      The design system covers everything from new page layouts to individual components as well as display of user
+      lockups, date and time ranges, and copy standards. This keeps the tutor and parent experiences consistent as the
+      product grows.
+    </p>
+  </div>
+
+  <Figure
+    images={[
+      { name: 'dojo-insights', alt: 'Tutor performance insights and reviews' },
+      { name: 'dojo-parent-home', alt: 'New parent homepage' },
+    ]}
+    lead="Built with AI coding agents."
+  >
+    Performance metrics tools for tutors, and a new homepage for parents to manage their classes and discover tutors and
+    group classes.
+  </Figure>
 
   <div class="section-head">
     <h2>Group classes: +10% revenue, with safety review built in</h2>
