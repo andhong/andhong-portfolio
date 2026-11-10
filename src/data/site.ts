@@ -26,8 +26,8 @@ export const projects = [
 ];
 
 // "Recent work" features at the top of the home page, in order.
-// Each feature shows one hero image (a file name in src/assets/media); a hero without
-// `name` renders as a placeholder until the image exists.
+// Each feature shows either one `hero` image or a 2×2 grid of four `tiles`
+// (file names in src/assets/media); an image without `name` renders as a placeholder.
 // `draft: true` shows the section in local preview (npm run dev) but not on the live site.
 export type Hero = { name?: string; alt: string };
 export const recent: {
@@ -36,7 +36,8 @@ export const recent: {
   tagline: string;
   tags: string;
   href: string;
-  hero: Hero;
+  hero?: Hero;
+  tiles?: Hero[];
   draft?: boolean;
 }[] = [
   {
@@ -54,6 +55,11 @@ export const recent: {
     tagline: 'is a social network focused on fighting social isolation amongst older adults.',
     tags: 'Brand identity • Product design',
     href: '/project/hank',
-    hero: { name: 'hank-screenshots', alt: 'Hank activity list, activity details, and group chat' },
+    tiles: [
+      { name: 'hank-app-screenshot', alt: 'Hank app screenshot' },
+      { name: 'hank-printed-card', alt: 'Hank printed card' },
+      { name: 'member-pins', alt: 'Hank member pins' },
+      { name: 'hank-screenshots-UI-snippets-1', alt: 'Hank UI snippets' },
+    ],
   },
 ];
