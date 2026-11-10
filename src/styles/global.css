@@ -151,6 +151,36 @@ main .wrap.full {
   border-color: currentColor;
 }
 
+/* Button in the manner of an early desktop dialog: white face, thin ink outline,
+   soft rounded corners, and the separate outer ring that marked the default
+   button. Inverts while hovered or pressed. */
+.button {
+  display: inline-block;
+  padding: 9px 22px 8px;
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow:
+    0 0 0 3px var(--page),
+    0 0 0 5px var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.button:hover,
+.button:active {
+  background: var(--ink);
+  color: #fff;
+}
+.button:focus-visible {
+  outline: 1px dotted var(--ink);
+  outline-offset: 8px;
+}
+
 /* Fine paper grain over the whole page (fractal noise, multiplied in). Fixed so
    it doesn't move on scroll; never intercepts clicks. */
 body::after {
