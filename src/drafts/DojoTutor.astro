@@ -58,11 +58,20 @@ import Stats from '../components/Stats.astro';
 
   <Figure
     images={[
-      {
-        alt: 'Dashboards, direct messaging, schedule management, insights, notification settings, payment history, and more',
-      },
+      { name: 'dojo-calendar-week', alt: 'Tutor week calendar' },
+      { name: 'dojo-chats', alt: 'Direct messaging between a tutor and parents' },
     ]}
+    tight
   />
+  <Figure
+    images={[
+      { name: 'dojo-subscriptions', alt: 'Tutor subscriptions list' },
+      { name: 'dojo-notifications', alt: 'Tutor notification settings' },
+    ]}
+    lead="Core marketplace tools."
+  >
+    Schedule management, direct messaging, subscriptions, and notification settings for tutors.
+  </Figure>
 
   <div class="section-head">
     <h2>Over half the frontend, built with AI coding agents</h2>
@@ -84,6 +93,18 @@ import Stats from '../components/Stats.astro';
     </p>
   </div>
 
+  <Figure
+    images={[
+      { name: 'dojo-calendar-day', alt: 'Updated tutor day calendar' },
+      { name: 'dojo-insights', alt: 'Tutor performance insights and reviews' },
+    ]}
+    tight
+  />
+  <Figure images={[{ name: 'dojo-parent-home', alt: 'New parent homepage' }]} lead="Built with AI coding agents.">
+    Updated calendar and performance metrics tools for tutors, and a new homepage for parents to manage their classes
+    and discover tutors and group classes.
+  </Figure>
+
   <div class="section-head">
     <h2>Group classes: +10% revenue in 8 months</h2>
     <p>
@@ -98,7 +119,15 @@ import Stats from '../components/Stats.astro';
     <p>Within the first 8 months of launch, group classes grew Dojo Tutor’s overall revenue by 10%.</p>
   </div>
 
-  <Figure images={[{ alt: 'Group class form' }, { alt: 'Group class dashboard' }]} />
+  <Figure
+    images={[
+      { name: 'dojo-group-classes', alt: 'Group classes dashboard' },
+      { name: 'dojo-group-class-detail', alt: 'Group class detail with sections and enrollment' },
+    ]}
+    lead="Group class management."
+  >
+    Tutors list classes, then open sections and track enrollment across them.
+  </Figure>
 
   <div class="section-head">
     <h2>Tutor-set pricing: 70% of tutors opted in within 3 months</h2>
@@ -122,7 +151,27 @@ import Stats from '../components/Stats.astro';
     </p>
   </div>
 
-  <Figure images={[{ alt: 'Pricing onboarding' }, { alt: 'Setting prices screens' }]} />
+  <Figure
+    images={[
+      { name: 'dojo-pricing-earnings', alt: 'Estimated earnings increase from the new pricing model' },
+      { name: 'dojo-pricing-setup', alt: 'Setting 1:1 tutoring prices during onboarding' },
+    ]}
+    lead="Opting in."
+    tight
+  >
+    Tutors see what they stand to earn before switching, then set prices with recommendations based on similar
+    classes.
+  </Figure>
+  <Figure
+    images={[
+      { name: 'dojo-class-prices', alt: 'Editing a class price with the recommended range and take-home pay' },
+      { name: 'dojo-pricing-modal', alt: 'Setting a group class price with Earnings Boost' },
+    ]}
+    lead="Pricing with guardrails."
+  >
+    Market-based recommended ranges, take-home pay after fees, and the Earnings Boost for long-term family
+    relationships.
+  </Figure>
 
   <div class="section-head">
     <h2>Native tutor apps, launching December 2026</h2>
@@ -137,5 +186,10 @@ import Stats from '../components/Stats.astro';
     </p>
   </div>
 
-  <Figure images={[{ alt: 'Tutor app' }]} />
+  <Figure
+    images={[{ name: 'dojo-app-phones', alt: 'Tutor app: classes, chat, last-minute substitution, and menu' }]}
+    lead="Tutor app."
+  >
+    Classes, chat, claiming a last-minute substitution, and the account menu.
+  </Figure>
 </CaseStudy>
