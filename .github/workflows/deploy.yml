@@ -27,6 +27,12 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Reuse resized images from earlier builds so only new or changed ones are processed.
+      - uses: actions/cache@v4
+        with:
+          path: node_modules/.astro
+          key: astro-images-${{ hashFiles('src/assets/**', 'src/components/Pic.astro', 'package-lock.json') }}
+          restore-keys: astro-images-
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -41,3 +47,6 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # Pages can take a while to process a large upload; the default is 10 minutes.
+          timeout: 1800000
