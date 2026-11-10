@@ -58,7 +58,7 @@ export const recent: {
     heading: ['Enabling Dojo Tutor’s tutors to ', 'set their own prices', ' and take control of their businesses.'],
     tags: 'Product design • User research • Product building',
     href: '/tutor-pricing',
-    hero: { name: 'dojo-class-prices', alt: 'Editing a class price with the recommended range and take-home pay' },
+    hero: { name: 'dojo-pricing-hero', alt: 'Setting a group class price: recommended range, take-home pay after the platform fee, and Earnings Boost' },
   },
   {
     company: 'Hank',
