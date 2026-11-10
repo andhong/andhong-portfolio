@@ -45,8 +45,8 @@ export const recent: {
   {
     company: 'ClassDojo',
     title: 'Dojo Tutor',
-    tagline: 'Taking Dojo Tutor, ClassDojo’s tutoring marketplace, from MVP to mature product.',
-    heading: ['Taking ', 'Dojo Tutor', ', ClassDojo’s tutoring marketplace, from MVP to mature product.'],
+    tagline: 'ClassDojo: Taking Dojo Tutor from MVP to a learning marketplace families and tutors trust.',
+    heading: ['ClassDojo: Taking ', 'Dojo Tutor', ' from MVP to a learning marketplace families and tutors trust.'],
     tags: 'Product design • Product building',
     href: '/dojo-tutor',
     hero: { name: 'dojo-tutor-hero', alt: 'A wall of Dojo Tutor screens across web and mobile: calendars, chats, pricing, group classes, insights, and the parent home' },
