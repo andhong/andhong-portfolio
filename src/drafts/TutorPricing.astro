@@ -1,42 +1,37 @@
 ---
 // Tutor-set pricing deep dive — DRAFT. Served at /tutor-pricing in local preview only
-// (see src/pages/[draft].astro). Spans marked <Tk> are prompts for details only Andrew has;
-// they render as red dashed boxes so nothing unfinished can slip through unnoticed.
-// To publish: fill every <Tk>, move this file to src/pages/tutor-pricing.astro, remove it
-// from src/pages/[draft].astro, remove `noindex`, and drop `draft: true` in src/data/site.ts.
+// (see src/pages/[draft].astro). Copy is edited in the "Tutor-set pricing case study" doc.
+// To publish: move this file to src/pages/tutor-pricing.astro, remove it from
+// src/pages/[draft].astro, remove `noindex`, and drop `draft: true` in src/data/site.ts.
 import CaseStudy from '../layouts/CaseStudy.astro';
 import Figure from '../components/Figure.astro';
-import Stats from '../components/Stats.astro';
-import Tk from '../components/Tk.astro';
 ---
 
 <CaseStudy
   name="Tutor-set pricing"
-  lead="Tutor-set pricing:"
-  tagline="Letting tutors set their own prices without a race to the bottom. 70% opted in within 3 months."
+  tagline="Enabling Dojo Tutor’s tutors to set their own prices and take control of their businesses."
   noindex
   details={[
     { label: 'Responsibilities', items: ['Product design', 'User research', 'Product building'] },
-    { label: 'Collaborators', items: ['1 product manager', 'TK engineers'] },
-    { label: 'Platforms', items: ['Web'] },
-    { label: 'Years', items: ['TK'] },
+    { label: 'Collaborators', items: ['1 product manager', '4 engineers'] },
+    { label: 'Platform', items: ['Web'] },
+    { label: 'Year', items: ['2026'] },
   ]}
 >
-  <Stats
-    slot="meta"
-    items={[
-      { value: '70%', label: 'of tutors opted in within 3 months' },
-      { value: 'TK', label: 'change in tutor take-home pay' },
-      { value: 'TK', label: 'second outcome (e.g. bookings or revenue)' },
-    ]}
-  />
+  <Fragment slot="headline">
+    Enabling Dojo Tutor’s tutors to <em>set their own prices</em> and take control of their businesses.
+  </Fragment>
+
+  <p class="callout" slot="meta">
+    70% of tutors opted in within 3 months, enabling Dojo Tutor to perform experiments with pricing.
+  </p>
 
   <div class="intro">
     <p>
-      Part of <a class="text-link" href="/dojo-tutor">Dojo Tutor</a>, ClassDojo’s marketplace connecting tutors and
-      families. Prices used to be fixed by the platform. We wanted tutors to set their own, so they could charge more
-      for specialty topics and open up more affordable options for families. I led the design and research, and built
-      much of the frontend.
+      <a class="text-link" href="/dojo-tutor">Dojo Tutor</a> is ClassDojo’s marketplace connecting tutors and families.
+      Prices used to be fixed by the platform across all grades, subjects, and student needs. We wanted tutors to set
+      their own prices so they could charge more for specialty topics and open up more affordable options for families.
+      I led the design and research, and built much of the frontend.
     </p>
   </div>
 
@@ -45,44 +40,47 @@ import Tk from '../components/Tk.astro';
   <div class="section-head">
     <h2>The stakes</h2>
     <p>
-      A fixed price treated every tutor as interchangeable. That capped what experienced and specialist tutors could
-      earn, and priced out families who needed something more affordable. Moving pricing to tutors was the step from a
-      matching service toward a true marketplace.
-    </p>
-    <p>
-      <Tk>What was at risk for the business: e.g. platform revenue, tutor churn, family conversion. One or two
-      sentences.</Tk>
+      Dojo Tutor set every price and pay rate centrally for all subjects, grades, and students. This constrained supply
+      as many tutors saw our fixed pricing as too low, especially for higher grades and upmarket topics such as
+      standardized test prep. This also prevented tutors in lower cost-of-living regions to offer less expensive classes
+      and compete on price.
     </p>
   </div>
 
   <div class="section-head">
-    <h2>What made it hard: fear of a race to the bottom</h2>
+    <h2>Tutors feared a race to the bottom</h2>
     <p>
-      Research showed that most tutors wanted to set their own prices, but many worried about a “race to the bottom” as
-      tutors competed on price.
+      I ran surveys and user interviews and discovered that most tutors wanted to set their own prices, but many worried
+      about a “race to the bottom” as tutors competed on price.
     </p>
     <p>
-      <Tk>How you learned this: who you talked to, how many tutors, what methods (interviews, surveys, data).</Tk>
-    </p>
-    <p>
-      <Tk>A quote or a specific finding that captures the fear.</Tk>
-    </p>
-    <p>
-      The real problem wasn’t the price input. It was confidence: tutors needed to believe that pricing themselves would
-      pay off, and that their value would be visible beyond a number.
+      Tutors also feared that families would not understand why different tutors would charge different prices and pick
+      tutors completely based on price.
     </p>
   </div>
 
   <div class="section-head">
-    <h2>Options we weighed</h2>
+    <h2>Establishing a fee structure</h2>
+    <p>Along with product, finance and operations counterparts I explored different variables for tutor-set pricing:</p>
+    <ul>
+      <li><strong>Adjusting take rate.</strong> Exploring different fee amounts for charging tutors.</li>
+      <li>
+        <strong>Loyalty incentives.</strong> Rewarding tutors for retaining subscribers by increasing their take rate after
+        a set number of classes with a family.
+      </li>
+      <li>
+        <strong>Giving tutors control over discounts.</strong> Discounts were previously set at the platform level. Tutors
+        could now decide whether to accept the tradeoffs of offering discounts.
+      </li>
+      <li>
+        <strong>The rollout.</strong> Deciding whether to make the release opt-in or opt-out as well as permanent vs
+        reversible.
+      </li>
+    </ul>
     <p>
-      <Tk>Option 1: what it was, and why you didn’t ship it.</Tk>
-    </p>
-    <p>
-      <Tk>Option 2: what it was, and why you didn’t ship it.</Tk>
-    </p>
-    <p>
-      <Tk>Where you disagreed with someone (PM, leadership, tutors) and how you resolved it.</Tk>
+      Given the potential impact on margin and overall revenue, this project had high visibility with leadership. My
+      product and ops counterparts and I walked leadership through different combinations of options until we reached a
+      consensus.
     </p>
     <p>
       We landed on opt-in, tutor-set pricing with guardrails: marketplace fees calculated to increase tutor take-home
@@ -107,7 +105,8 @@ import Tk from '../components/Tk.astro';
     lead="Opting in."
   >
     Tutors see what they stand to earn before switching, then set prices with recommendations based on similar
-    classes. Leading with take-home pay answered the race-to-the-bottom fear before a tutor typed a number.
+    classes. Leading with take-home pay showed tutors that they stood to gain additional take-home pay from the new
+    pricing model.
   </Figure>
 
   <Figure
@@ -115,7 +114,7 @@ import Tk from '../components/Tk.astro';
     lead="Pricing with guardrails."
   >
     Market-based recommended ranges, take-home pay after fees, and the Earnings Boost for long-term family
-    relationships. <Tk>Why the Earnings Boost exists and what it rewards.</Tk>
+    relationships.
   </Figure>
 
   <div class="section-head">
@@ -125,17 +124,16 @@ import Tk from '../components/Tk.astro';
       within the first 3 months of release.
     </p>
     <p>
-      <Tk>What happened to prices: did they go up, down, spread out? Any sign of a race to the bottom?</Tk>
-    </p>
-    <p>
-      <Tk>Impact on families and the business: bookings, revenue, take-home pay.</Tk>
+      The majority of tutors accepted platform recommendations and we saw an expected spread of tutors offering both
+      higher and lower prices.
     </p>
   </div>
 
   <div class="section-head">
     <h2>What I’d do differently</h2>
     <p>
-      <Tk>One honest lesson: something you’d change, test earlier, or that surprised you.</Tk>
+      Show external stakeholders the different pricing options in end-to-end prototypes that showed the impact to both
+      tutors and families. The different pricing options were too abstract to understand the impact on end users.
     </p>
   </div>
 

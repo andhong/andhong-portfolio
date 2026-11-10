@@ -56,7 +56,13 @@ const previous: { company: string; role?: string }[] = [
             {r.company === features[0].company ? 'Recent work' : 'Previously'} · {r.company}
           </p>
           <h2>
-            <a class="title-link" href={r.href}><em>{r.title}</em> {r.tagline}</a>
+            <a class="title-link" href={r.href}>
+              {r.heading ? (
+                <>{r.heading[0]}<em>{r.heading[1]}</em>{r.heading[2]}</>
+              ) : (
+                <><em>{r.title}</em> {r.tagline}</>
+              )}
+            </a>
           </h2>
           <p class="tags">{r.tags}</p>
           <a class:list={['hero-img', { tiles: r.tiles }]} href={r.href} aria-label={`${r.title} case study`}>

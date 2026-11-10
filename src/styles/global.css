@@ -237,6 +237,13 @@ body::after {
 .case .section-head {
   margin-bottom: clamp(36px, 5vw, 60px);
 }
+.case .section-head ul {
+  margin: 0 0 1em;
+  padding-left: 1.1em;
+}
+.case .section-head li {
+  margin-bottom: 0.5em;
+}
 .case .section-head h2 {
   margin-bottom: 18px;
 }

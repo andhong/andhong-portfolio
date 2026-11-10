@@ -38,6 +38,8 @@ export const recent: {
   href: string;
   hero?: Hero;
   tiles?: Hero[];
+  /** Custom headline in place of "*title* tagline": plain text, an italic phrase, then plain text. */
+  heading?: [string, string, string];
   draft?: boolean;
 }[] = [
   {
@@ -52,7 +54,8 @@ export const recent: {
     draft: true,
     company: 'ClassDojo',
     title: 'Tutor-set pricing',
-    tagline: 'let Dojo Tutor’s tutors set their own prices without a race to the bottom. 70% opted in within 3 months.',
+    tagline: 'Enabling Dojo Tutor’s tutors to set their own prices and take control of their businesses.',
+    heading: ['Enabling Dojo Tutor’s tutors to ', 'set their own prices', ' and take control of their businesses.'],
     tags: 'Product design • User research • Product building',
     href: '/tutor-pricing',
     hero: { name: 'dojo-class-prices', alt: 'Editing a class price with the recommended range and take-home pay' },

@@ -9,7 +9,8 @@ interface Props {
   name: string;
   /** Bold text that opens the headline, if different from `name` (e.g. 'Dojo Tutor:'). */
   lead?: string;
-  /** Rest of the headline after the project name. */
+  /** Rest of the headline after the project name. A `headline` slot, if given, replaces the
+   *  whole headline (lead + tagline); the tagline is then only used for the page description. */
   tagline: string;
   /** Tab/page title, if different from `name`. */
   title?: string;
@@ -30,7 +31,13 @@ const og = shareImage
 
 <Base title={title} description={`${name} ${tagline}`} image={og} noindex={noindex}>
   <article class="wrap case">
-    <h1 class="headline"><strong>{lead}</strong> {tagline}</h1>
+    {
+      Astro.slots.has('headline') ? (
+        <h1 class="headline"><slot name="headline" /></h1>
+      ) : (
+        <h1 class="headline"><strong>{lead}</strong> {tagline}</h1>
+      )
+    }
     <div class="meta">
       {
         details.length > 0 && (
