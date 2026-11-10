@@ -5,7 +5,7 @@ import Figure from '../../components/Figure.astro';
 
 <CaseStudy
   name="Hank"
-  tagline="is a social network focused on fighting social isolation amongst older adults."
+  tagline="Founding and building Hank, a social network focused on fighting social isolation amongst older adults."
   shareImage="hank-app-screenshot"
   details={[
     { label: 'Responsibilities', items: ['Product design', 'User research', 'Many other hats'] },
@@ -14,6 +14,10 @@ import Figure from '../../components/Figure.astro';
     { label: 'Years', items: ['2020–2024'] },
   ]}
 >
+  <Fragment slot="headline">
+    Founding and building <strong>Hank</strong>, a social network focused on fighting social isolation amongst older adults.
+  </Fragment>
+
   <Fragment slot="meta">
     <p class="callout">Hank was acquired by Wider Circle in 2024.</p>
   </Fragment>

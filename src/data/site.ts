@@ -64,7 +64,8 @@ export const recent: {
   {
     company: 'Hank',
     title: 'Hank',
-    tagline: 'is a social network focused on fighting social isolation amongst older adults.',
+    tagline: 'Founding and building Hank, a social network focused on fighting social isolation amongst older adults.',
+    heading: ['Founding and building ', 'Hank', ', a social network focused on fighting social isolation amongst older adults.'],
     tags: 'Brand identity • Product design',
     href: '/project/hank',
     tiles: [
