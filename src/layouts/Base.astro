@@ -14,7 +14,8 @@ interface Props {
 }
 
 const { title, description = site.description, image, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} – ${site.title}` : `${site.title} – Portfolio of ${site.name}`;
+// "Andrew Hong - Product Designer - <page>"; the homepage is "Work".
+const fullTitle = `${site.title} - ${title ?? 'Work'}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = image ? new URL(image, Astro.site).href : undefined;
 

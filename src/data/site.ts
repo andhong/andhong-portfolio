@@ -1,6 +1,6 @@
 export const site = {
   name: 'Andrew Hong',
-  title: 'Andrew Hong | Product Designer',
+  title: 'Andrew Hong - Product Designer',
   description:
     "I'm Andrew Hong, a product designer based in Philadelphia making things that I can be proud of.",
   email: 'andrewhong09@gmail.com',
