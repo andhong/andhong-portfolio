@@ -52,7 +52,6 @@ export const recent: {
     hero: { name: 'dojo-tutor-hero', alt: 'A wall of Dojo Tutor screens across web and mobile: calendars, chats, pricing, group classes, insights, and the parent home' },
   },
   {
-    draft: true,
     company: 'ClassDojo',
     title: 'Tutor-set pricing',
     tagline: 'Enabling Dojo Tutor’s tutors to set their own prices and take control of their businesses.',
