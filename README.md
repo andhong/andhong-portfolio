@@ -32,7 +32,7 @@ Unfinished pages live in `src/drafts/`. They show up in `npm run dev` but are ne
 | What | Where |
 | --- | --- |
 | Name, email, links, nav, home-page project list | `src/data/site.ts` |
-| Home / About / Playground | `src/pages/index.astro`, `about.astro`, `playground.astro` |
+| Home / About / Play | `src/pages/index.astro`, `about.astro`, `play.astro` |
 | Case studies | `src/pages/project/*.astro` (URLs like `/project/hank`) |
 | Page shell (header, footer, meta tags) | `src/layouts/Base.astro` |
 | Case-study headline + metadata | `src/layouts/CaseStudy.astro` |

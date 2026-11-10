@@ -9,7 +9,7 @@ export const site = {
 
 export const nav = [
   { href: '/', label: 'Work' },
-  { href: '/playground', label: 'Play' },
+  { href: '/play', label: 'Play' },
   { href: '/about', label: 'About' },
 ];
 
