@@ -1,0 +1,431 @@
+---
+// Footer explorations after Josef Albers (Homage to the Square, Interaction of Color).
+// Preview only: served at /footer-lab by the dev server, never in the production build.
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+// Palettes in the spirit of the Homage paintings: outer → inner.
+const palettes = [
+  ['#e9b44c', '#f08a24', '#d9531e', '#9b2915'], // late-summer yellow to oxblood
+  ['#cfd2c3', '#a3ab8c', '#6f7d5b', '#3f4a37'], // olive grays
+  ['#d7e3e9', '#86aec7', '#3e709a', '#1c3553'], // dusk blues
+  ['#f3d6c4', '#e59a8a', '#c4566a', '#6d2643'], // rose to plum
+  ['#f1e6b8', '#dcc56b', '#b28b2f', '#5e4a1d'], // ochres
+  ['#e6e1d8', '#bdb4a6', '#857b6d', '#3a342d'], // stone
+];
+
+const links = [
+  { label: 'LinkedIn', href: site.linkedin, external: true },
+  { label: 'Email', href: `mailto:${site.email}` },
+];
+---
+
+<Base title="Footer lab" noindex>
+  <section class="lab-intro wrap">
+    <p class="label">Footer lab · preview only</p>
+    <h1>Five footers after Josef Albers</h1>
+    <p>Each one is live: hover, click, and move the mouse around.</p>
+  </section>
+
+  <!-- A · HOMAGE ------------------------------------------------------- -->
+  <p class="v-label wrap"><span class="label">A · Homage</span> One big Homage to the Square, full bleed. Click to change the palette.</p>
+  <footer class="v v-homage" data-palettes={JSON.stringify(palettes)}>
+    <div class="h-sq">
+      <i /><i /><i />
+      <div class="h-inner">
+        <p class="f-links">{links.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener noreferrer' : undefined}>{l.label}</a></>)}</p>
+        <p class="f-sign">Made in Philadelphia</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- B · STUDY STRIP --------------------------------------------------- -->
+  <p class="v-label wrap"><span class="label">B · Study strip</span> A row of small Homages, edge to edge, like a sheet of color studies. Hover one to bring it forward.</p>
+  <footer class="v v-strip">
+    <div class="strip">
+      {
+        [...palettes, ...palettes.slice(0, 2)].map((p) => (
+          <div class="mini" style={`--c0:${p[0]};--c1:${p[1]};--c2:${p[2]};--c3:${p[3]}`}>
+            <i /><i /><i />
+          </div>
+        ))
+      }
+    </div>
+    <div class="strip-base">
+      <p class="f-links">{links.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener noreferrer' : undefined}>{l.label}</a></>)}</p>
+      <p class="f-sign">Made with <span class="mini-heart" aria-label="love"><i /><i /></span> in Philadelphia</p>
+    </div>
+  </footer>
+
+  <!-- C · INTERACTION ---------------------------------------------------- -->
+  <p class="v-label wrap"><span class="label">C · Interaction</span> Albers’ famous trick: the two small squares are the exact same color. Hover to prove it.</p>
+  <footer class="v v-interaction">
+    <div class="field warm"><div class="chip"></div></div>
+    <div class="field cool"><div class="chip"></div></div>
+    <div class="bridge" aria-hidden="true"></div>
+    <div class="i-text">
+      <p class="i-caption">These two squares are the same color.</p>
+      <p class="f-links">{links.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener noreferrer' : undefined}>{l.label}</a></>)}</p>
+    </div>
+  </footer>
+
+  <!-- D · GONE NUTS ------------------------------------------------------ -->
+  <p class="v-label wrap"><span class="label">D · Gone nuts</span> Homage proportions stretched to the whole footer. The squares lean toward your cursor; click to reshuffle.</p>
+  <footer class="v v-nuts" data-palettes={JSON.stringify(palettes)}>
+    <div class="n n1"><div class="n n2"><div class="n n3"><div class="n n4">
+      <div class="n-text">
+        <p class="n-big">Let’s make something.</p>
+        <p class="f-links">{links.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener noreferrer' : undefined}>{l.label}</a></>)}</p>
+      </div>
+    </div></div></div></div>
+  </footer>
+
+  <!-- E · COLOR FIELD ---------------------------------------------------- -->
+  <p class="v-label wrap"><span class="label">E · Color field</span> A wall of tiny Homages whose colors drift slowly, like a color chart coming alive. The text sits on a plain card.</p>
+  <footer class="v v-field">
+    <div class="tiles" aria-hidden="true">
+      {
+        Array.from({ length: 48 }, (_, i) => {
+          const p = palettes[(i * 5 + Math.floor(i / 12)) % palettes.length];
+          return (
+            <div class="tile" style={`--c0:${p[0]};--c1:${p[1]};--c2:${p[2]};--c3:${p[3]};--d:${(i % 7) * -1.3}s`}>
+              <i /><i /><i />
+            </div>
+          );
+        })
+      }
+    </div>
+    <div class="card">
+      <p class="f-links">{links.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener noreferrer' : undefined}>{l.label}</a></>)}</p>
+      <p class="f-sign">Made with <span class="mini-heart" aria-label="love"><i /><i /></span> in Philadelphia</p>
+    </div>
+  </footer>
+
+  <div class="lab-end wrap"><p class="label">↓ Current footer, for comparison</p></div>
+</Base>
+
+<script>
+  // A and D: click to cycle palettes.
+  for (const el of document.querySelectorAll<HTMLElement>('.v-homage, .v-nuts')) {
+    const palettes: string[][] = JSON.parse(el.dataset.palettes!);
+    let i = el.classList.contains('v-nuts') ? 3 : 0;
+    const apply = () => palettes[i].forEach((c, k) => el.style.setProperty(`--c${k}`, c));
+    apply();
+    el.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) return;
+      i = (i + 1) % palettes.length;
+      apply();
+    });
+  }
+
+  // D: inner rectangles lean toward the cursor, deeper ones more.
+  const nuts = document.querySelector<HTMLElement>('.v-nuts');
+  if (nuts && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    nuts.addEventListener('pointermove', (e) => {
+      const r = nuts.getBoundingClientRect();
+      nuts.style.setProperty('--mx', String((e.clientX - r.left) / r.width - 0.5));
+      nuts.style.setProperty('--my', String((e.clientY - r.top) / r.height - 0.5));
+    });
+    nuts.addEventListener('pointerleave', () => {
+      nuts.style.setProperty('--mx', '0');
+      nuts.style.setProperty('--my', '0');
+    });
+  }
+</script>
+
+<style>
+  .lab-intro {
+    padding: 40px 0 10px;
+  }
+  .lab-intro h1 {
+    margin: 10px 0 8px;
+  }
+  .v-label {
+    margin-top: 90px;
+    margin-bottom: 18px;
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+  .v-label .label {
+    display: block;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .lab-end {
+    margin-top: 90px;
+  }
+
+  /* Shared footer type */
+  .v {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+  }
+  .v :global(a) {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .f-links {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin: 0 0 8px;
+    font-size: 20px;
+  }
+  .f-sign {
+    margin: 0;
+    font-style: italic;
+    font-size: 17px;
+  }
+
+  /* A · Homage: each square sits low inside the one before it, as in the paintings
+     (side margin 1, top 1.5, bottom 0.5 on a 10-unit grid). */
+  .v-homage {
+    --c0: #e9b44c;
+    --c1: #f08a24;
+    --c2: #d9531e;
+    --c3: #9b2915;
+    background: var(--c0);
+    padding: 70px 0 0;
+    cursor: pointer;
+    transition: background 0.6s ease;
+  }
+  .h-sq {
+    position: relative;
+    width: min(620px, 86vw);
+    aspect-ratio: 1;
+    margin: 0 auto;
+    background: var(--c1);
+    transition: background 0.6s ease;
+  }
+  .h-sq i {
+    position: absolute;
+    display: block;
+    transition: background 0.6s ease;
+  }
+  .h-sq i:nth-child(1) {
+    inset: 15% 10% 5%;
+    background: var(--c2);
+  }
+  .h-sq i:nth-child(2) {
+    inset: 30% 20% 10%;
+    background: var(--c3);
+  }
+  .h-sq i:nth-child(3) {
+    inset: 45% 30% 15%;
+    background: var(--c0);
+    opacity: 0;
+  }
+  .v-homage .h-inner {
+    position: absolute;
+    inset: 30% 20% 10%;
+    display: grid;
+    place-content: center;
+    color: var(--c0);
+  }
+
+  /* B · Study strip */
+  .v-strip {
+    background: #f4efe6;
+    color: var(--ink);
+  }
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+  }
+  .mini {
+    position: relative;
+    aspect-ratio: 1;
+    background: var(--c0);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .mini i,
+  .tile i {
+    position: absolute;
+    display: block;
+  }
+  .mini i:nth-child(1),
+  .tile i:nth-child(1) {
+    inset: 15% 10% 5%;
+    background: var(--c1);
+  }
+  .mini i:nth-child(2),
+  .tile i:nth-child(2) {
+    inset: 30% 20% 10%;
+    background: var(--c2);
+  }
+  .mini i:nth-child(3),
+  .tile i:nth-child(3) {
+    inset: 45% 30% 15%;
+    background: var(--c3);
+  }
+  .mini:hover {
+    transform: scale(1.12);
+    z-index: 1;
+    box-shadow: 0 18px 30px -12px rgba(0, 0, 0, 0.35);
+  }
+  .strip-base {
+    padding: 40px 20px 36px;
+  }
+  .mini-heart {
+    position: relative;
+    display: inline-block;
+    width: 0.8em;
+    height: 0.8em;
+    margin: 0 0.1em;
+    vertical-align: -0.05em;
+    background: #e9b44c;
+  }
+  .mini-heart i {
+    position: absolute;
+    display: block;
+  }
+  .mini-heart i:nth-child(1) {
+    inset: 18% 14% 6%;
+    background: #d9531e;
+  }
+  .mini-heart i:nth-child(2) {
+    inset: 38% 30% 12%;
+    background: #9b2915;
+  }
+
+  /* C · Interaction: one mid-tone chip on two grounds. */
+  .v-interaction {
+    --same: #a48a6a;
+    --band: 122px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 300px var(--band);
+  }
+  .field {
+    display: grid;
+    place-items: center;
+  }
+  .warm {
+    background: #f0b23a;
+  }
+  .cool {
+    background: #3f4f74;
+  }
+  .chip {
+    width: 90px;
+    height: 90px;
+    background: var(--same);
+  }
+  .bridge {
+    position: absolute;
+    left: calc(25% + 45px);
+    right: calc(25% + 45px);
+    top: calc((100% - var(--band)) / 2 - 14px);
+    height: 28px;
+    background: var(--same);
+    transform: scaleX(0);
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .v-interaction:hover .bridge {
+    transform: scaleX(1);
+  }
+  .i-text {
+    grid-column: 1 / -1;
+    padding: 30px 20px 32px;
+    background: var(--ink);
+    color: #fff;
+  }
+  .i-caption {
+    margin: 0 0 10px;
+    font-style: italic;
+    font-size: 17px;
+  }
+
+  /* D · Gone nuts */
+  .v-nuts {
+    --c0: #f3d6c4;
+    --c1: #e59a8a;
+    --c2: #c4566a;
+    --c3: #6d2643;
+    --mx: 0;
+    --my: 0;
+    cursor: pointer;
+  }
+  .n {
+    transition:
+      background 0.6s ease,
+      transform 0.35s ease-out;
+  }
+  .n1 {
+    background: var(--c0);
+    padding: 90px 6vw 30px;
+  }
+  .n2 {
+    background: var(--c1);
+    padding: 70px 6vw 24px;
+    transform: translate(calc(var(--mx) * 18px), calc(var(--my) * 10px));
+  }
+  .n3 {
+    background: var(--c2);
+    padding: 56px 6vw 20px;
+    transform: translate(calc(var(--mx) * 14px), calc(var(--my) * 8px));
+  }
+  .n4 {
+    background: var(--c3);
+    padding: 54px 20px 44px;
+    transform: translate(calc(var(--mx) * 12px), calc(var(--my) * 7px));
+  }
+  .n-big {
+    margin: 0 0 18px;
+    font-size: clamp(40px, 7vw, 92px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--c0);
+  }
+  .v-nuts .f-links {
+    color: var(--c1);
+  }
+
+  /* E · Color field */
+  .v-field {
+    color: var(--ink);
+    min-height: 420px;
+    display: grid;
+    place-items: center;
+  }
+  .tiles {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .tile {
+    position: relative;
+    background: var(--c0);
+    animation: drift 7s ease-in-out infinite alternate;
+    animation-delay: var(--d);
+  }
+  @keyframes drift {
+    to {
+      filter: hue-rotate(40deg) saturate(1.15);
+    }
+  }
+  .card {
+    position: relative;
+    background: #fff;
+    padding: 30px 44px 28px;
+    box-shadow: 6px 6px 0 var(--ink);
+    border: 1.5px solid var(--ink);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tile {
+      animation: none;
+    }
+  }
+  @media (max-width: 700px) {
+    .strip {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .tiles {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+</style>
