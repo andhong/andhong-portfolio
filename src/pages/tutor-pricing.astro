@@ -2,6 +2,7 @@
 // Tutor-set pricing case study. Copy is edited in the "Tutor-set pricing case study" doc.
 import CaseStudy from '../layouts/CaseStudy.astro';
 import Figure from '../components/Figure.astro';
+import Pic from '../components/Pic.astro';
 ---
 
 <CaseStudy
@@ -111,6 +112,34 @@ import Figure from '../components/Figure.astro';
     </p>
   </div>
 
+  <figure class="figure pair">
+    <div class="grid" style="--cols: 2">
+      <Pic
+        name="dojo-pricing-details"
+        alt="Pricing details before confirming: payout rates, Earnings Boost, trial pay, and the tutor's new class prices and discounts"
+        sizes="(max-width: 700px) 100vw, 585px"
+      />
+      <video
+        src="/media/dojo-pricing-hero.mp4"
+        poster="/media/dojo-pricing-hero-poster.jpg"
+        width="1920"
+        height="1080"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label="Setting a group class price: recommended range, take-home pay after the platform fee, and Earnings Boost"
+      ></video>
+    </div>
+    <figcaption>
+      <strong>Pricing with guardrails.</strong>{' '}<span class="muted"
+        >Market-based recommended ranges, take-home pay after fees, and the Earnings Boost for long-term family
+        relationships.</span
+      >
+    </figcaption>
+  </figure>
+
   <Figure
     images={[
       { name: 'dojo-pricing-earnings', alt: 'Estimated earnings increase from the new pricing model' },
@@ -123,13 +152,6 @@ import Figure from '../components/Figure.astro';
     pricing model.
   </Figure>
 
-  <Figure
-    images={[{ name: 'dojo-class-prices', alt: 'Editing a class price with the recommended range, take-home pay, and Earnings Boost' }]}
-    lead="Pricing with guardrails."
-  >
-    Market-based recommended ranges, take-home pay after fees, and the Earnings Boost for long-term family
-    relationships.
-  </Figure>
 
   <div class="section-head">
     <h2>Results</h2>
@@ -161,6 +183,15 @@ import Figure from '../components/Figure.astro';
 </CaseStudy>
 
 <style>
+  /* Screenshot beside a video, both 4:3 (the video's empty edges are cropped). */
+  .pair video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    background: #fdf6ee;
+  }
   .video video {
     max-width: none;
     border-radius: var(--radius);
