@@ -29,7 +29,7 @@ const og = shareImage
   : undefined;
 ---
 
-<Base title={title} description={`${name} ${tagline}`} image={og} noindex={noindex}>
+<Base title={title} description={Astro.slots.has('headline') ? tagline : `${name} ${tagline}`} image={og} noindex={noindex}>
   <article class="wrap case">
     {
       Astro.slots.has('headline') ? (

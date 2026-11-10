@@ -12,8 +12,7 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
 
 <CaseStudy
   name="Dojo Tutor"
-  lead="Dojo Tutor:"
-  tagline="I’ve designed 70% of ClassDojo’s tutoring marketplace surfaces, and built over half of the frontend myself."
+  tagline="Taking Dojo Tutor, ClassDojo’s tutoring marketplace, from MVP to mature product."
   details={[
     { label: 'Responsibilities', items: ['Product design', 'User research', 'Product building'] },
     { label: 'Collaborators', items: ['1 product manager', '4 engineers'] },
@@ -21,6 +20,10 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
     { label: 'Years', items: ['2024–Present'] },
   ]}
 >
+  <Fragment slot="headline">
+    Taking <strong>Dojo Tutor</strong>, ClassDojo’s tutoring marketplace, from MVP to mature product.
+  </Fragment>
+
   <Stats
     slot="meta"
     items={[
