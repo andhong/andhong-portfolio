@@ -1,0 +1,132 @@
+---
+// Click/tap any case-study image to view it larger. Uses the largest size the
+// page's responsive image already offers, so no extra files are generated.
+---
+
+<dialog class="case-lightbox" aria-label="Image viewer">
+  <button class="lb-close" type="button">Close</button>
+  <img alt="" decoding="async" />
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('.case-lightbox');
+  if (dialog) {
+    const big = dialog.querySelector('img')!;
+
+    // Largest candidate from the <picture>'s sources (AVIF/WebP) or the img itself.
+    const largest = (img: HTMLImageElement) => {
+      const sets = [...(img.closest('picture')?.querySelectorAll('source') ?? [])].map((s) => s.srcset);
+      sets.push(img.srcset);
+      let best = { url: img.currentSrc || img.src, w: 0 };
+      for (const set of sets.filter(Boolean)) {
+        for (const part of set.split(',')) {
+          const [url, size] = part.trim().split(/\s+/);
+          const w = parseInt(size, 10) || 0;
+          if (w > best.w) best = { url, w };
+        }
+      }
+      return best.url;
+    };
+
+    const open = (img: HTMLImageElement) => {
+      big.src = largest(img);
+      big.alt = img.alt;
+      document.documentElement.classList.add('lb-lock');
+      dialog.showModal();
+    };
+
+    for (const img of document.querySelectorAll<HTMLImageElement>('.case .figure img, .case .split img')) {
+      img.classList.add('zoomable');
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', `View larger: ${img.alt}`);
+      img.addEventListener('click', () => open(img));
+      img.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(img);
+        }
+      });
+    }
+
+    dialog.querySelector('.lb-close')!.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (e) => {
+      if (e.target !== big) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      document.documentElement.classList.remove('lb-lock');
+      big.removeAttribute('src');
+    });
+  }
+</script>
+
+<style is:global>
+  .case img.zoomable {
+    cursor: zoom-in;
+  }
+  .case img.zoomable:focus-visible {
+    outline: 1px solid var(--ink);
+    outline-offset: 4px;
+  }
+  html.lb-lock {
+    overflow: hidden;
+  }
+  .case-lightbox {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 64px var(--gutter);
+    border: 0;
+    background: transparent;
+    cursor: zoom-out;
+  }
+  .case-lightbox[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .case-lightbox::backdrop {
+    background: rgba(255, 255, 255, 0.985);
+  }
+  .case-lightbox[open],
+  .case-lightbox[open]::backdrop {
+    animation: case-lb-fade 0.2s ease;
+  }
+  @keyframes case-lb-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  .case-lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: var(--radius);
+    cursor: default;
+  }
+  .case-lightbox .lb-close {
+    position: absolute;
+    top: 22px;
+    right: var(--gutter);
+    padding: 6px 0 3px;
+    border: 0;
+    border-bottom: 1px solid var(--ink);
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .case-lightbox[open],
+    .case-lightbox[open]::backdrop {
+      animation: none;
+    }
+  }
+</style>
