@@ -134,16 +134,21 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
     </p>
   </div>
 
-  <Figure
-    images={[
-      { name: 'dojo-insights', alt: 'Tutor performance insights and reviews' },
-      { name: 'dojo-parent-home', alt: 'New parent homepage' },
-    ]}
-    lead="Built with AI coding agents."
-  >
-    Performance metrics tools for tutors, and a new homepage for parents to manage their classes and discover tutors and
-    group classes.
-  </Figure>
+  <figure class="figure video">
+    <video
+      class="wide"
+      src="/media/dojo-design-system-components.mp4"
+      poster="/media/dojo-design-system-components-poster.jpg"
+      width="1920"
+      height="1080"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-label="Dojo Tutor design system components: navigation, notification settings, calendars, earnings, subscriptions, pricing, and class management"
+    ></video>
+  </figure>
 
   <div class="section-head">
     <h2>Group classes: +10% revenue, with safety review built in</h2>
