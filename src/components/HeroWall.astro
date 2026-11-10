@@ -1,0 +1,135 @@
+---
+// Dojo Tutor hero: a tilted wall of real screens whose columns drift slowly and
+// endlessly, alternating up and down. Replaces the flat dojo-tutor-hero image.
+//
+// Sizes are in "layer units" (--u): the frame shows VIEW units across, so every
+// measurement below scales with the frame's width.
+import { getImage } from 'astro:assets';
+import { media } from '../lib/media';
+
+interface Props {
+  alt: string;
+  eager?: boolean;
+}
+const { alt, eager = false } = Astro.props;
+
+type Tile = string | [string, string]; // desktop screen, or a pair of phone screens
+const COLUMNS: Tile[][] = [
+  ['notifications', 'pricing-setup', 'insights', ['app-login', 'app-error'], 'chats', 'calendar-day'],
+  ['subscriptions', 'chats', ['app-classes', 'app-chat'], 'class-prices', 'pricing-modal', 'parent-home'],
+  ['calendar-week', 'calendar-day', 'pricing-earnings', 'group-class-detail', ['app-week', 'app-chatlist'], 'subscriptions'],
+  ['pricing-modal', ['app-menu', 'app-substitute'], 'parent-home', 'group-classes', 'insights', 'calendar-week'],
+  ['insights', ['app-week', 'app-chatlist'], 'pricing-setup', 'calendar-week', 'notifications', 'class-prices'],
+];
+// Vertical stagger (layer units) and seconds per loop; odd columns run downward.
+const OFFSETS = [-260, -620, -60, -480, -180];
+const DURATIONS = [150, 175, 160, 185, 165];
+
+const names = [...new Set(COLUMNS.flat(2))];
+const urls = Object.fromEntries(
+  await Promise.all(
+    names.map(async (n) => {
+      const phone = n.startsWith('app-');
+      const img = await getImage({ src: media(`wall-${n}`), width: phone ? 300 : 760, format: 'webp', quality: 80 });
+      return [n, img.src];
+    }),
+  ),
+);
+---
+
+<div class="hero-wall" role="img" aria-label={alt}>
+  <div class="layer" aria-hidden="true">
+    {
+      COLUMNS.map((col, c) => (
+        <div class="col" style={`--off:${OFFSETS[c]};--dur:${DURATIONS[c]}s;--dir:${c % 2 ? 'reverse' : 'normal'}`}>
+          <div class="track">
+            {[...col, ...col].map((t) =>
+              Array.isArray(t) ? (
+                <div class="pair">
+                  <img class="phone" src={urls[t[0]]} alt="" width="300" height="649" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+                  <img class="phone" src={urls[t[1]]} alt="" width="300" height="649" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+                </div>
+              ) : (
+                <img class="desk" src={urls[t]} alt="" width="720" height="512" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+              ),
+            )}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .hero-wall {
+    /* VIEW: layer units visible across the frame. Smaller = more zoomed in. */
+    --view: 2300;
+    --gap: 36;
+    --angle: -18deg;
+    --shift: 300; /* moves the wall up so it fills the top of the frame */
+    container-type: inline-size;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1840 / 1300;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: #fdf6ee;
+  }
+  .layer {
+    --u: calc(100cqw / var(--view));
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: flex;
+    gap: calc(var(--gap) * var(--u));
+    height: calc(2700 * var(--u));
+    transform: translate(-50%, -50%) translateY(calc(var(--shift) * var(--u) * -1)) rotate(var(--angle));
+  }
+  .col {
+    width: calc(720 * var(--u));
+    flex: none;
+  }
+  .track {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--gap) * var(--u));
+    margin-top: calc(var(--off) * var(--u));
+    animation: wall-drift var(--dur) linear infinite;
+    animation-direction: var(--dir);
+    will-change: transform;
+  }
+  /* The track holds the column twice; moving it by one copy (plus the gap between
+     copies) lands exactly where it started, so the loop is seamless. */
+  @keyframes wall-drift {
+    to {
+      transform: translateY(calc(-50% - var(--gap) * var(--u) / 2));
+    }
+  }
+  .hero-wall img {
+    display: block;
+    max-width: none;
+    height: auto;
+    background: #fff;
+    box-shadow:
+      0 0 0 calc(1.5 * var(--u)) rgba(60, 45, 10, 0.12),
+      0 calc(16 * var(--u)) calc(40 * var(--u)) rgba(110, 92, 74, 0.28);
+  }
+  .hero-wall .desk {
+    width: 100%;
+    border-radius: calc(24 * var(--u));
+  }
+  .pair {
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--gap) * var(--u));
+  }
+  .hero-wall .phone {
+    width: calc(300 * var(--u));
+    border-radius: calc(44 * var(--u));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      animation: none;
+    }
+  }
+</style>

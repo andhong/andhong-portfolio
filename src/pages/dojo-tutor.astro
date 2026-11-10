@@ -3,6 +3,7 @@
 import CaseStudy from '../layouts/CaseStudy.astro';
 import Figure from '../components/Figure.astro';
 import Stats from '../components/Stats.astro';
+import HeroWall from '../components/HeroWall.astro';
 import { recent } from '../data/site';
 
 // Link to the pricing deep dive once it's published (always in local preview).
@@ -44,7 +45,12 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
     </p>
   </div>
 
-  <Figure images={[{ name: 'dojo-tutor-hero', alt: 'A wall of Dojo Tutor screens across web and mobile: calendars, chats, pricing, group classes, insights, and the parent home' }]} eager />
+  <figure class="figure wide">
+    <HeroWall
+      alt="A wall of Dojo Tutor screens across web and mobile: calendars, chats, pricing, group classes, insights, and the parent home"
+      eager
+    />
+  </figure>
 
   <div class="section-head">
     <h2>From matching service to marketplace: +20% LTV year over year</h2>

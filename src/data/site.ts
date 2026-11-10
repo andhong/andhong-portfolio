@@ -29,7 +29,8 @@ export const projects = [
 // Each feature shows either one `hero` image or a 2×2 grid of four `tiles`
 // (file names in src/assets/media); an image without `name` renders as a placeholder.
 // `draft: true` shows the section in local preview (npm run dev) but not on the live site.
-export type Hero = { name?: string; alt: string };
+/** `wall: true` renders the animated wall of screens (HeroWall) instead of the image. */
+export type Hero = { name?: string; alt: string; wall?: boolean };
 export const recent: {
   company: string;
   title: string;
@@ -49,7 +50,7 @@ export const recent: {
     heading: ['ClassDojo: Taking ', 'Dojo Tutor', ' from MVP to a learning marketplace families and tutors trust.'],
     tags: 'Product design • Product building',
     href: '/dojo-tutor',
-    hero: { name: 'dojo-tutor-hero', alt: 'A wall of Dojo Tutor screens across web and mobile: calendars, chats, pricing, group classes, insights, and the parent home' },
+    hero: { name: 'dojo-tutor-hero', wall: true, alt: 'A wall of Dojo Tutor screens across web and mobile: calendars, chats, pricing, group classes, insights, and the parent home' },
   },
   {
     company: 'ClassDojo',

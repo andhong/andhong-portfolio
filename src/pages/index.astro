@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Pic from '../components/Pic.astro';
+import HeroWall from '../components/HeroWall.astro';
 import Placeholder from '../components/Placeholder.astro';
 import { projects, recent } from '../data/site';
 
@@ -67,7 +68,9 @@ const previous: { company: string; role?: string }[] = [
           <p class="tags">{r.tags}</p>
           <a class:list={['hero-img', { tiles: r.tiles }]} href={r.href} aria-label={`${r.title} case study`}>
             {(r.tiles ?? (r.hero ? [r.hero] : [])).map((img, i) =>
-              img.name ? (
+              img.wall ? (
+                <HeroWall alt={img.alt} eager={idx === 0} />
+              ) : img.name ? (
                 <Pic name={img.name} alt={img.alt} sizes={r.tiles ? half : undefined} eager={idx === 0 && i < 2} />
               ) : (
                 <Placeholder label={img.alt} />
