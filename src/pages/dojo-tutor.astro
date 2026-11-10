@@ -1,10 +1,5 @@
 ---
-// Dojo Tutor case study — DRAFT. Served at /dojo-tutor in local preview only
-// (see src/pages/[draft].astro); it is not part of the live site.
-// To publish: move this file to src/pages/dojo-tutor.astro (imports work as-is), remove
-// it from src/pages/[draft].astro, remove `noindex`, and drop `draft: true` in src/data/site.ts.
-// Image slots without a `name` render as placeholders: once a file is in
-// src/assets/media (see README → Images), add `name: 'file-name'`.
+// Dojo Tutor case study.
 import CaseStudy from '../layouts/CaseStudy.astro';
 import Figure from '../components/Figure.astro';
 import Stats from '../components/Stats.astro';
@@ -14,7 +9,6 @@ import Stats from '../components/Stats.astro';
   name="Dojo Tutor"
   lead="Dojo Tutor:"
   tagline="I’ve designed 70% of ClassDojo’s tutoring marketplace surfaces, and built over half of the frontend myself."
-  noindex
   details={[
     { label: 'Responsibilities', items: ['Product design', 'User research', 'Product building'] },
     { label: 'Collaborators', items: ['1 product manager', '4 engineers'] },

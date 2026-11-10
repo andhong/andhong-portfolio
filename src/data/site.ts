@@ -41,7 +41,6 @@ export const recent: {
   draft?: boolean;
 }[] = [
   {
-    draft: true,
     company: 'ClassDojo',
     title: 'Dojo Tutor',
     tagline: 'is ClassDojo’s marketplace connecting tutors and families across a wide range of subjects, in both 1-on-1 and group formats.',
