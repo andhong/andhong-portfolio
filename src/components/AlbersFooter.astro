@@ -71,8 +71,10 @@ const [c0, c1, c2, c3] = palettes[0];
     --mx: 0;
     --my: 0;
     margin-top: 140px;
-    /* A little less below than above, so the squares sit low, as in the paintings. */
-    padding: clamp(40px, 5vw, 64px) var(--gutter) clamp(32px, 4vw, 48px);
+    /* Below the squares: the same width as each square's bottom edge (5% of the
+       outer square), so the field reads as one more ring of the Homage. */
+    --square: min(300px, 100vw - 2 * var(--gutter));
+    padding: clamp(40px, 5vw, 64px) var(--gutter) calc(var(--square) * 0.05);
     background: var(--c0);
     cursor: pointer;
     transition: background 0.6s ease;
@@ -87,7 +89,7 @@ const [c0, c1, c2, c3] = palettes[0];
   .sq1 {
     position: relative;
     /* Just big enough for the two-line sign and links in the innermost square. */
-    width: min(300px, 100%);
+    width: var(--square);
     aspect-ratio: 1;
     margin: 0 auto;
     background: var(--c1);
