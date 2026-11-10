@@ -7,4 +7,6 @@ export default defineConfig({
   // Keep the same URLs as the old WordPress site, e.g. /project/hank
   build: { format: 'directory' },
   trailingSlash: 'ignore',
+  // Hide Astro's floating dev toolbar (the dark pill at the bottom of local previews).
+  devToolbar: { enabled: false },
 });

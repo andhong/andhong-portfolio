@@ -5,8 +5,10 @@
 // it from src/pages/[draft].astro, remove `noindex`, and drop `draft: true` in src/data/site.ts.
 // Image slots without a `name` render as placeholders: once a file is in
 // src/assets/media (see README → Images), add `name: 'file-name'`.
+// Text in <span class="todo"> is a placeholder still waiting on copy.
 import CaseStudy from '../layouts/CaseStudy.astro';
 import Figure from '../components/Figure.astro';
+import Stats from '../components/Stats.astro';
 ---
 
 <CaseStudy
@@ -14,18 +16,20 @@ import Figure from '../components/Figure.astro';
   tagline="is ClassDojo’s marketplace connecting tutors and families across a wide range of subjects, in both 1-on-1 and group formats."
   noindex
   details={[
-    { label: 'Responsibilities', items: ['Product design', 'User research'] },
-    { label: 'Collaborators', items: ['1 product manager', '1 product designer', '8 engineers'] },
-    { label: 'Platforms', items: ['Web', 'iOS', 'Android'] },
+    { label: 'Responsibilities', items: ['Product design', 'User research', 'Product building'] },
+    { label: 'Collaborators', items: ['1 product manager', '8 engineers'] },
+    { label: 'Platforms', items: ['Web', 'iOS and Android (launching Dec 2026)'] },
     { label: 'Years', items: ['2024–Present'] },
   ]}
 >
-  <Fragment slot="meta">
-    <p class="callout">
-      Designed and shipped more than 75% of Dojo Tutor’s current product experience, often building features myself
-      with AI coding agents. Grew M3 retention 12% and LTV 20% YoY.
-    </p>
-  </Fragment>
+  <Stats
+    slot="meta"
+    items={[
+      { value: '75%+', label: 'of Dojo Tutor’s current product experience designed and shipped' },
+      { value: '+12%', label: '3-month retention (relative)' },
+      { value: '+20%', label: 'Lifetime value, year over year' },
+    ]}
+  />
 
   <div class="intro">
     <p>
@@ -46,8 +50,13 @@ import Figure from '../components/Figure.astro';
     <p>
       Since joining in 2024, I’ve redesigned every post-purchase surface for tutors and families. I’ve also added the
       core features a marketplace needs: schedule management, tutor-set pricing, direct messaging, automated marketing
-      tools, and payment management. For these, I used AI coding agents to build 70% of the parent surface frontends and
-      80% of the tutor surface frontends, with backend contributions as well.
+      tools, and payment management.
+    </p>
+    <p>
+      <span class="todo"
+        >[User research: one finding or tutor/parent quote that shaped this work, e.g. what research showed families or
+        tutors needed from a marketplace.]</span
+      >
     </p>
   </div>
 
@@ -60,6 +69,21 @@ import Figure from '../components/Figure.astro';
   />
 
   <div class="section-head">
+    <h2>Building features myself with AI coding agents</h2>
+    <p>
+      For these features, I used AI coding agents to build 70% of the parent-facing frontend and 80% of the
+      tutor-facing frontend, with backend contributions as well.
+    </p>
+    <p><span class="todo">[What you built this way: one or two concrete examples.]</span></p>
+    <p>
+      <span class="todo"
+        >[How you kept quality up: e.g. code review with engineers, tests, working inside the design system.]</span
+      >
+    </p>
+    <p><span class="todo">[Where it broke down, and what you changed as a result.]</span></p>
+  </div>
+
+  <div class="section-head">
     <h2>Expanding from 1-on-1 tutoring to group classes and growing revenue by 10%</h2>
     <p>
       Dojo Tutor launched with 1-on-1 online tutoring only. In early 2026, we introduced group classes, our largest
@@ -67,12 +91,13 @@ import Figure from '../components/Figure.astro';
     </p>
     <p>
       I designed the tutor experience for creating and managing group classes, along with the internal tools our team
-      uses to review class submissions.
+      uses to review class submissions before they reach families.
+      <span class="todo"
+        >[What the review guards against, e.g. inappropriate or unsafe content, misleading descriptions, low-quality
+        classes, and how the tools make that review fast and consistent.]</span
+      >
     </p>
-    <p>
-      Within the first 8 months of launch, group classes accounted for 10% of Dojo Tutor’s revenue and are a strong
-      contributor to overall revenue growth.
-    </p>
+    <p>Within the first 8 months of launch, group classes grew Dojo Tutor’s overall revenue by 10%.</p>
   </div>
 
   <Figure images={[{ alt: 'Group class form' }, { alt: 'Group class dashboard' }]} />
@@ -81,9 +106,23 @@ import Figure from '../components/Figure.astro';
     <h2>Letting tutors set their own prices</h2>
     <p>
       Prices used to be fixed by the platform. Dojo Tutor sought to allow tutors to set their own prices, allowing them to
-      charge more for specialty topics as well as open up more affordable tutoring options for families. I designed and
-      built much of the frontend for tutor pricing, including the first-time experience, setting rates, adding
-      discounts, and surfacing market data so tutors can price competitively.
+      charge more for specialty topics as well as open up more affordable tutoring options for families.
+    </p>
+    <p>
+      <span class="todo"
+        >[Research: what tutors were worried about, and what you learned talking to them or from data.]</span
+      >
+    </p>
+    <p>
+      I designed and built much of the frontend for tutor pricing, including the first-time experience, setting rates,
+      adding discounts, and surfacing market data so tutors can price competitively.
+      <span class="todo"
+        >[Guardrails: how the market data and any limits kept prices fair for families and protected tutors from
+        underpricing.]</span
+      >
+    </p>
+    <p>
+      <span class="todo">[Rollout: e.g. opt-in, staged release, how you communicated the change to tutors.]</span>
     </p>
     <p>Despite widespread apprehension from our tutor community, over 70% of tutors have opted into the new pricing model.</p>
   </div>
@@ -91,12 +130,28 @@ import Figure from '../components/Figure.astro';
   <Figure images={[{ alt: 'Pricing onboarding' }, { alt: 'Setting prices screens' }]} />
 
   <div class="section-head">
-    <h2>Launching iOS and Android apps for tutors</h2>
+    <h2>Native apps for tutors, launching December 2026</h2>
     <p>
-      I designed native apps that let tutors message families, manage their classes, and claim open spots in classes
-      that need a substitute. The app is slated to launch December 2026.
+      I designed native iOS and Android apps that let tutors message families, manage their classes, and claim open
+      spots in classes that need a substitute.
+    </p>
+    <p>
+      <span class="todo"
+        >[One notable design decision for the apps, and why: e.g. what you left out of mobile, or how claiming a substitute
+        spot works.]</span
+      >
     </p>
   </div>
 
   <Figure images={[{ alt: 'Tutor app' }]} />
 </CaseStudy>
+
+<style>
+  /* Placeholder copy: obvious in preview so nothing ships by accident. */
+  .todo {
+    color: #b3261e;
+    background: rgba(179, 38, 30, 0.06);
+    outline: 1px dashed rgba(179, 38, 30, 0.5);
+    outline-offset: 2px;
+  }
+</style>

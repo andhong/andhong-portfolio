@@ -1,0 +1,55 @@
+---
+// A row of headline numbers, e.g. [{ value: '+20%', label: 'Lifetime value, year over year' }].
+interface Props {
+  items: { value: string; label: string }[];
+}
+const { items } = Astro.props;
+---
+
+<dl class="stats" style={`--n: ${items.length}`}>
+  {
+    items.map((s) => (
+      <div>
+        <dt>{s.label}</dt>
+        <dd>{s.value}</dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    gap: 24px;
+    margin: 36px 0 0;
+    padding: 24px 0 26px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  /* Number on top, label below (label comes first in the markup for screen readers). */
+  .stats div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
+  dd {
+    margin: 0 0 6px;
+    font-size: clamp(40px, 5vw, 54px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variant-numeric: lining-nums;
+  }
+  dt {
+    font-size: var(--text-sm);
+    line-height: 1.3;
+    color: var(--muted);
+    max-width: 22ch;
+  }
+  @media (max-width: 640px) {
+    .stats {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+</style>
