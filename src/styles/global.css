@@ -197,6 +197,26 @@ html.mm-lock {
 .case .meta p {
   margin: 0 0 6px;
 }
+/* Project details: labelled columns, one value per line. Fixed four columns
+   so they line up from page to page; two on phones. */
+.case .details {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px 24px;
+  margin: 0;
+}
+.case .details dt {
+  margin-bottom: 10px;
+}
+.case .details dd {
+  margin: 0;
+  line-height: 1.45;
+}
+@media (max-width: 640px) {
+  .case .details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 /* Scoped under .meta so it beats `.case .meta p` (which zeroes the top margin). */
 .case .meta .callout {
   border-top: 1px solid var(--rule);

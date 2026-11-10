@@ -7,13 +7,14 @@ import Figure from '../../components/Figure.astro';
   name="Hank"
   tagline="is a social network focused on fighting social isolation amongst older adults."
   shareImage="hank-app-screenshot"
+  details={[
+    { label: 'Responsibilities', items: ['Product design', 'User research', 'Many other hats'] },
+    { label: 'Collaborators', items: ['1 product manager', '4 engineers'] },
+    { label: 'Platforms', items: ['iOS', 'Web'] },
+    { label: 'Years', items: ['2020–2024'] },
+  ]}
 >
   <Fragment slot="meta">
-    <p><strong>Years</strong> 2020–2024</p>
-    <p><strong>Role</strong> Co-founder, Head of Product &amp; Design</p>
-    <p><strong>Responsibilities</strong> Product design, User research, Many other hats</p>
-    <p><strong>Collaborators</strong> 1 product manager, 4 engineers</p>
-    <p><strong>Platforms</strong> iOS, Web</p>
     <p class="callout">Hank was acquired by Wider Circle in 2024.</p>
   </Fragment>
 

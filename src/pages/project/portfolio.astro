@@ -8,8 +8,11 @@ import Figure from '../../components/Figure.astro';
   name="1stdibs Contemporary"
   tagline="brought the best contemporary designers to buyers all over the world."
   shareImage="contemporary-landing-3"
+  details={[
+    { label: 'Platforms', items: ['Responsive web'] },
+    { label: 'Year', items: ['2017'] },
+  ]}
 >
-  <p slot="meta">Product Designer • Responsive web • 2017</p>
 
   <Figure images={[{ name: 'contemporary-landing-3', alt: '1stdibs Contemporary landing page' }]} eager />
 

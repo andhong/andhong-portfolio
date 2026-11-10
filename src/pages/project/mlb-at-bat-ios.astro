@@ -8,8 +8,12 @@ import Split from '../../components/Split.astro';
   name="MLB: The Official App"
   tagline="is the #1 app for live baseball and used by tens of millions of baseball fans."
   shareImage="project-thumb_at-bat"
+  details={[
+    { label: 'Responsibilities', items: ['Product design', 'User research'] },
+    { label: 'Platforms', items: ['iOS', 'Android'] },
+    { label: 'Years', items: ['2017–2019'] },
+  ]}
 >
-  <p slot="meta">Lead Designer • iOS and Android • Product design, User research • 2017–2019</p>
 
   <Figure images={[{ name: 'Artboard-Copy', alt: 'MLB app scoreboard, news, and game screens' }]} eager tight />
   <Figure

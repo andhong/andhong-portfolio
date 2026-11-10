@@ -14,9 +14,12 @@ interface Props {
   shareImage?: string;
   /** Keep the page out of search results (e.g. drafts). */
   noindex?: boolean;
+  /** Project details shown as columns under the headline, e.g.
+   *  [{ label: 'Platforms', items: ['iOS', 'Web'] }, { label: 'Years', items: ['2020–2024'] }] */
+  details?: { label: string; items: string[] }[];
 }
 
-const { name, tagline, title = name, shareImage, noindex = false } = Astro.props;
+const { name, tagline, title = name, shareImage, noindex = false, details = [] } = Astro.props;
 const og = shareImage
   ? (await getImage({ src: media(shareImage), width: 1200, format: 'jpg' })).src
   : undefined;
@@ -25,7 +28,23 @@ const og = shareImage
 <Base title={title} description={`${name} ${tagline}`} image={og} noindex={noindex}>
   <article class="wrap case">
     <h1 class="headline"><strong>{name}</strong> {tagline}</h1>
-    <div class="meta"><slot name="meta" /></div>
+    <div class="meta">
+      {
+        details.length > 0 && (
+          <dl class="details">
+            {details.map((d) => (
+              <div>
+                <dt class="label">{d.label}</dt>
+                {d.items.map((item) => (
+                  <dd>{item}</dd>
+                ))}
+              </div>
+            ))}
+          </dl>
+        )
+      }
+      <slot name="meta" />
+    </div>
     <slot />
   </article>
 </Base>
