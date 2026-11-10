@@ -110,6 +110,10 @@ h3 {
 main .wrap {
   max-width: calc(var(--content) + 2 * var(--gutter));
 }
+/* Opt out of the 800px column (e.g. the Play grid): use the header width. */
+main .wrap.full {
+  max-width: calc(var(--max) + 2 * var(--gutter));
+}
 
 .muted {
   color: var(--muted);

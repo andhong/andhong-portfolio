@@ -35,7 +35,7 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
 ---
 
 <Base title="Play" description="Side projects and other creative pursuits.">
-  <section class="wrap">
+  <section class="wrap full">
     <h1>Side projects and other creative pursuits</h1>
     <div class="masonry">
       {
@@ -51,7 +51,7 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
                   aria-label={`View larger: ${it.alt}`}
                   aria-haspopup="dialog"
                 >
-                  <Pic name={it.name} alt={it.alt} sizes="(max-width: 700px) 100vw, 260px" eager={it.order < 3} />
+                  <Pic name={it.name} alt={it.alt} sizes="(max-width: 700px) 100vw, 380px" eager={it.order < 3} />
                 </button>
               </div>
             ))}
