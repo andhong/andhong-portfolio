@@ -19,6 +19,8 @@
   --radius: 3px;
   --max: 1170px; /* header/nav width */
   --content: 800px; /* everything inside <main> and the footer */
+  /* Case-study images break out of the text column up to the header width. */
+  --wide: min(var(--max), 100vw - 2 * var(--gutter));
   --gutter: clamp(16px, 4vw, 55px);
   --serif: 'EB Garamond Variable', 'EB Garamond', Garamond, 'Times New Roman', serif;
   --sans: var(--serif);
@@ -36,6 +38,8 @@ html {
 
 body {
   margin: 0;
+  /* Wide case-study images are centered on the viewport; clip any sub-pixel/scrollbar spill. */
+  overflow-x: clip;
   background: var(--page);
   color: var(--ink);
   font-family: var(--serif);
@@ -254,6 +258,23 @@ body::after {
   display: grid;
   grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr));
   gap: 24px;
+}
+/* Images run wider than the 800px text column (captions stay in the column). */
+.case .grid,
+.case .figure-row,
+.case .wide {
+  width: var(--wide);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.case .figure-row .grid {
+  width: auto;
+  left: 0;
+  transform: none;
+}
+.case .figure-row figcaption {
+  max-width: none;
 }
 .case .grid img {
   width: 100%;

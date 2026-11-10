@@ -63,7 +63,7 @@ import Figure from '../../components/Figure.astro';
   </Figure>
 
   <figure class="video">
-    <video src="/media/Activity-form-demo-16x9-1.mp4" autoplay muted loop playsinline preload="metadata"
+    <video class="wide" src="/media/Activity-form-demo-16x9-1.mp4" autoplay muted loop playsinline preload="metadata"
       aria-label="Demo of the Hank activity creation form"></video>
     <figcaption>
       <strong>Activity creation form.</strong>
@@ -118,7 +118,6 @@ import Figure from '../../components/Figure.astro';
     margin: 0 0 clamp(60px, 8vw, 100px);
   }
   .video video {
-    width: 100%;
     border-radius: var(--radius);
     background: var(--panel);
   }
