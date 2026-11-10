@@ -54,7 +54,6 @@ const previous: { company: string; role?: string }[] = [
         <div class="wrap">
           <p class="label">
             {idx === 0 ? 'Recent work' : 'Previously'} · {r.company}
-            {r.draft && <span class="draft-tag">Draft · not on live site</span>}
           </p>
           <h2>
             <a class="title-link" href={r.href}><em>{r.title}</em> {r.tagline}</a>
@@ -144,14 +143,6 @@ const previous: { company: string; role?: string }[] = [
   }
   .recent h2 {
     margin: 18px auto 14px;
-  }
-  .draft-tag {
-    display: inline-block;
-    white-space: nowrap;
-    margin-left: 10px;
-    padding: 2px 8px;
-    border: 1px dashed currentColor;
-    color: #b3261e;
   }
   .recent h2 em {
     font-style: italic;
