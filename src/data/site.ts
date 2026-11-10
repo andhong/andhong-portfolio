@@ -42,8 +42,8 @@ export const recent: {
     draft: true,
     company: 'ClassDojo',
     title: 'Dojo Tutor',
-    tagline: 'is a marketplace connecting tutors and families across a wide range of subjects, in both 1-on-1 and group formats.',
-    tags: 'Product design',
+    tagline: 'is ClassDojo’s marketplace connecting tutors and families across a wide range of subjects, in both 1-on-1 and group formats.',
+    tags: 'Product design • Product building',
     href: '/dojo-tutor',
     tiles: [
       { alt: 'Dojo Tutor image 1' },
