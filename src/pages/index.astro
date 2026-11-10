@@ -82,23 +82,28 @@ const previous: { company: string; role?: string }[] = [
     ))
   }
 
-  <section class="selected wrap">
-    <p class="label">Selected works</p>
-    <ul class="grid">
-      {
-        shown.map((p) => (
-          <li>
-            <a href={`/project/${p.slug}`}>
-              <Pic name={p.thumb} alt={p.title} sizes={half} />
-              <span class="label years">{p.years}</span>
-              <span class="name">{p.title}</span>
-              <span class="blurb">{p.blurb}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
+  {
+    /* The whole section disappears when every project is hidden. */
+    shown.length > 0 && (
+      <section class="selected wrap">
+        <p class="label">Selected works</p>
+        <ul class="grid">
+          {
+            shown.map((p) => (
+              <li>
+                <a href={`/project/${p.slug}`}>
+                  <Pic name={p.thumb} alt={p.title} sizes={half} />
+                  <span class="label years">{p.years}</span>
+                  <span class="name">{p.title}</span>
+                  <span class="blurb">{p.blurb}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    )
+  }
 </Base>
 
 <style>

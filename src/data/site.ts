@@ -17,10 +17,10 @@ export const nav = [
 // `thumb` is a file name in src/assets/media (no extension); `years` shows under the title.
 // `hidden: true` keeps the page live at its URL but leaves it off the home page.
 export const projects = [
-  { slug: 'lumi', title: 'Lumi', blurb: 'Supply chain management tools', years: '2019–2020', thumb: 'lumi-dashboard-3' },
-  { slug: 'mlb-at-bat-ios', title: 'MLB: The Official App', blurb: 'Product design', years: '2017–2019', thumb: 'project-thumb_at-bat' },
-  { slug: 'mlb-at-bat-stats', title: 'MLB Stats', blurb: 'Case study', years: '2017–2019', thumb: 'project-thumb_at-bat-stats' },
-  { slug: '1stdibs-seller', title: '1stDibs Seller Tools', blurb: 'Marketplace seller tools', years: '2017', thumb: '1stdibs-dashboard-final2' },
+  { slug: 'lumi', title: 'Lumi', blurb: 'Supply chain management tools', years: '2019–2020', thumb: 'lumi-dashboard-3', hidden: true },
+  { slug: 'mlb-at-bat-ios', title: 'MLB: The Official App', blurb: 'Product design', years: '2017–2019', thumb: 'project-thumb_at-bat', hidden: true },
+  { slug: 'mlb-at-bat-stats', title: 'MLB Stats', blurb: 'Case study', years: '2017–2019', thumb: 'project-thumb_at-bat-stats', hidden: true },
+  { slug: '1stdibs-seller', title: '1stDibs Seller Tools', blurb: 'Marketplace seller tools', years: '2017', thumb: '1stdibs-dashboard-final2', hidden: true },
   { slug: 'portfolio', title: '1stdibs Contemporary', blurb: 'Product design', years: '2017', thumb: 'project-thumb_1d-contemporary', hidden: true },
   { slug: 'trove', title: 'Trove 3D Printing', blurb: 'Product design', years: '2014–2016', thumb: 'project-thumb_trove', hidden: true },
 ];
