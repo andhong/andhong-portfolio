@@ -1,10 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import Pic from '../components/Pic.astro';
+import { getImage } from 'astro:assets';
+import { media } from '../lib/media';
 
 // Listed in reading order (used on phones). `col` places each image in the
 // same desktop column as the old site's masonry layout.
-const items = [
+const list = [
   { name: 'freezer-cocktail-resized', alt: 'Freezer Cocktail bottle and label', col: 0 },
   { name: 'AJH02564-scaled', alt: 'Green mountain ridge under a blue sky', col: 1 },
   { name: 'Untitled-design-3', alt: 'Hand holding a small printed thank-you card', col: 2 },
@@ -18,7 +20,16 @@ const items = [
   { name: 'globe-sm', alt: 'Abstract striped globe illustration', col: 0 },
   { name: 'cp-chelsea', alt: 'Pixel-art Chelsea boot', col: 2 },
   { name: 'once-in-a-blue-moon', alt: 'Two overlapping circles on a teal poster', col: 0 },
-].map((it, order) => ({ ...it, order }));
+];
+
+// Each image also gets a large version for the lightbox (loaded only when opened).
+const items = await Promise.all(
+  list.map(async (it, order) => {
+    const src = media(it.name);
+    const full = await getImage({ src, width: Math.min(2000, src.width), format: 'webp', quality: 82 });
+    return { ...it, order, full: full.src };
+  }),
+);
 
 const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
 ---
@@ -32,7 +43,16 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
           <div class="col">
             {col.map((it) => (
               <div class="item" style={`order: ${it.order}`}>
-                <Pic name={it.name} alt={it.alt} sizes="(max-width: 700px) 100vw, 260px" eager={it.order < 3} />
+                <button
+                  class="lb-trigger"
+                  type="button"
+                  data-full={it.full}
+                  data-alt={it.alt}
+                  aria-label={`View larger: ${it.alt}`}
+                  aria-haspopup="dialog"
+                >
+                  <Pic name={it.name} alt={it.alt} sizes="(max-width: 700px) 100vw, 260px" eager={it.order < 3} />
+                </button>
               </div>
             ))}
           </div>
@@ -40,7 +60,45 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
       }
     </div>
   </section>
+
+  <dialog class="lightbox" aria-label="Image viewer">
+    <button class="lb-close" type="button">Close</button>
+    <figure>
+      <img alt="" decoding="async" />
+      <figcaption></figcaption>
+    </figure>
+  </dialog>
 </Base>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
+  if (dialog) {
+    const img = dialog.querySelector('img')!;
+    const caption = dialog.querySelector('figcaption')!;
+
+    const close = () => dialog.close();
+
+    for (const trigger of document.querySelectorAll<HTMLButtonElement>('.lb-trigger')) {
+      trigger.addEventListener('click', () => {
+        img.src = trigger.dataset.full!;
+        img.alt = trigger.dataset.alt!;
+        caption.textContent = trigger.dataset.alt!;
+        document.documentElement.classList.add('lb-lock');
+        dialog.showModal(); // focus returns to the trigger automatically on close
+      });
+    }
+
+    dialog.querySelector('.lb-close')!.addEventListener('click', close);
+    // Clicking anywhere except the image itself (or the close button) dismisses.
+    dialog.addEventListener('click', (e) => {
+      if (e.target !== img) close();
+    });
+    dialog.addEventListener('close', () => {
+      document.documentElement.classList.remove('lb-lock');
+      img.removeAttribute('src');
+    });
+  }
+</script>
 
 <style>
   h1 {
@@ -59,9 +117,25 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
     flex-direction: column;
     gap: 24px;
   }
+  .lb-trigger {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+  }
+  .lb-trigger:focus-visible {
+    outline: 1px solid var(--ink);
+    outline-offset: 4px;
+  }
   .item :global(img) {
     width: 100%;
     border-radius: var(--radius);
+    transition: opacity 0.3s ease;
+  }
+  .lb-trigger:hover :global(img) {
+    opacity: 0.9;
   }
   @media (max-width: 700px) {
     .masonry {
@@ -71,6 +145,80 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
     }
     .col {
       display: contents;
+    }
+  }
+
+  /* Lightbox */
+  :global(html.lb-lock) {
+    overflow: hidden;
+  }
+  .lightbox {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: zoom-out;
+  }
+  .lightbox::backdrop {
+    background: rgba(255, 255, 255, 0.985);
+  }
+  .lightbox[open],
+  .lightbox[open]::backdrop {
+    animation: lb-fade 0.2s ease;
+  }
+  @keyframes lb-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  .lightbox figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    height: 100%;
+    margin: 0;
+    padding: 64px var(--gutter) 40px;
+  }
+  .lightbox img {
+    max-width: 100%;
+    max-height: calc(100dvh - 150px);
+    width: auto;
+    height: auto;
+    border-radius: var(--radius);
+    cursor: default;
+  }
+  .lightbox figcaption {
+    font-style: italic;
+    color: var(--muted);
+    font-size: var(--text-sm);
+    text-align: center;
+  }
+  .lb-close {
+    position: absolute;
+    top: 22px;
+    right: var(--gutter);
+    padding: 6px 0 3px;
+    border: 0;
+    border-bottom: 1px solid var(--ink);
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lightbox[open],
+    .lightbox[open]::backdrop {
+      animation: none;
     }
   }
 </style>
