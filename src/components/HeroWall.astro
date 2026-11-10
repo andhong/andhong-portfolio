@@ -124,6 +124,9 @@ const urls = Object.fromEntries(
   }
   .hero-wall .phone {
     width: calc(300 * var(--u));
+    /* iOS screenshots have black display corners baked in (radius ~44px at 390px
+       wide); round just enough to hide them. Desktop screens stay square. */
+    border-radius: calc(36 * var(--u));
   }
   @media (prefers-reduced-motion: reduce) {
     .track {
