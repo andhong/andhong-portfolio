@@ -1,76 +1,70 @@
 ---
-// "Establishing a fee structure": the pricing options we explored, side by side,
-// ending with the structure we launched. For each class type, a bar shows what the
-// tutor earns per class on a shared scale; the tick marks what the parent pays, so a
-// bar past the tick means Dojo was subsidizing that class. A lighter segment is pay
-// that only arrives with a bonus (a converted trial, or a loyal family).
+// "Establishing a fee structure": the pricing models we weighed, in plain terms, ending
+// with the one we launched. Each card gives the idea in a sentence, what a tutor earns
+// on a regular class and on a trial (bars on a shared scale; the tick is what the family
+// pays, so a bar past it means Dojo covered the difference; the lighter segment is
+// bonus pay), and the tradeoff that decided it. Business detail (take rates, fees) is
+// left out on purpose so the page reads without context.
 
-type Pay = { base: number; bonus?: number; note: string } | null; // null = still TBD
+type Pay = { base: number; bonus?: number; note: string };
 type Option = {
   eyebrow: string;
   name: string;
-  terms: string[];
-  sub: Pay; // $30 subscription class
-  trial: Pay; // $5 trial class
-  group: Pay; // $10 per student group class
-  takeaway: string;
+  idea: string;
+  regular: Pay; // a $30 class in an ongoing subscription
+  trial: Pay; // a $5 first class
+  tradeoff: string;
   launched?: boolean;
 };
 
 const options: Option[] = [
   {
     eyebrow: 'Before',
-    name: 'Fixed pricing',
-    terms: ['Dojo sets every price', 'Trials heavily subsidized'],
-    sub: { base: 15, note: '$15' },
-    trial: { base: 7.5, bonus: 7.5, note: '$7.50 + $7.50 if it converts' },
-    group: { base: 5, note: '$5 per student' },
-    takeaway: 'Subsidizing trials isn’t sustainable once we start paying to acquire families.',
+    name: 'Dojo sets every price',
+    idea: 'One price for every class, with cheap trials to bring families in.',
+    regular: { base: 15, note: '$15' },
+    trial: { base: 7.5, bonus: 7.5, note: '$7.50, or $15 if the family signs up' },
+    tradeoff: 'Dojo paid tutors more than families paid for trials, which can’t last once we pay to find families.',
   },
   {
     eyebrow: 'Option 1',
-    name: 'Keep today’s trials',
-    terms: ['40% take rate', '20% marketplace fee'],
-    sub: { base: 15, note: '$15' },
-    trial: { base: 7.5, bonus: 7.5, note: '$7.50 + $7.50 if it converts' },
-    group: { base: 5, note: '$5 per student' },
-    takeaway: 'Trials stay subsidized, so subscription fees have to be very high to pay for them.',
+    name: 'Keep generous trials',
+    idea: 'Tutors set prices, and Dojo keeps paying trials well.',
+    regular: { base: 15, note: '$15' },
+    trial: { base: 7.5, bonus: 7.5, note: '$7.50, or $15 if the family signs up' },
+    tradeoff: 'Regular classes would carry high fees to pay for the trials.',
   },
   {
     eyebrow: 'Option 2',
-    name: 'One flat rate',
-    terms: ['30% take rate', '17% marketplace fee', 'Same for every class type'],
-    sub: { base: 18, note: '$18' },
+    name: 'One simple rate',
+    idea: 'Dojo keeps the same share of every class, trials included.',
+    regular: { base: 18, note: '$18' },
     trial: { base: 3, note: '$3' },
-    group: { base: 6, note: '$6 per student' },
-    takeaway: 'Much more reasonable overall, but tutor pay on trials is cut sharply.',
+    tradeoff: 'Fair and easy to explain, but trial pay drops sharply.',
   },
   {
     eyebrow: 'Option 3',
-    name: 'Incentive heavy',
-    terms: ['35% take rate', '20% marketplace fee', 'Take drops to ~30% after 10 classes with a family', '$6.75 bonus when a trial converts'],
-    sub: { base: 16.7, bonus: 1.3, note: '$16.70, then $18' },
-    trial: { base: 3.25, bonus: 7, note: '$3.25 + $7 if it converts' },
-    group: null,
-    takeaway: 'Rewards tutors for converting and keeping families.',
+    name: 'Reward results',
+    idea: 'Lower base pay, with bonuses when a trial converts and as families stay.',
+    regular: { base: 16.7, bonus: 1.3, note: '$16.70, rising to $18' },
+    trial: { base: 3.25, bonus: 7, note: '$3.25, or $10.25 if the family signs up' },
+    tradeoff: 'Pays for the outcomes we want, but has more rules to explain.',
   },
   {
     eyebrow: 'What we launched',
-    name: 'Starting structure',
-    terms: ['35% take rate', '20% marketplace fee, none on trials', 'Take drops to 30% after 30 classes with a family'],
-    sub: { base: 16.25, bonus: 1.25, note: '$16.25, then $17.50' },
+    name: 'Simple, with a loyalty reward',
+    idea: 'The same share on every class, and tutors earn more the longer a family stays.',
+    regular: { base: 16.25, bonus: 1.25, note: '$16.25, rising to $17.50' },
     trial: { base: 3.25, note: '$3.25' },
-    group: { base: 5.43, note: '$5.43 per student' },
-    takeaway: 'Like Option 3 without the trial bonus, so it’s simpler to explain.',
+    tradeoff: 'Most of Option 3’s upside, simple enough to explain in one screen.',
     launched: true,
   },
 ];
 
 // One scale per class type, shared across every option so bars compare directly.
 const rows = [
-  { key: 'sub', label: '1:1 subscription', parent: 30, max: 30 },
+  { key: 'regular', label: 'Regular class', parent: 30, max: 30 },
   { key: 'trial', label: 'Trial class', parent: 5, max: 15 },
-  { key: 'group', label: 'Group class', parent: 10, max: 10 },
 ] as const;
 const pct = (v: number, max: number) => `${((v / max) * 100).toFixed(2)}%`;
 ---
@@ -82,49 +76,39 @@ const pct = (v: number, max: number) => `${((v / max) * 100).toFixed(2)}%`;
         <li class:list={['card', { launched: o.launched }]}>
           <p class="eyebrow">{o.eyebrow}</p>
           <h3 class="name">{o.name}</h3>
-          <ul class="terms">
-            {o.terms.map((t) => (
-              <li>{t}</li>
-            ))}
-          </ul>
-          <p class="pay-head">Tutor pay per class</p>
+          <p class="idea">{o.idea}</p>
+          <p class="pay-head">Tutor earns</p>
           <dl class="pay">
             {rows.map((r) => {
               const p = o[r.key];
               return (
                 <div class="pay-row">
                   <dt>
-                    {r.label} <span class="parent">· parent pays ${r.parent}</span>
+                    {r.label} <span class="parent">· family pays ${r.parent}</span>
                   </dt>
                   <dd>
-                    {p ? (
-                      <>
-                        <span class="track" aria-hidden="true">
-                          <span class="fill" style={`width:${pct(p.base, r.max)}`} />
-                          {p.bonus && (
-                            <span class="bonus" style={`left:${pct(p.base, r.max)};width:${pct(p.bonus, r.max)}`} />
-                          )}
-                          <span class="tick" style={`left:${pct(r.parent, r.max)}`} />
-                        </span>
-                        <span class="value">{p.note}</span>
-                      </>
-                    ) : (
-                      <span class="value tbd">Not yet modeled</span>
-                    )}
+                    <span class="track" aria-hidden="true">
+                      <span class="fill" style={`width:${pct(p.base, r.max)}`} />
+                      {p.bonus && (
+                        <span class="bonus" style={`left:${pct(p.base, r.max)};width:${pct(p.bonus, r.max)}`} />
+                      )}
+                      <span class="tick" style={`left:${pct(r.parent, r.max)}`} />
+                    </span>
+                    <span class="value">{p.note}</span>
                   </dd>
                 </div>
               );
             })}
           </dl>
-          <p class="takeaway">{o.takeaway}</p>
+          <p class="takeaway">{o.tradeoff}</p>
         </li>
       ))
     }
   </ol>
   <figcaption id="fee-options-cap">
-    <strong>The options we explored.</strong>{' '}<span class="muted"
-      >Bars compare tutor pay across options; the tick marks what the parent pays, so a bar past it means Dojo covered
-      the difference. The lighter segment is bonus pay for a converted trial or a long-term family.</span
+    <strong>The pricing models we weighed.</strong>{' '}<span class="muted"
+      >Bars show what a tutor earns per class. The red tick is what the family pays, so a bar past it means Dojo made up
+      the difference. The lighter part of a bar is bonus pay.</span
     >
   </figcaption>
 </figure>
@@ -184,15 +168,10 @@ const pct = (v: number, max: number) => `${((v / max) * 100).toFixed(2)}%`;
     font-weight: 500;
     letter-spacing: -0.01em;
   }
-  .terms {
+  .idea {
     align-self: start;
     margin: 0 0 16px;
-    padding: 0;
-    list-style: none;
     color: var(--muted);
-  }
-  .terms li + li {
-    margin-top: 2px;
   }
   .pay-head {
     margin: 0 0 8px;
@@ -257,10 +236,6 @@ const pct = (v: number, max: number) => `${((v / max) * 100).toFixed(2)}%`;
   .value {
     font-size: 15px;
     font-variant-numeric: tabular-nums;
-  }
-  .tbd {
-    color: var(--muted);
-    font-style: italic;
   }
   .takeaway {
     margin: 0;
