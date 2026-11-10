@@ -157,11 +157,6 @@ body::after {
   mix-blend-mode: multiply;
 }
 
-/* While the mobile menu is open, the page behind it doesn't scroll. */
-html.mm-lock {
-  overflow: hidden;
-}
-
 .sr-only {
   position: absolute;
   width: 1px;

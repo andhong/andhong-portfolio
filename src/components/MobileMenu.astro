@@ -1,6 +1,7 @@
 ---
-// Phone-only menu: a small square button that grows into a panel from its corner.
-// Hidden on wider screens, where the inline nav in the header is shown instead.
+// Phone-only menu: a small-caps "Menu" button that unfolds a plain list of links
+// beneath the header, pushing the page down (no overlay). Hidden on wider screens,
+// where the inline nav in the header is shown instead.
 import { site, nav } from '../data/site';
 
 interface Props {
@@ -11,35 +12,32 @@ const { isActive } = Astro.props;
 ---
 
 <div class="mm" data-mm>
-  <button class="mm-toggle" type="button" aria-expanded="false" aria-controls="mm-panel" aria-label="Open menu">
-    <span class="bar" aria-hidden="true"></span>
-    <span class="bar" aria-hidden="true"></span>
+  <button class="mm-toggle" type="button" aria-expanded="false" aria-controls="mm-panel">
+    <span class="when-closed">Menu</span>
+    <span class="when-open" aria-hidden="true">Close</span>
   </button>
 
-  <div class="mm-backdrop" data-mm-close aria-hidden="true"></div>
-
-  <div class="mm-panel" id="mm-panel" role="dialog" aria-modal="true" aria-label="Menu" inert>
-    <p class="label mm-eyebrow">Andrew Hong</p>
-    <nav aria-label="Main">
-      <ul>
-        {
-          nav.map((item, i) => (
-            <li style={`--i: ${i}`}>
-              <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-                {item.label}
-                {isActive(item.href) && <span class="dot" aria-hidden="true" />}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
-    <hr />
-    <p class="mm-contact" style={`--i: ${nav.length}`}>
-      <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <span aria-hidden="true">·</span>
-      <a href={`mailto:${site.email}`}>Email</a>
-    </p>
+  <div class="mm-panel" id="mm-panel" inert>
+    <div class="mm-inner">
+      <nav aria-label="Main">
+        <ul>
+          {
+            nav.map((item) => (
+              <li>
+                <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <p class="mm-contact">
+        <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span aria-hidden="true">·</span>
+        <a href={`mailto:${site.email}`}>Email</a>
+      </p>
+    </div>
   </div>
 </div>
 
@@ -50,29 +48,22 @@ const { isActive } = Astro.props;
     const panel = root.querySelector<HTMLElement>('.mm-panel')!;
     const wide = window.matchMedia('(min-width: 641px)');
 
-    const setOpen = (open: boolean, { restoreFocus = true } = {}) => {
+    const setOpen = (open: boolean) => {
       root.classList.toggle('is-open', open);
-      document.documentElement.classList.toggle('mm-lock', open);
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       panel.inert = !open;
-      if (open) panel.querySelector<HTMLAnchorElement>('nav a')?.focus({ preventScroll: true });
-      else if (restoreFocus) toggle.focus({ preventScroll: true });
     };
 
     toggle.addEventListener('click', () => setOpen(!root.classList.contains('is-open')));
-    root.querySelector('[data-mm-close]')!.addEventListener('click', () => setOpen(false));
-    panel.addEventListener('click', (e) => {
-      if ((e.target as HTMLElement).closest('a')) setOpen(false, { restoreFocus: false });
-    });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && root.classList.contains('is-open')) setOpen(false);
+      if (e.key === 'Escape' && root.classList.contains('is-open')) {
+        setOpen(false);
+        toggle.focus();
+      }
     });
-    wide.addEventListener('change', (e) => {
-      if (e.matches) setOpen(false, { restoreFocus: false });
-    });
+    wide.addEventListener('change', (e) => e.matches && setOpen(false));
     // Coming back via the browser's back button can restore a page with the menu open.
-    window.addEventListener('pageshow', () => setOpen(false, { restoreFocus: false }));
+    window.addEventListener('pageshow', () => setOpen(false));
   }
 </script>
 
@@ -81,148 +72,84 @@ const { isActive } = Astro.props;
     display: none;
   }
 
+  /* On phones the button and panel join the header row; the panel wraps onto
+     its own full-width line beneath the logo and button. */
   @media (max-width: 640px) {
     .mm {
-      display: block;
+      display: contents;
     }
   }
 
-  /* Square button; its two bars cross into an × when open. */
   .mm-toggle {
-    position: relative;
-    z-index: 30;
-    display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    background: var(--page);
+    padding: 6px 0 3px;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    background: none;
     color: var(--ink);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: border-color 0.3s ease;
-  }
-  .bar {
-    grid-area: 1 / 1;
-    width: 17px;
-    height: 1.5px;
-    background: currentColor;
-    transition: transform 0.5s cubic-bezier(0.5, 0.5, 0, 1);
-  }
-  .bar:first-child {
-    transform: translateY(-3px);
-  }
-  .bar:last-child {
-    transform: translateY(3px);
   }
   .is-open .mm-toggle {
-    border-color: transparent;
+    border-bottom-color: var(--ink);
   }
-  .is-open .bar:first-child {
-    transform: rotate(45deg);
+  .when-open,
+  .is-open .when-closed {
+    display: none;
   }
-  .is-open .bar:last-child {
-    transform: rotate(-45deg);
-  }
-
-  .mm-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 10;
-    background: rgba(26, 26, 26, 0.22);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-  }
-  .is-open .mm-backdrop {
-    opacity: 1;
-    pointer-events: auto;
+  .is-open .when-open {
+    display: inline;
   }
 
-  /* The panel scales up from the button's corner (top right). */
+  /* Unfolds by animating the row height from 0 to its natural size. */
   .mm-panel {
-    position: fixed;
-    top: 12px;
-    right: 12px;
-    left: 12px;
-    z-index: 20;
-    padding: 22px 24px 26px;
-    background: var(--page);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14);
-    transform-origin: calc(100% - 22px) 22px;
-    transform: scale(0.1);
+    flex-basis: 100%;
+    display: grid;
+    grid-template-rows: 0fr;
     opacity: 0;
-    visibility: hidden;
     transition:
-      transform 0.6s cubic-bezier(0.5, 0.5, 0, 1),
-      opacity 0.3s ease,
-      visibility 0s linear 0.6s;
+      grid-template-rows 0.35s ease,
+      opacity 0.25s ease;
   }
   .is-open .mm-panel {
-    transform: scale(1);
+    grid-template-rows: 1fr;
     opacity: 1;
-    visibility: visible;
-    transition:
-      transform 0.6s cubic-bezier(0.5, 0.5, 0, 1),
-      opacity 0.2s ease,
-      visibility 0s;
+  }
+  .mm-inner {
+    overflow: hidden;
+    min-height: 0;
   }
 
-  .mm-eyebrow {
-    margin: 2px 0 40px;
-  }
   ul {
     list-style: none;
-    margin: 0;
+    margin: 18px 0 0;
     padding: 0;
+    border-top: 1px solid var(--rule);
   }
-  li,
-  .mm-contact {
-    opacity: 0;
-    transform: translateY(8px);
-    transition:
-      opacity 0.4s ease,
-      transform 0.6s cubic-bezier(0.5, 0.5, 0, 1);
-  }
-  .is-open li,
-  .is-open .mm-contact {
-    opacity: 1;
-    transform: none;
-    transition-delay: calc(0.12s + var(--i) * 0.05s);
+  li {
+    border-bottom: 1px solid var(--rule);
   }
   nav a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2px 0;
-    font-size: clamp(38px, 11vw, 46px);
-    line-height: 1.15;
-    letter-spacing: -0.035em;
+    display: block;
+    padding: 10px 0;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
     text-decoration: none;
-    color: var(--ink);
-  }
-  nav a:not([aria-current='page']) {
     color: var(--muted);
   }
-  .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: currentColor;
-  }
-  hr {
-    border: 0;
-    border-top: 1px solid var(--rule);
-    margin: 28px 0 18px;
+  nav a[aria-current='page'] {
+    color: var(--ink);
+    font-style: italic;
   }
   .mm-contact {
     display: flex;
     gap: 12px;
-    margin: 0;
-    font-size: var(--text);
+    margin: 16px 0 6px;
+    font-size: var(--text-sm);
   }
   .mm-contact a {
     text-decoration: none;
@@ -232,14 +159,8 @@ const { isActive } = Astro.props;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .mm-panel,
-    .is-open .mm-panel,
-    li,
-    .mm-contact,
-    .bar,
-    .mm-backdrop {
-      transition-duration: 0.01s !important;
-      transition-delay: 0s !important;
+    .mm-panel {
+      transition: none;
     }
   }
 </style>

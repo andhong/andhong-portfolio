@@ -144,13 +144,15 @@ const isActive = (href: string) =>
     font-style: normal;
   }
 
-  /* Phones: the inline links give way to the expanding menu (MobileMenu). */
+  /* Phones: the inline links give way to the "Menu" button (MobileMenu), whose
+     list unfolds on its own line below. */
   @media (max-width: 640px) {
     .site-header {
-      align-items: center;
-      padding-top: 14px;
-      padding-bottom: 14px;
-      padding-right: 12px;
+      flex-wrap: wrap;
+      align-items: baseline;
+      row-gap: 0;
+      padding-top: 22px;
+      padding-bottom: 22px;
     }
     .logo {
       font-size: 22px;
