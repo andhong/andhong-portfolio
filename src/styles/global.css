@@ -202,15 +202,15 @@ html.mm-lock {
 .case .details {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 32px 24px;
+  gap: 24px;
   margin: 0;
 }
 .case .details dt {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 .case .details dd {
   margin: 0;
-  line-height: 1.45;
+  line-height: 1.25;
 }
 @media (max-width: 640px) {
   .case .details {
