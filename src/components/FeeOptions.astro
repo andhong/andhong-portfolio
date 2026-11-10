@@ -1,0 +1,283 @@
+---
+// "Establishing a fee structure": the pricing options we explored, side by side,
+// ending with the structure we launched. For each class type, a bar shows what the
+// tutor earns per class on a shared scale; the tick marks what the parent pays, so a
+// bar past the tick means Dojo was subsidizing that class. A lighter segment is pay
+// that only arrives with a bonus (a converted trial, or a loyal family).
+
+type Pay = { base: number; bonus?: number; note: string } | null; // null = still TBD
+type Option = {
+  eyebrow: string;
+  name: string;
+  terms: string[];
+  sub: Pay; // $30 subscription class
+  trial: Pay; // $5 trial class
+  group: Pay; // $10 per student group class
+  takeaway: string;
+  launched?: boolean;
+};
+
+const options: Option[] = [
+  {
+    eyebrow: 'Before',
+    name: 'Fixed pricing',
+    terms: ['Dojo sets every price', 'Trials heavily subsidized'],
+    sub: { base: 15, note: '$15' },
+    trial: { base: 7.5, bonus: 7.5, note: '$7.50 + $7.50 if it converts' },
+    group: { base: 5, note: '$5 per student' },
+    takeaway: 'Subsidizing trials isn’t sustainable once we start paying to acquire families.',
+  },
+  {
+    eyebrow: 'Option 1',
+    name: 'Keep today’s trials',
+    terms: ['40% take rate', '20% marketplace fee'],
+    sub: { base: 15, note: '$15' },
+    trial: { base: 7.5, bonus: 7.5, note: '$7.50 + $7.50 if it converts' },
+    group: { base: 5, note: '$5 per student' },
+    takeaway: 'Trials stay subsidized, so subscription fees have to be very high to pay for them.',
+  },
+  {
+    eyebrow: 'Option 2',
+    name: 'One flat rate',
+    terms: ['30% take rate', '17% marketplace fee', 'Same for every class type'],
+    sub: { base: 18, note: '$18' },
+    trial: { base: 3, note: '$3' },
+    group: { base: 6, note: '$6 per student' },
+    takeaway: 'Much more reasonable overall, but tutor pay on trials is cut sharply.',
+  },
+  {
+    eyebrow: 'Option 3',
+    name: 'Incentive heavy',
+    terms: ['35% take rate', '20% marketplace fee', 'Take drops to ~30% after 10 classes with a family', '$6.75 bonus when a trial converts'],
+    sub: { base: 16.7, bonus: 1.3, note: '$16.70, then $18' },
+    trial: { base: 3.25, bonus: 7, note: '$3.25 + $7 if it converts' },
+    group: null,
+    takeaway: 'Rewards tutors for converting and keeping families.',
+  },
+  {
+    eyebrow: 'What we launched',
+    name: 'Starting structure',
+    terms: ['35% take rate', '20% marketplace fee, none on trials', 'Take drops to 30% after 30 classes with a family'],
+    sub: { base: 16.25, bonus: 1.25, note: '$16.25, then $17.50' },
+    trial: { base: 3.25, note: '$3.25' },
+    group: { base: 5.43, note: '$5.43 per student' },
+    takeaway: 'Like Option 3 without the trial bonus, so it’s simpler to explain.',
+    launched: true,
+  },
+];
+
+// One scale per class type, shared across every option so bars compare directly.
+const rows = [
+  { key: 'sub', label: '1:1 subscription', parent: 30, max: 30 },
+  { key: 'trial', label: 'Trial class', parent: 5, max: 15 },
+  { key: 'group', label: 'Group class', parent: 10, max: 10 },
+] as const;
+const pct = (v: number, max: number) => `${((v / max) * 100).toFixed(2)}%`;
+---
+
+<figure class="fee-options" aria-labelledby="fee-options-cap">
+  <ol class="cards wide">
+    {
+      options.map((o) => (
+        <li class:list={['card', { launched: o.launched }]}>
+          <p class="eyebrow">{o.eyebrow}</p>
+          <h3 class="name">{o.name}</h3>
+          <ul class="terms">
+            {o.terms.map((t) => (
+              <li>{t}</li>
+            ))}
+          </ul>
+          <p class="pay-head">Tutor pay per class</p>
+          <dl class="pay">
+            {rows.map((r) => {
+              const p = o[r.key];
+              return (
+                <div class="pay-row">
+                  <dt>
+                    {r.label} <span class="parent">· parent pays ${r.parent}</span>
+                  </dt>
+                  <dd>
+                    {p ? (
+                      <>
+                        <span class="track" aria-hidden="true">
+                          <span class="fill" style={`width:${pct(p.base, r.max)}`} />
+                          {p.bonus && (
+                            <span class="bonus" style={`left:${pct(p.base, r.max)};width:${pct(p.bonus, r.max)}`} />
+                          )}
+                          <span class="tick" style={`left:${pct(r.parent, r.max)}`} />
+                        </span>
+                        <span class="value">{p.note}</span>
+                      </>
+                    ) : (
+                      <span class="value tbd">Not yet modeled</span>
+                    )}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
+          <p class="takeaway">{o.takeaway}</p>
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption id="fee-options-cap">
+    <strong>The options we explored.</strong>{' '}<span class="muted"
+      >Bars compare tutor pay across options; the tick marks what the parent pays, so a bar past it means Dojo covered
+      the difference. The lighter segment is bonus pay for a converted trial or a long-term family.</span
+    >
+  </figcaption>
+</figure>
+
+<style>
+  .fee-options {
+    --cream: #fdf6ee;
+    --line: rgba(26, 26, 26, 0.14);
+    margin: 0 0 clamp(60px, 8vw, 100px);
+  }
+  .cards {
+    list-style: none;
+    margin-top: 0;
+    margin-bottom: 18px;
+    padding: clamp(16px, 2.4vw, 28px);
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+    background: var(--cream);
+    border-radius: var(--radius);
+  }
+  /* Each card spans six shared rows (eyebrow, name, terms, pay heading, pay, takeaway),
+     so the pay rows line up across cards however long each card's terms run. */
+  .card {
+    display: grid;
+    grid-row: span 6;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+    align-content: start;
+    padding: 18px 16px 16px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+  /* The launched structure wears the site's hard-shadow button treatment. */
+  .card.launched {
+    border: 1.5px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .eyebrow {
+    margin: 0 0 4px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .launched .eyebrow {
+    color: var(--ink);
+  }
+  .name {
+    margin: 0 0 10px;
+    font-size: 21px;
+    line-height: 1.15;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .terms {
+    align-self: start;
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+    color: var(--muted);
+  }
+  .terms li + li {
+    margin-top: 2px;
+  }
+  .pay-head {
+    margin: 0 0 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .pay {
+    margin: 0 0 14px;
+  }
+  .pay-row + .pay-row {
+    margin-top: 10px;
+  }
+  .pay dt {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .parent {
+    white-space: nowrap;
+  }
+  .pay dd {
+    margin: 0;
+  }
+  .track {
+    position: relative;
+    display: block;
+    height: 8px;
+    margin-bottom: 4px;
+    background: rgba(26, 26, 26, 0.06);
+    border-radius: 4px;
+  }
+  .fill,
+  .bonus {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+  .fill {
+    left: 0;
+    background: var(--ink);
+    border-radius: 4px 0 0 4px;
+  }
+  /* Bonus pay: same hue, lighter, separated from the base by a 2px surface gap. */
+  .bonus {
+    background: rgba(26, 26, 26, 0.32);
+    border-left: 2px solid #fff;
+    border-radius: 0 4px 4px 0;
+  }
+  .tick {
+    position: absolute;
+    top: -3px;
+    bottom: -3px;
+    width: 2px;
+    margin-left: -1px;
+    background: #c4302b;
+  }
+  .value {
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+  }
+  .tbd {
+    color: var(--muted);
+    font-style: italic;
+  }
+  .takeaway {
+    margin: 0;
+    font-style: italic;
+    color: var(--ink);
+  }
+  @media (max-width: 1100px) {
+    .cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .card.launched {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 600px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
