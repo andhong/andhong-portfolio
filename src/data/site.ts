@@ -47,7 +47,7 @@ export const recent: {
     tagline: 'is ClassDojo’s marketplace connecting tutors and families across a wide range of subjects, in both 1-on-1 and group formats.',
     tags: 'Product design • Product building',
     href: '/dojo-tutor',
-    hero: { name: 'dojo-tutor-hero', alt: 'Dojo Tutor tutor calendar showing the day’s classes' },
+    hero: { name: 'dojo-tutor-hero', alt: 'A wall of Dojo Tutor screens across web and mobile: calendars, chats, pricing, group classes, insights, and the parent home' },
   },
   {
     company: 'Hank',
