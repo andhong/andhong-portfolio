@@ -41,6 +41,12 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
 ---
 
 <Base title="Play" description="Side projects and other creative pursuits.">
+  <!-- Hide the photos before first paint so they can animate in (see the reveal script);
+       a safety timer shows everything if that script never runs. -->
+  <script is:inline>
+    document.documentElement.classList.add('play-reveal');
+    setTimeout(() => window.__playReveal || document.documentElement.classList.add('play-reveal-all'), 4000);
+  </script>
   <section class="wrap full">
     <h1>Side projects and other creative pursuits</h1>
     <div class="masonry">
@@ -76,6 +82,40 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
 </Base>
 
 <script>
+  // Photos fade and rise in as they come into view, once their image has loaded.
+  // Those revealed together stagger in reading order (top-left first).
+  {
+    (window as unknown as { __playReveal: boolean }).__playReveal = true;
+    const items = [...document.querySelectorAll<HTMLElement>('.masonry .item')].sort(
+      (a, b) => Number(a.style.order) - Number(b.style.order),
+    );
+    const show = (el: HTMLElement, delay: number) => {
+      el.style.setProperty('--delay', `${delay}ms`);
+      el.classList.add('in');
+    };
+    const ready = (el: HTMLElement) => {
+      const img = el.querySelector('img');
+      return !img || img.complete ? Promise.resolve() : new Promise((r) => {
+            img.addEventListener('load', r, { once: true });
+            img.addEventListener('error', r, { once: true });
+          });
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        const entering = entries.filter((e) => e.isIntersecting).map((e) => e.target as HTMLElement);
+        entering.sort((a, b) => Number(a.style.order) - Number(b.style.order));
+        entering.forEach((el, i) => {
+          io.unobserve(el);
+          ready(el).then(() => show(el, i * 90));
+        });
+      },
+      { rootMargin: '0px 0px -8% 0px' },
+    );
+    items.forEach((el) => io.observe(el));
+  }
+</script>
+
+<script>
   const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
   if (dialog) {
     const img = dialog.querySelector('img')!;
@@ -104,6 +144,26 @@ const columns = [0, 1, 2].map((c) => items.filter((it) => it.col === c));
 </script>
 
 <style>
+  /* Load-in: each photo fades and rises a little, staggered. Only while the page has
+     opted in (play-reveal), so with no JavaScript everything simply shows. */
+  :global(html.play-reveal:not(.play-reveal-all)) .item:not(.in) {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  .item {
+    transition:
+      opacity 0.6s ease var(--delay, 0ms),
+      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--delay, 0ms);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(html.play-reveal) .item:not(.in) {
+      opacity: 1;
+      transform: none;
+    }
+    .item {
+      transition: none;
+    }
+  }
   h1 {
     text-align: center;
     font-size: clamp(30px, 3.4vw, 40px);
