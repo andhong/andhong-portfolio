@@ -26,15 +26,29 @@ const OFFSETS = [-260, -620, -60, -480, -180];
 const DURATIONS = [150, 175, 160, 185, 165];
 
 const names = [...new Set(COLUMNS.flat(2))];
-const urls = Object.fromEntries(
+// Each screen in a few widths; the browser picks the smallest that's sharp on the
+// viewer's screen (a desktop tile is 720/VIEW of the frame width, about 31% of it).
+// Phone screenshots are only 390px wide at the source, so they ship at full size.
+const DESK_WIDTHS = [760, 1100, 1440];
+const shots = Object.fromEntries(
   await Promise.all(
     names.map(async (n) => {
-      const phone = n.startsWith('app-');
-      const img = await getImage({ src: media(`wall-${n}`), width: phone ? 300 : 760, format: 'webp', quality: 80 });
-      return [n, img.src];
+      const src = media(`wall-${n}`);
+      if (n.startsWith('app-')) {
+        const img = await getImage({ src, width: src.width, format: 'webp', quality: 85 });
+        return [n, { src: img.src, srcset: undefined }];
+      }
+      const imgs = await Promise.all(
+        DESK_WIDTHS.filter((w) => w <= src.width).map((w) => getImage({ src, width: w, format: 'webp', quality: 85 })),
+      );
+      return [n, { src: imgs[0].src, srcset: imgs.map((im, i) => `${im.src} ${DESK_WIDTHS[i]}w`).join(', ') }];
     }),
   ),
 );
+// Twice the tile's on-screen width: the wall is rotated and always moving, and that
+// resampling softens an image that's only just big enough. The files stay small
+// (a 1440px screen is ~40 KB), so the extra sharpness is cheap.
+const deskSizes = '(max-width: 1202px) 62vw, 732px';
 ---
 
 <div class="hero-wall" role="img" aria-label={alt}>
@@ -46,11 +60,11 @@ const urls = Object.fromEntries(
             {[...col, ...col].map((t) =>
               Array.isArray(t) ? (
                 <div class="pair">
-                  <img class="phone" src={urls[t[0]]} alt="" width="300" height="649" loading={eager ? 'eager' : 'lazy'} decoding="async" />
-                  <img class="phone" src={urls[t[1]]} alt="" width="300" height="649" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+                  <img class="phone" src={shots[t[0]].src} alt="" width="300" height="649" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+                  <img class="phone" src={shots[t[1]].src} alt="" width="300" height="649" loading={eager ? 'eager' : 'lazy'} decoding="async" />
                 </div>
               ) : (
-                <img class="desk" src={urls[t]} alt="" width="720" height="512" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+                <img class="desk" src={shots[t].src} srcset={shots[t].srcset} sizes={deskSizes} alt="" width="720" height="512" loading={eager ? 'eager' : 'lazy'} decoding="async" />
               ),
             )}
           </div>
