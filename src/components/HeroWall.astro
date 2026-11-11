@@ -136,11 +136,15 @@ const deskSizes = '(max-width: 1202px) 62vw, 732px';
     justify-content: center;
     gap: calc(var(--gap) * var(--u));
   }
+  /* Phone screenshots have transparent rounded corners in the files themselves
+     (cut just past the black iOS display corners), so the shadow is a drop-shadow
+     that follows that shape. A hairline edge keeps white screens off the cream. */
   .hero-wall .phone {
     width: calc(300 * var(--u));
-    /* iOS screenshots have black display corners baked in (radius ~44px at 390px
-       wide); round just enough to hide them. Desktop screens stay square. */
-    border-radius: calc(36 * var(--u));
+    background: none;
+    box-shadow: none;
+    filter: drop-shadow(0 0 calc(0.75 * var(--u)) rgba(60, 45, 10, 0.45))
+      drop-shadow(0 calc(18 * var(--u)) calc(22 * var(--u)) rgba(110, 92, 74, 0.38));
   }
   @media (prefers-reduced-motion: reduce) {
     .track {
