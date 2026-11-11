@@ -1,0 +1,144 @@
+---
+// "Using AI to make tutors more effective": the four AI features as a bento grid,
+// each tile a short looping video. Every video was exported on the same warm gray
+// (#f5f0ed), so the tiles use that exact color and the video edges disappear.
+//
+// Desktop: lesson plans runs tall on the left; recaps and the teaching assistant sit
+// side by side; Tutor Clips spans the bottom with its text beside the video.
+// Phones: one column, text above each video.
+
+const tiles = [
+  {
+    key: 'lessons',
+    title: 'Lesson plans',
+    text: 'Generate a plan for the next class, refine it in plain words, then turn it into slides.',
+    video: '/media/ai-lesson-plans.mp4',
+    w: 1120,
+    h: 1460,
+  },
+  {
+    key: 'recaps',
+    title: 'Class recaps',
+    text: 'A recap is drafted after every class. Tutors review, edit, and share it with families.',
+    video: '/media/ai-class-recaps.mp4',
+    w: 960,
+    h: 880,
+  },
+  {
+    key: 'assistant',
+    title: 'Teaching assistant',
+    text: 'Real-time tips in the classroom while class is happening.',
+    video: '/media/ai-teaching-assistant.mp4',
+    w: 960,
+    h: 1000,
+  },
+  {
+    key: 'clips',
+    title: 'Tutor Clips',
+    text: 'Key moments from class, ready for families to watch and share.',
+    video: '/media/ai-tutor-clips.mp4',
+    w: 1280,
+    h: 1060,
+  },
+];
+---
+
+<div class="ai-bento wide" role="group" aria-label="AI features for tutors">
+  {
+    tiles.map((t) => (
+      <div class={`tile ${t.key}`}>
+        <div class="copy">
+          <h3>{t.title}</h3>
+          <p>{t.text}</p>
+        </div>
+        <video
+          src={t.video}
+          poster={t.video.replace('.mp4', '-poster.jpg')}
+          width={t.w}
+          height={t.h}
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-label={`${t.title}: ${t.text}`}
+        />
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .ai-bento {
+    --tile: #f6f1ee; /* what browsers render the videos’ #f5f0ed as */
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      'lessons recaps assistant'
+      'lessons clips clips';
+    gap: 14px;
+    margin-bottom: clamp(60px, 8vw, 100px);
+  }
+  .tile {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--tile);
+    border-radius: 10px;
+  }
+  .lessons {
+    grid-area: lessons;
+    justify-content: space-between;
+  }
+  .recaps {
+    grid-area: recaps;
+  }
+  .assistant {
+    grid-area: assistant;
+  }
+  /* Tutor Clips: text beside the video. */
+  .clips {
+    grid-area: clips;
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    align-items: center;
+  }
+  .copy {
+    padding: 24px 24px 0;
+  }
+  .clips .copy {
+    padding: 24px;
+  }
+  h3 {
+    margin: 0 0 6px;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .copy p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+  video {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: auto;
+  }
+  @media (max-width: 800px) {
+    .ai-bento {
+      grid-template-columns: 1fr;
+      grid-template-areas: 'lessons' 'recaps' 'assistant' 'clips';
+    }
+    .clips {
+      display: flex;
+      flex-direction: column;
+    }
+    .clips .copy {
+      padding: 24px 24px 0;
+    }
+  }
+</style>

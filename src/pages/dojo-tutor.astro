@@ -4,6 +4,7 @@ import CaseStudy from '../layouts/CaseStudy.astro';
 import Figure from '../components/Figure.astro';
 import Stats from '../components/Stats.astro';
 import HeroWall from '../components/HeroWall.astro';
+import AiBento from '../components/AiBento.astro';
 import Pic from '../components/Pic.astro';
 import { recent } from '../data/site';
 
@@ -135,21 +136,7 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
     </p>
   </div>
 
-  <figure class="figure video">
-    <video
-      class="wide"
-      src="/media/dojo-ai-reel.mp4"
-      poster="/media/dojo-ai-reel-poster.jpg"
-      width="1920"
-      height="1080"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      aria-label="Dojo Tutor AI features: class recaps, Tutor Clips, the in-class teaching assistant, AI-generated assessments, and lesson plans"
-    ></video>
-  </figure>
+  <AiBento />
 
   <div class="section-head">
     <h2>Group classes: +10% revenue, with safety review built in</h2>
