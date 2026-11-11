@@ -3,9 +3,9 @@
 // each tile a short looping video. Every video was exported on the same warm gray
 // (#f5f0ed), so the tiles use that exact color and the video edges disappear.
 //
-// Desktop: lesson plans runs tall on the left; recaps and the teaching assistant sit
-// side by side; Tutor Clips spans the bottom with its text beside the video.
-// Phones: one column, text above each video.
+// Four in a row, text above each video. Every video sits in a box of the same shape
+// and is scaled to fit (never cropped), so each one's UI is centered in its box and
+// the boxes line up along the bottom. Tablets: 2 x 2. Phones: one column.
 
 const tiles = [
   {
@@ -72,10 +72,7 @@ const tiles = [
   .ai-bento {
     --tile: #f6f1ee; /* what browsers render the videos’ #f5f0ed as */
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-areas:
-      'lessons recaps assistant'
-      'lessons clips clips';
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 14px;
     margin-bottom: clamp(60px, 8vw, 100px);
   }
@@ -86,59 +83,42 @@ const tiles = [
     background: var(--tile);
     border-radius: 10px;
   }
-  .lessons {
-    grid-area: lessons;
-    justify-content: space-between;
-  }
-  .recaps {
-    grid-area: recaps;
-  }
-  .assistant {
-    grid-area: assistant;
-  }
-  /* Tutor Clips: text beside the video. */
-  .clips {
-    grid-area: clips;
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    align-items: center;
-  }
   .copy {
-    padding: 24px 24px 0;
-  }
-  .clips .copy {
-    padding: 24px;
+    padding: 22px 20px 0;
   }
   h3 {
     margin: 0 0 6px;
-    font-size: 23px;
+    font-size: 22px;
     font-weight: 500;
     line-height: 1.15;
     letter-spacing: -0.01em;
   }
   .copy p {
     margin: 0;
-    font-size: 15px;
+    font-size: 14.5px;
     line-height: 1.4;
     color: var(--muted);
   }
+  /* Same box for every video, pinned to the bottom of the tile; the video is scaled to
+     fit and centered, so its UI sits in the middle. The empty edges match the tile. */
   video {
     display: block;
     width: 100%;
+    aspect-ratio: 4 / 5;
     height: auto;
     margin-top: auto;
+    object-fit: contain;
+    object-position: center;
+    background: var(--tile);
   }
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
+    .ai-bento {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 560px) {
     .ai-bento {
       grid-template-columns: 1fr;
-      grid-template-areas: 'lessons' 'recaps' 'assistant' 'clips';
-    }
-    .clips {
-      display: flex;
-      flex-direction: column;
-    }
-    .clips .copy {
-      padding: 24px 24px 0;
     }
   }
 </style>
