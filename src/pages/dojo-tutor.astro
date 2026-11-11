@@ -178,11 +178,6 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
 
   <figure class="figure pair tight">
     <div class="grid" style="--cols: 2">
-      <Pic
-        name="dojo-pricing-details"
-        alt="Pricing details before confirming: payout rates, Earnings Boost, trial pay, and the tutor's new class prices and discounts"
-        sizes="(max-width: 700px) 100vw, 585px"
-      />
       <video
         src="/media/dojo-pricing-hero.mp4"
         poster="/media/dojo-pricing-hero-poster.jpg"
@@ -195,6 +190,11 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
         preload="metadata"
         aria-label="Setting a group class price: recommended range, take-home pay after the platform fee, and Earnings Boost"
       ></video>
+      <Pic
+        name="dojo-pricing-details"
+        alt="Pricing details before confirming: payout rates, Earnings Boost, trial pay, and the tutor's new class prices and discounts"
+        sizes="(max-width: 700px) 100vw, 585px"
+      />
     </div>
     <figcaption>
       <strong>Pricing with guardrails.</strong>{' '}<span class="muted"

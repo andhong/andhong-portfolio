@@ -117,11 +117,6 @@ import FeeOptions from '../components/FeeOptions.astro';
 
   <figure class="figure pair">
     <div class="grid" style="--cols: 2">
-      <Pic
-        name="dojo-pricing-details"
-        alt="Pricing details before confirming: payout rates, Earnings Boost, trial pay, and the tutor's new class prices and discounts"
-        sizes="(max-width: 700px) 100vw, 585px"
-      />
       <video
         src="/media/dojo-pricing-hero.mp4"
         poster="/media/dojo-pricing-hero-poster.jpg"
@@ -134,6 +129,11 @@ import FeeOptions from '../components/FeeOptions.astro';
         preload="metadata"
         aria-label="Setting a group class price: recommended range, take-home pay after the platform fee, and Earnings Boost"
       ></video>
+      <Pic
+        name="dojo-pricing-details"
+        alt="Pricing details before confirming: payout rates, Earnings Boost, trial pay, and the tutor's new class prices and discounts"
+        sizes="(max-width: 700px) 100vw, 585px"
+      />
     </div>
     <figcaption>
       <strong>Pricing with guardrails.</strong>{' '}<span class="muted"
@@ -143,17 +143,27 @@ import FeeOptions from '../components/FeeOptions.astro';
     </figcaption>
   </figure>
 
-  <Figure
-    images={[
-      { name: 'dojo-pricing-earnings', alt: 'Estimated earnings increase from the new pricing model' },
-      { name: 'dojo-pricing-setup', alt: 'Setting 1:1 tutoring prices during onboarding' },
-    ]}
-    lead="Opting in."
-  >
-    Tutors see what they stand to earn before switching, then set prices with recommendations based on similar
-    classes. Leading with take-home pay showed tutors that they stood to gain additional take-home pay from the new
-    pricing model.
-  </Figure>
+  <figure class="figure video">
+    <video
+      class="wide"
+      src="/media/dojo-pricing-ftue.mp4"
+      poster="/media/dojo-pricing-ftue-poster.jpg"
+      width="1920"
+      height="1080"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-label="Demo of the first-time experience for setting your own prices: the earnings estimate, then choosing a class price within the recommended range"
+    ></video>
+    <figcaption>
+      <strong>The first-time experience.</strong>{' '}<span class="muted"
+        >A demo of a tutor setting their own prices for the first time: they see what they stand to earn before
+        switching, then set each class price with a recommended range and their take-home pay in view.</span
+      >
+    </figcaption>
+  </figure>
 
 
   <div class="section-head">
