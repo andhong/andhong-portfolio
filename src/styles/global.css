@@ -35,6 +35,26 @@
   box-sizing: border-box;
 }
 
+/* Quick cross-fade between pages (native cross-document view transitions; browsers
+   without support just navigate normally). The header keeps its own name so it holds
+   still while the page content fades. */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 180ms;
+  animation-timing-function: ease;
+}
+.site-header {
+  view-transition-name: site-header;
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
 html {
   -webkit-text-size-adjust: 100%;
 }
