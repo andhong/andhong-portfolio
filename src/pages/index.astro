@@ -11,10 +11,10 @@ const features = recent.filter((r) => !r.draft || import.meta.env.DEV);
 const half = '(max-width: 700px) 100vw, 400px';
 
 // Hero résumé lines: company, then an optional role (shown in gray italic).
-const previous: { company: string; role?: string }[] = [
-  { company: 'Hank', role: 'Co-founder' },
-  { company: 'MLB Advanced Media' },
-  { company: '1stDibs' },
+const previous: { company: string; role?: string; href?: string }[] = [
+  { company: 'Hank', role: 'Co-founder', href: 'https://www.gethank.com/' },
+  { company: 'MLB Advanced Media', href: 'https://www.mlb.com/apps/mlb-app' },
+  { company: '1stDibs', href: 'https://www.1stdibs.com/' },
 ];
 ---
 
@@ -38,7 +38,12 @@ const previous: { company: string; role?: string }[] = [
           <>
             {/* The dot rides with the entry before it so it never starts a line. */}
             <span class="entry">
-              {p.company}{p.role && <> <em>{p.role}</em></>}
+              {p.href ? (
+                <a class="text-link" href={p.href} target="_blank" rel="noopener noreferrer">{p.company}</a>
+              ) : (
+                p.company
+              )}
+              {p.role && <> <em>{p.role}</em></>}
               {i < previous.length - 1 && <span class="sep" aria-hidden="true">·</span>}
             </span>{' '}
           </>
