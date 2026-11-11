@@ -13,7 +13,7 @@ import FeeOptions from '../components/FeeOptions.astro';
     { label: 'Responsibilities', items: ['Product design', 'User research', 'Product building'] },
     { label: 'Collaborators', items: ['1 product manager', '4 engineers'] },
     { label: 'Platform', items: ['Web'] },
-    { label: 'Year', items: ['2026'] },
+    { label: 'Year', items: ['May–June 2026'] },
   ]}
 >
   <Fragment slot="headline">
@@ -26,8 +26,7 @@ import FeeOptions from '../components/FeeOptions.astro';
 
   <div class="intro">
     <p>
-      <a class="text-link" href="/dojo-tutor">Dojo Tutor</a> is ClassDojo’s marketplace connecting tutors and families.
-      Prices used to be fixed by the platform across all grades, subjects, and student needs. We wanted tutors to set
+      <a class="text-link" href="/dojo-tutor">Dojo Tutor</a> is ClassDojo’s marketplace connecting tutors and families. We wanted tutors to set
       their own prices so they could charge more for specialty topics and open up more affordable options for families.
       I led the design and research, and built much of the frontend.
     </p>
@@ -36,8 +35,8 @@ import FeeOptions from '../components/FeeOptions.astro';
   <figure class="figure video">
     <video
       class="wide"
-      src="/media/dojo-pricing-hero.mp4"
-      poster="/media/dojo-pricing-hero-poster.jpg"
+      src="/media/dojo-pricing-ftue-v2.mp4"
+      poster="/media/dojo-pricing-ftue-v2-poster.jpg"
       width="1920"
       height="1080"
       autoplay
@@ -45,7 +44,7 @@ import FeeOptions from '../components/FeeOptions.astro';
       loop
       playsinline
       preload="auto"
-      aria-label="Setting a group class price: recommended range, take-home pay after the platform fee, and Earnings Boost"
+      aria-label="Demo of the first-time experience for setting your own prices: the earnings estimate, then choosing a class price within the recommended range"
     ></video>
   </figure>
 
@@ -77,31 +76,10 @@ import FeeOptions from '../components/FeeOptions.astro';
 
   <div class="section-head">
     <h2>Establishing a fee structure</h2>
-    <p>Along with product, finance and operations counterparts I explored different variables for tutor-set pricing:</p>
-    <ul>
-      <li><strong>Adjusting take rate.</strong> Exploring different fee amounts for charging tutors.</li>
-      <li>
-        <strong>Loyalty incentives.</strong> Rewarding tutors for retaining subscribers by increasing their take rate after
-        a set number of classes with a family.
-      </li>
-      <li>
-        <strong>Giving tutors control over discounts.</strong> Discounts were previously set at the platform level. Tutors
-        could now decide whether to accept the tradeoffs of offering discounts.
-      </li>
-      <li>
-        <strong>The rollout.</strong> Deciding whether to make the release opt-in or opt-out as well as permanent vs
-        reversible.
-      </li>
-    </ul>
     <p>
-      Given the potential impact on margin and overall revenue, this project had high visibility with leadership. My
-      product and ops counterparts and I walked leadership through different combinations of options until we reached a
-      consensus.
-    </p>
-    <p>
-      We landed on opt-in, tutor-set pricing with guardrails: marketplace fees calculated to increase tutor take-home
-      pay, recommended ranges based on market data, and tools that help tutors communicate their value instead of
-      competing as an undifferentiated listing.
+      With product, finance, and operations counterparts, I explored take rates, loyalty incentives, tutor-controlled
+      discounts, and how to roll it out. Given the impact on margin and revenue, we walked leadership through the
+      combinations until we agreed on opt-in pricing with guardrails.
     </p>
   </div>
 
@@ -143,27 +121,6 @@ import FeeOptions from '../components/FeeOptions.astro';
     </figcaption>
   </figure>
 
-  <figure class="figure video">
-    <video
-      class="wide"
-      src="/media/dojo-pricing-ftue-v2.mp4"
-      poster="/media/dojo-pricing-ftue-v2-poster.jpg"
-      width="1920"
-      height="1080"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      aria-label="Demo of the first-time experience for setting your own prices: the earnings estimate, then choosing a class price within the recommended range"
-    ></video>
-    <figcaption>
-      <strong>The first-time experience.</strong>{' '}<span class="muted"
-        >A demo of a tutor setting their own prices for the first time: they see what they stand to earn before
-        switching, then set each class price with a recommended range and their take-home pay in view.</span
-      >
-    </figcaption>
-  </figure>
 
 
   <div class="section-head">
