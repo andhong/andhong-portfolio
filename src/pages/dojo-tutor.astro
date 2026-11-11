@@ -60,11 +60,11 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
       left the core tools a marketplace needs, like schedule management, messaging, and pricing, sitting in the
       backlog.
     </p>
-    <p>
+    <blockquote class="pull">
       Since joining in 2024, I’ve redesigned every post-purchase surface and added the tools a marketplace needs:
       scheduling, tutor-set pricing, messaging, marketing tools, and payments. They helped tutors keep families
       longer, growing LTV 20% year over year.
-    </p>
+    </blockquote>
   </div>
 
   <Figure
@@ -124,15 +124,8 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
   <div class="section-head">
     <h2>Building AI tools to make tutors more effective</h2>
     <p>
-      AI turns class recordings into recaps and progress reports for families. I designed the flow that lets
-      tutors review and edit everything before it’s sent.
-    </p>
-    <p>
-      I also designed Tutor Clips, which sends families short highlights from each session.
-    </p>
-    <p>
-      I designed an in-class assistant that surfaces context from past lessons and suggests next steps,
-      especially when a tutor is converting a trial.
+      I designed a suite of AI tools that handle the busywork around each class, from planning and recaps to in-class
+      tips and highlight clips, so tutors can focus on teaching while staying in control of everything families see.
     </p>
   </div>
 
@@ -170,7 +163,7 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
     {
       showPricing && (
         <p>
-          <a class="more" href="/tutor-pricing">Read the full pricing case study ›</a>
+          <a class="case-link" href="/tutor-pricing">Read the full pricing case study <span aria-hidden="true">→</span></a>
         </p>
       )
     }
@@ -235,6 +228,38 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
 </CaseStudy>
 
 <style>
+  /* Call-out link to the pricing deep dive: mono label, ink rule, arrow nudges on hover. */
+  .case-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid var(--ink);
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .case-link span {
+    transition: transform 0.15s ease;
+  }
+  .case-link:hover span {
+    transform: translateX(4px);
+  }
+  /* Pull quote: the section's key line, set larger in italic with a rule. */
+  .pull {
+    margin: 28px 0 0;
+    padding: 4px 0 4px 28px;
+    border-left: 2px solid var(--ink);
+    font-size: calc(var(--text-lg) * 1.12);
+    font-style: italic;
+    line-height: 1.38;
+    letter-spacing: -0.01em;
+  }
   /* A screenshot beside a video: the video is cropped to the screenshot's 4:3 so the
      pair sits level (its edges are empty background). */
   .pair video {
