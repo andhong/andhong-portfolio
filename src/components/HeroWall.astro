@@ -33,7 +33,8 @@ const DESK_WIDTHS = [760, 1100, 1440];
 const shots = Object.fromEntries(
   await Promise.all(
     names.map(async (n) => {
-      const src = media(`wall-${n}`);
+      // Phone files are named wall-iphone-*: they carry transparent rounded corners.
+      const src = media(n.startsWith('app-') ? `wall-iphone-${n.slice(4)}` : `wall-${n}`);
       if (n.startsWith('app-')) {
         const img = await getImage({ src, width: src.width, format: 'webp', quality: 85 });
         return [n, { src: img.src, srcset: undefined }];
