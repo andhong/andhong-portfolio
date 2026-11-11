@@ -6,10 +6,10 @@
 /* Design: a quiet nod to 1980s print advertising — tightly set Garamond,
    hairline rules and generous whitespace. */
 :root {
-  --ink: #1a1a1a;
+  --ink: #1f1e1d; /* warm near-black, never pure black */
   --muted: #555555; /* ~6.8:1 on the textured page */
   --nav: #6b6b6b; /* inactive nav links: lighter than body text, still ~5:1 */
-  --link: #1a1a1a;
+  --link: #1f1e1d;
   --rule: #dddddd;
   --band: #f4f4f4;
   --panel: #f4f4f4;
