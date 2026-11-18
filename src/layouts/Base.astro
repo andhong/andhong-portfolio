@@ -22,7 +22,7 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (href: string) =>
-  href === '/' ? path === '/' || path.startsWith('/project') || path.startsWith('/dojo-tutor') : path.startsWith(href);
+  href === '/' ? path === '/' || path.startsWith('/project') : path.startsWith(href);
 ---
 
 <!doctype html>

@@ -1,15 +1,15 @@
 ---
 // Dojo Tutor case study.
-import CaseStudy from '../layouts/CaseStudy.astro';
-import Figure from '../components/Figure.astro';
-import Stats from '../components/Stats.astro';
-import HeroWall from '../components/HeroWall.astro';
-import AiBento from '../components/AiBento.astro';
-import Pic from '../components/Pic.astro';
-import { recent } from '../data/site';
+import CaseStudy from '../../layouts/CaseStudy.astro';
+import Figure from '../../components/Figure.astro';
+import Stats from '../../components/Stats.astro';
+import HeroWall from '../../components/HeroWall.astro';
+import AiBento from '../../components/AiBento.astro';
+import Pic from '../../components/Pic.astro';
+import { recent } from '../../data/site';
 
 // Link to the pricing deep dive once it's published (always in local preview).
-const pricing = recent.find((r) => r.href === '/tutor-pricing');
+const pricing = recent.find((r) => r.href === '/project/tutor-pricing');
 const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
 ---
 
@@ -163,7 +163,7 @@ const showPricing = pricing && (!pricing.draft || import.meta.env.DEV);
     {
       showPricing && (
         <p>
-          <a class="case-link" href="/tutor-pricing">Read the full pricing case study <span aria-hidden="true">→</span></a>
+          <a class="case-link" href="/project/tutor-pricing">Read the full pricing case study <span aria-hidden="true">→</span></a>
         </p>
       )
     }

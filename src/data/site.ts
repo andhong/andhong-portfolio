@@ -50,7 +50,7 @@ export const recent: {
     tagline: 'ClassDojo: Designing and building the marketplace tools Dojo Tutor was missing.',
     heading: ['ClassDojo: Designing and building the marketplace tools ', 'Dojo Tutor', ' was missing.'],
     tags: 'Product design • Product building',
-    href: '/dojo-tutor',
+    href: '/project/dojo-tutor',
     hero: { name: 'dojo-tutor-hero', wall: true, alt: 'A wall of Dojo Tutor screens across web and mobile: calendars, chats, pricing, group classes, insights, and the parent home' },
   },
   {
@@ -59,7 +59,7 @@ export const recent: {
     tagline: 'Enabling Dojo Tutor’s tutors to set their own prices and take control of their businesses.',
     heading: ['Enabling Dojo Tutor’s tutors to ', 'set their own prices', ' and take control of their businesses.'],
     tags: 'Product design • User research • Product building',
-    href: '/tutor-pricing',
+    href: '/project/tutor-pricing',
     hero: { video: '/media/dojo-pricing-hero.mp4', poster: '/media/dojo-pricing-hero-poster.jpg', alt: 'Setting a group class price: recommended range, take-home pay after the platform fee, and Earnings Boost' },
   },
   {

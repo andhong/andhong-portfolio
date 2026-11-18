@@ -9,4 +9,9 @@ export default defineConfig({
   trailingSlash: 'ignore',
   // Hide Astro's floating dev toolbar (the dark pill at the bottom of local previews).
   devToolbar: { enabled: false },
+  // The ClassDojo case studies moved under /project; keep old links working.
+  redirects: {
+    '/dojo-tutor': '/project/dojo-tutor',
+    '/tutor-pricing': '/project/tutor-pricing',
+  },
 });
